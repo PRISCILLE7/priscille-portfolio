@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-bg-primary: #F7F7F8;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #EDEEF0;
+  --color-border-primary: #D6DADE;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #5E5F6E;
+  --color-text-tertiary: #A5AEB8;
+  --color-purple: #6C47FF;
+  --color-purple-light: #EEE9FF;
+  --color-green: #059669;
+  --color-cyan: #06b6d4;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Diagonal gutter pattern on body — Charvi's signature gutters */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #EDEEF0;
+  background-image: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.045) 12.5%,
+    transparent 12.5%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.045) 50%,
+    rgba(0, 0, 0, 0.045) 62.5%,
+    transparent 62.5%,
+    transparent 100%
+  );
+  background-size: 5px 5px;
+}
+
+/* Page container — cream bg + vertical border lines, masks diagonal */
+.page-container {
+  background: #F7F7F8;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-left: 1px solid #D6DADE;
+  border-right: 1px solid #D6DADE;
+  min-height: 100vh;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animated gradient ring */
+@keyframes ring-spin {
+  to { transform: rotate(360deg); }
+}
+.ring-spin { animation: ring-spin 5s linear infinite; }
+.ring-spin-reverse { animation: ring-spin 5s linear infinite reverse; }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(120deg, #6C47FF 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
