@@ -4,39 +4,59 @@ import GridWrapper from "./GridWrapper";
 
 const experience = [
   {
-    title: "AI/ML Engineer — Computer Vision & MLOps",
-    company: "Bizom / Intelligence Partner · Remote",
-    period: "Jan 2024 – Present",
+    title: "Freelance Data Scientist & ML Engineer",
+    company: "FieldPro by Optimetriks",
+    location: "Paris, France / Remote",
+    period: "Oct. 2025 - present · 8 months",
+    intro:
+      "Development and industrialization of AI solutions for field execution, deployed across multiple countries in Africa and Asia for FMCG clients (Nestlé, Coca-Cola).",
     items: [
-      "Deployed and maintained YOLO v8/v11 models in production for Nestlé & Coca-Cola across 5 countries.",
-      "Solved an invisible staging bug in a multi-model workflow corrupting predictions in the prod WebApp.",
-      "Analyzed distribution of 90k+ images, identified a 1:14 class imbalance, ran targeted retraining.",
-      "Migrated 40,000+ annotated images with retroactive correction of 587,000+ annotations (Hasty → GCS → Label Studio).",
-      "Robust Python pipeline: auto-retry on 429 errors, automatic CORS correction on GCS bucket, zero data loss.",
+      "Designed, trained, fine-tuned and deployed YOLO v8/v11 models in production across 5 countries (Vietnam, Senegal, Nigeria, Ivory Coast, Cameroon)",
+      "Owned the full ML lifecycle end-to-end: data curation, class balancing, training, evaluation, deployment, retraining, monitoring",
+      "Migrated 40,000+ annotated images (Hasty → GCS → Label Studio) with robust pipeline and error recovery; retroactively corrected 587,000+ annotations",
+      "Validated annotation quality across 90,000+ labeled images",
+      "Built automated data pipelines on GCP/GCS with REST API integration, checkpoint recovery and consistency validation",
+      "Led structured A/B experiments and offline/online evaluations to drive continuous model improvement",
+      "Investigated production incidents (Kubernetes/GKE), coordinated with ML teams for resolution",
+      "Integrated MLflow for experiment tracking, model versioning and deployment lifecycle management",
     ],
-    tags: ["YOLO v8/v11", "GCP", "Docker", "Python", "REST API", "Label Studio", "MLOps"],
+    tags: [
+      "Python", "PyTorch", "YOLO v8/v11", "GCP/GCS", "Docker",
+      "Kubernetes", "MLflow", "Label Studio", "Hasty", "Jira", "REST API",
+    ],
   },
   {
-    title: "AI Research Engineer — Predictive Maintenance",
-    company: "Research Project · IFI-VNU / La Rochelle",
-    period: "2024 – 2025",
+    title: "R&D Intern - AI-based Fault Diagnosis of Electric Machines",
+    company: "LGI2A Laboratory · University of Artois & EDF",
+    location: "France",
+    period: "Jun. - Dec. 2025 · 7 months",
+    intro:
+      "Research project on intelligent predictive maintenance of Permanent Magnet Synchronous Machines (PMSMs) using AI and physics-based simulation.",
     items: [
-      "Developed a self-supervised learning approach for electric motor fault diagnosis using Pyleecan simulation.",
-      "Generated 200k+ synthetic training samples from FEM electromagnetic simulations.",
-      "Submitted to IEA/AIE 2026 — accepted for publication.",
+      "Generated a synthetic dataset of electromagnetic simulations (Pyleecan/FEMM) - 50+ motor variants (Tesla Model 3, Toyota Prius) under healthy and faulty conditions",
+      "Developed and validated a self-supervised framework (Self2Self+) for magnetic fault denoising and localization",
+      "Analyzed time/frequency-domain signals (magnetic flux, torque, field density) to extract discriminative fault signatures",
+      "Applied transfer learning to adapt pre-trained models to fault diagnosis with limited real-world data",
+      "Leveraged HPC infrastructure (SLURM, cluster) to scale electromagnetic batch simulations",
+      "Outcome: paper accepted at IEA/AIE 2026, Kuala Lumpur, Malaysia",
     ],
-    tags: ["PyTorch", "Pyleecan", "FEMM", "Self-Supervised Learning", "Signal Analysis"],
+    tags: [
+      "PyTorch", "TensorFlow", "Pyleecan", "FEMM",
+      "SLURM / HPC", "Self-Supervised", "Transfer Learning", "Signal Analysis",
+    ],
+    lastItemBold: true,
   },
   {
-    title: "AI Engineer — Multi-Agent Simulation",
-    company: "Academic Project · IFI-VNU",
-    period: "2024 – 2025",
+    title: "Teaching & Research Assistant",
+    company: "University of Kinshasa (UNIKIN)",
+    location: "DR Congo",
+    period: "Nov. 2022 - Dec. 2023 · 1 yr 2 mo",
     items: [
-      "Designed a multi-agent system (GAMA Platform) to optimize urban waste collection routes.",
-      "Reduced travel time and distance through intelligent agent coordination.",
-      "Published in AFIA Bulletin n°129.",
+      "Supervised practical sessions in Programming Logic, Algorithms, Computer Science and Biometrics",
+      "Mentored students on final-year projects and research work",
+      "Contributed to exam preparation, grading and evaluation",
     ],
-    tags: ["GAMA", "GAML", "Multi-Agent Systems", "Optimization"],
+    tags: [],
   },
 ];
 
@@ -63,24 +83,41 @@ export default function Experience() {
               <div className="flex justify-between items-start gap-4 flex-wrap mb-2">
                 <div>
                   <h3 className="text-[1rem] font-semibold mb-0.5">{e.title}</h3>
-                  <p className="text-[0.82rem] text-purple">{e.company}</p>
+                  <p className="text-[0.82rem] text-purple">
+                    {e.company}
+                    <span className="text-text-tertiary"> &nbsp;·&nbsp; {e.location}</span>
+                  </p>
                 </div>
                 <span className="font-mono text-[0.68rem] text-text-tertiary flex-shrink-0 mt-0.5">{e.period}</span>
               </div>
+              {e.intro && (
+                <p className="text-[0.85rem] text-text-secondary leading-[1.65] mb-3 italic">{e.intro}</p>
+              )}
               <ul className="mb-3 space-y-1">
-                {e.items.map((item, j) => (
-                  <li key={j} className="text-[0.85rem] text-text-secondary leading-[1.6] pl-4 relative before:content-['›'] before:absolute before:left-0 before:text-purple">
-                    {item}
-                  </li>
-                ))}
+                {e.items.map((item, j) => {
+                  const isLast = j === e.items.length - 1 && e.lastItemBold;
+                  return (
+                    <li
+                      key={j}
+                      className="text-[0.85rem] text-text-secondary leading-[1.6] pl-4 relative before:content-['›'] before:absolute before:left-0 before:text-purple"
+                    >
+                      {isLast ? <strong>{item}</strong> : item}
+                    </li>
+                  );
+                })}
               </ul>
-              <div className="flex flex-wrap gap-1.5">
-                {e.tags.map((t) => (
-                  <span key={t} className="font-mono text-[0.67rem] text-text-tertiary bg-bg-tertiary border border-border-primary px-2.5 py-1 rounded-full">
-                    {t}
-                  </span>
-                ))}
-              </div>
+              {e.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {e.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="font-mono text-[0.67rem] text-text-tertiary bg-bg-tertiary border border-border-primary px-2.5 py-1 rounded-full"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         ))}

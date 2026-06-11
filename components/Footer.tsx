@@ -4,6 +4,7 @@ const footerLinks = {
     { href: "#education", label: "Education" },
     { href: "#experience", label: "Experience" },
     { href: "#research", label: "Research" },
+    { href: "#problem-solving", label: "Problem-Solving" },
   ],
   Work: [
     { href: "#projects", label: "Projects" },
@@ -27,7 +28,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="border-t border-border-primary bg-bg-primary py-14 pb-8">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 mb-10">
           <div className="col-span-2 md:col-span-1">
             <span className="font-mono font-bold text-[1.1rem] text-text-primary block mb-2">
@@ -35,7 +36,7 @@ export default function Footer() {
             </span>
             <p className="text-[0.82rem] text-text-secondary leading-[1.72] max-w-[240px] mb-4">
               I&apos;m an AI/ML Engineer and researcher constantly exploring what intelligent systems
-              can do — from research labs to industrial production.
+              can do - from research labs to industrial production.
             </p>
             <div className="flex flex-wrap gap-2">
               {socials.map((s) => (
@@ -78,13 +79,6 @@ export default function Footer() {
           <span className="font-mono text-[0.72rem] text-text-tertiary">
             © 2026 Priscille E. Ebwala · AI/ML Engineer
           </span>
-          <div className="flex gap-2">
-            {["✉ Email", "in LinkedIn", "⌥ GitHub"].map((l) => (
-              <span key={l} className="font-mono text-[0.6rem] text-text-secondary bg-bg-tertiary border border-border-primary px-3 py-1 rounded-full">
-                {l}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

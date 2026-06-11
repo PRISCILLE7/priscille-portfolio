@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import GridWrapper from "./GridWrapper";
 
 const contacts = [
-  { icon: "✉", label: "Email", value: "priscille.e.ebwala@gmail.com", href: "mailto:priscille.e.ebwala@gmail.com" },
+  { icon: "✉", label: "Email", value: "priscille.e.ebwala@gmail.com", href: "https://mail.google.com/mail/?view=cm&to=priscille.e.ebwala@gmail.com" },
   { icon: "⌥", label: "GitHub", value: "github.com/PRISCILLE7", href: "https://github.com/PRISCILLE7" },
   { icon: "in", label: "LinkedIn", value: "linkedin.com/in/priscille-ebwala", href: "https://linkedin.com/in/priscille-ebwala" },
   { icon: "○", label: "ORCID", value: "0009-0008-1342-2495", href: "https://orcid.org/0009-0008-1342-2495" },
+  { icon: "▶", label: "YouTube", value: "youtube.com/@LeDéclicDePriscilla", href: "https://www.youtube.com/@LeD%C3%A9clicdePriscilla" },
 ];
 
 export default function Contact() {
@@ -35,7 +36,6 @@ export default function Contact() {
             <span className="text-green font-medium">● Open to opportunities</span>
           </p>
           <div className="rounded-2xl border border-border-primary bg-bg-secondary p-4 font-mono text-[0.74rem] text-text-tertiary leading-[1.7]">
-            Based in Vietnam · Open to relocation worldwide<br />
             Languages: French (native) · English (business fluent)<br />
             Responding within 24h
           </div>

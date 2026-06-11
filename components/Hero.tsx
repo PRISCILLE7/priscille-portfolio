@@ -88,7 +88,7 @@ export default function Hero() {
           transition={{ delay: 0.45, duration: 0.5 }}
           className="text-[0.93rem] text-text-secondary leading-[1.85] max-w-[520px] mb-8"
         >
-          I build intelligent systems that cross from research into reality — turning data into
+          I build intelligent systems that cross from research into reality - turning data into
           decisions, models into products, and ideas into impact across industries.
         </motion.p>
 
@@ -146,14 +146,11 @@ export default function Hero() {
             <Image src={src} alt="Priscille" width={110} height={140} className="w-full h-full object-cover object-[center_15%]" />
           </div>
         ))}
-        <span className="font-mono text-[0.66rem] text-text-secondary bg-bg-secondary border border-border-primary px-3.5 py-2 rounded-full whitespace-nowrap">
-          &gt;_ PhD-ready
-        </span>
         <span className="font-mono text-[0.66rem] text-purple border border-purple/25 bg-purple/5 px-3.5 py-2 rounded-full whitespace-nowrap">
-          Computer Vision · MLOps · Industrial AI
+          ML Engineer · Data Scientist · Computer Vision · MLOps · Industrial AI · R&amp;D
         </span>
-        <span className="font-mono text-[0.66rem] text-text-secondary bg-bg-secondary border border-border-primary px-3.5 py-2 rounded-full whitespace-nowrap">
-          📍 Vietnam
+        <span className="font-mono text-[0.66rem] text-green border border-green/25 bg-green/5 px-3.5 py-2 rounded-full whitespace-nowrap">
+          ● Available · Industry · PhD · R&amp;D
         </span>
       </motion.div>
     </section>
