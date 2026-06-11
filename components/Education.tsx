@@ -4,10 +4,10 @@ import GridWrapper from "./GridWrapper";
 
 const education = [
   {
-    degree: "Master's in Intelligent & Multimedia Systems — Double Degree",
+    degree: "Master's in Intelligent & Multimedia Systems - Double Degree",
     school: "Institut Francophone International (VNU-IFI) · Hanoi, Vietnam",
     note: "in partnership with University of La Rochelle, France",
-    period: "2024 – 2025",
+    period: "2024 – 2026",
     tags: ["Machine Learning", "Computer Vision", "NLP", "Multimedia", "Intelligent Systems"],
   },
   {

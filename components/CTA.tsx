@@ -36,7 +36,9 @@ export default function CTA() {
           className="flex gap-3 justify-center flex-wrap mb-5"
         >
           <a
-            href="mailto:priscille.e.ebwala@gmail.com"
+            href="https://mail.google.com/mail/?view=cm&to=priscille.e.ebwala@gmail.com"
+            target="_blank"
+            rel="noreferrer"
             className="bg-white text-[#1c1917] font-semibold text-[0.88rem] px-7 py-3 rounded-full hover:opacity-90 transition-opacity"
           >
             Send me an email

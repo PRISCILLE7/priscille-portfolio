@@ -1,0 +1,521 @@
+"use client";
+import { motion } from "framer-motion";
+import GridWrapper from "./GridWrapper";
+
+type Block = {
+  label: string;
+  labelColor: string;
+  content: string;
+  isList?: boolean;
+};
+
+type Challenge = {
+  num: string;
+  title: string;
+  blocks: Block[];
+  tags: string[];
+};
+
+type Project = {
+  projectNum: string;
+  title: string;
+  context: string;
+  challenges: Challenge[];
+};
+
+const projects: Project[] = [
+  {
+    projectNum: "Project 1",
+    title: "Multi-Country Product Detection Model Industrialization",
+    context: "FieldPro (Optimetriks) · Nestlé & Coca-Cola · Vietnam, Senegal, Nigeria, Ivory Coast, Cameroon · YOLO v8/v11, GCP, Docker",
+    challenges: [
+      {
+        num: "01",
+        title: "Invisible production bug in a multi-model workflow",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "A computer vision model produced correct results in every test environment - Colab, REST API, staging - but failed silently in the production WebApp. SKUs displayed as raw codes instead of product names, and certain products were not detected at all.",
+          },
+          {
+            label: "ROOT CAUSE",
+            labelColor: "text-orange-500",
+            content:
+              "The Prediction Server ran a multi-model workflow (Maggi, Milk, NCF, POSM) but only loaded the skus.csv of the first model, ignoring class mappings for all subsequent models.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Isolated the exact pipeline stage where behavior diverged between staging and production",
+              "Identified the skus.csv / classes_map conflict in the multi-model workflow",
+              "Updated the shared classes_map to correctly reference SKU mappings for all four models",
+              "Validated fix in production with field teams - zero regression on existing models",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content: "Correct product names displayed across all model categories. Bug validated by field operations teams.",
+          },
+        ],
+        tags: ["YOLO v8/v11", "GCP", "REST API", "Multi-model orchestration", "Production debugging"],
+      },
+      {
+        num: "02",
+        title: "Severe class imbalance causing systematic detection failures",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Field teams reported products not detected or confused with similar variants. Offline evaluation metrics appeared acceptable, masking real production degradation.",
+          },
+          {
+            label: "ROOT CAUSE",
+            labelColor: "text-orange-500",
+            content:
+              "Critical annotation imbalances - e.g., similar SKUs with size variants showed ratios up to 1:14 (230 vs 3,348 annotations). Several classes had as few as 6 annotations.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Ran full annotation distribution analysis across all classes per country model",
+              "Defined a critical threshold: under 500 annotations flagged as high-risk",
+              "Coordinated targeted data collection with the labeling team for under-represented classes",
+              "Ran targeted retraining cycles after data enrichment, with controlled field evaluation",
+              "Identified training-distribution mismatch: clean studio shots vs. real-world field images",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Improved detection reliability on previously failing classes. Structured process established for continuous annotation monitoring across all markets.",
+          },
+        ],
+        tags: ["Class balancing", "Dataset curation", "YOLO v8/v11", "Offline vs. online metrics"],
+      },
+      {
+        num: "03",
+        title: "Class mapping inconsistencies across training artifacts",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Discrepancies between class names in Hasty, CSV mapping files, and deployment tickets. Old/New packaging variants created duplicate entries; certain newly added variants went undetected in production.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Cross-verified class names across Hasty, YAML configs, and CSV mapping files",
+              "Preserved exact YAML used during training to prevent index-to-class-name drift at deployment",
+              "Documented missing packaging variants and triggered retraining for affected models",
+              "Established a validation checklist: Hasty → CSV → YAML → deployment ticket",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Zero mapping-related deployment incidents on subsequent releases. Reusable validation process adopted for all new model versions.",
+          },
+        ],
+        tags: ["Class mapping", "YAML/CSV validation", "Deployment pipeline", "Hasty"],
+      },
+      {
+        num: "04",
+        title: "Training data quality as a silent performance bottleneck",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Some models showed inconsistent performance that couldn't be explained by class imbalance or mapping issues alone. Training datasets contained noisy annotations, near-duplicate images across train/val splits, and inconsistent labeling conventions across different annotation sessions.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Conducted systematic data audits: identified and removed near-duplicate images between train and validation sets",
+              "Flagged low-confidence and inconsistent annotations for relabeling",
+              "Standardized labeling conventions and guidelines across annotation sessions",
+              "Established training data quality as a first-class step in the ML lifecycle - before any model training begins",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Cleaner datasets consistently improved model precision on difficult classes. Training data quality established as a core engineering concern - not an afterthought.",
+          },
+        ],
+        tags: ["Data quality", "Dataset audit", "Annotation quality", "Train/val split integrity"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 2",
+    title: "Large-Scale Annotation Pipeline Migration: Hasty → GCS → Label Studio",
+    context: "FieldPro (Optimetriks) · 40,000+ images · 587,000+ annotations · GCP/GCS, Python, REST API, Label Studio, Hasty",
+    challenges: [
+      {
+        num: "01",
+        title: "Rate limiting causing silent pipeline failures",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "The Hasty API rejected requests after a certain volume (429 Too Many Requests). Without error handling, the pipeline failed silently mid-migration, leaving an incomplete and inconsistent dataset state.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Implemented automatic retry with exponential backoff: on 429 errors, pause 2 minutes then resume",
+              "Added request rate throttling (time.sleep(1.0)) between calls to stay within API limits",
+              "Logged all failed requests with context for post-hoc recovery without restarting the full migration",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content: "Zero silent failures. Full migration completed with automatic recovery from all rate-limit interruptions.",
+          },
+        ],
+        tags: ["Python", "REST API", "Hasty", "Retry / backoff"],
+      },
+      {
+        num: "02",
+        title: "CORS policy blocking image access from Label Studio",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Label Studio failed to load images hosted on GCS due to CORS violations. The error was intermittent - only certain image sizes during import triggered it - making it hard to reproduce reliably.",
+          },
+          {
+            label: "ROOT CAUSE",
+            labelColor: "text-orange-500",
+            content:
+              "Other GCS bucket operations were silently overwriting the CORS configuration, removing the rules that allowed Label Studio's origin.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Identified the CORS rule overwrite pattern by tracking bucket configuration changes over time",
+              "Integrated automatic CORS reapplication into the pipeline after any bucket operation that could modify it",
+              "Validated cross-origin access as part of the pipeline's pre-import checks",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content: "CORS errors fully eliminated. No further manual intervention required for image access configuration.",
+          },
+        ],
+        tags: ["GCP/GCS", "CORS policy", "Label Studio", "Python"],
+      },
+      {
+        num: "03",
+        title: "Guaranteeing image / annotation / label synchronization at scale",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Migrating 40,000+ images with bounding boxes and labels across three platforms created multiple opportunities for silent desynchronization - images without annotations, label-index drift between platforms.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Built cross-platform validation scripts verifying for every image: presence in GCS, bounding boxes in Hasty, correct label assignment",
+              "Ran validation at 3 stages: after Hasty export, after GCS upload, after Label Studio import",
+              "Implemented checkpoint recovery: pipeline could resume from any validated checkpoint",
+              "Retroactively corrected 587,000+ annotations where label assignments had drifted from source mapping",
+            ].join("|||"),
+          },
+          {
+            label: "CONCRETE DETAIL",
+            labelColor: "text-purple",
+            content:
+              "The retroactive correction required tracing the exact class index mapping used during annotation, comparing it against the current mapping, and applying deterministic remapping without altering bounding box geometry.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Migration of multiple Nestlé projects (hundreds of thousands of images) completed with zero verified data loss.",
+          },
+        ],
+        tags: ["Python", "GCP/GCS", "Label Studio", "Hasty", "Data integrity"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 3",
+    title: "Production ML System Monitoring & Incident Investigation",
+    context: "FieldPro (Optimetriks) · GCP / GKE / Kubernetes · REST API, Python · 5 simultaneous country deployments",
+    challenges: [
+      {
+        num: "01",
+        title: "Ambiguous 500 error on ML endpoint with no local reproduction",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "The /get_models endpoint returned 500 Internal Server Error while /predict worked correctly on the same environment. Not reproducible locally - cause ambiguous between auth failure, network issue, or application bug.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Verified authentication tokens - tokens valid, same token worked on /predict",
+              "Tested all available endpoints to map the exact perimeter of the failure",
+              "Investigated Kubernetes workloads on GKE to distinguish infrastructure from application-level failure",
+              "Analyzed pod logs and workload states to identify whether ML server process was in degraded state",
+              "Documented findings and created tickets for the ML infrastructure team with full technical context",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Failure localized to the ML Server application layer (not auth or network). Incident turnaround time significantly reduced.",
+          },
+        ],
+        tags: ["Kubernetes / GKE", "REST API", "Incident management", "Production debugging"],
+      },
+      {
+        num: "02",
+        title: "Training-distribution mismatch causing production performance degradation",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Several SKUs showed strong offline validation scores but consistently failed in real field conditions. The degradation was only visible after deployment, not during standard model evaluation.",
+          },
+          {
+            label: "ROOT CAUSE",
+            labelColor: "text-orange-500",
+            content:
+              "Training images were clean, centered, professionally lit product shots. Field images contained variable angles, complex backgrounds, partial occlusions, and motion blur - a distribution severely underrepresented in training data.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Documented the exact performance gap per SKU: offline validation score vs. field test success rate",
+              "Produced per-market data collection recommendations specifying required image diversity",
+              "Established a protocol for comparing offline and online evaluation before each production deployment",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Structured pre-deployment evaluation protocol introduced. Data collection guidelines updated for all markets.",
+          },
+        ],
+        tags: ["Distribution shift", "Offline/online evaluation", "Production monitoring", "Dataset strategy"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 4",
+    title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
+    context: "LGI2A Laboratory · University of Artois & EDF · France · Paper accepted at IEA/AIE 2026",
+    challenges: [
+      {
+        num: "01",
+        title: "No labeled real-world data available for supervised training",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Magnetic faults in PMSMs are rare, expensive to reproduce experimentally, and require deep expert knowledge to annotate - making conventional supervised learning impractical for real-world deployment.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Designed a physics-based synthetic data generation pipeline using Pyleecan and FEMM - 50+ motor variants (Tesla Model 3, Toyota Prius) under healthy and faulty conditions",
+              "Developed a self-supervised denoising framework (Self2Self+) that learns fault signatures directly from unlabeled flux map data",
+              "Combined FEM simulation, Self2Self+ denoising, and automatic segmentation into a unified diagnostic pipeline",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Complete fault diagnosis pipeline operating without manual annotations. Framework published at IEA/AIE 2026, Kuala Lumpur, Malaysia.",
+          },
+        ],
+        tags: ["Self-supervised learning", "FEM simulation", "Pyleecan", "FEMM", "PyTorch", "Synthetic data"],
+      },
+      {
+        num: "02",
+        title: "Scaling electromagnetic simulations on limited infrastructure",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Generating a sufficiently large and diverse synthetic dataset required hundreds of electromagnetic simulations across different motor geometries, fault types, and severity levels. Running these sequentially was computationally prohibitive.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Configured the simulation pipeline on HPC cluster infrastructure using SLURM job scheduling",
+              "Parallelized batch electromagnetic simulations across multiple compute nodes",
+              "Structured the output dataset with standardized naming and metadata for full traceability",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Dataset of 50+ motor variants generated at scale. Simulation time reduced from weeks to days through parallel execution.",
+          },
+        ],
+        tags: ["SLURM", "HPC", "Parallel computing", "Pyleecan", "Batch processing"],
+      },
+    ],
+  },
+];
+
+const labelColorMap: Record<string, string> = {
+  "text-red-500": "#ef4444",
+  "text-orange-500": "#f97316",
+  "text-blue-500": "#3b82f6",
+  "text-green": "#059669",
+  "text-purple": "#6C47FF",
+};
+
+export default function ProblemSolving() {
+  return (
+    <GridWrapper id="problem-solving">
+      <h2 className="flex items-center gap-3 text-[1.5rem] font-bold tracking-tight mb-4">
+        <span className="font-mono text-[0.72rem] text-purple/70 tracking-[0.1em] font-normal">05.</span>
+        Problem-Solving
+      </h2>
+      <p className="text-[0.9rem] text-text-secondary leading-[1.8] mb-5">
+        A documented record of real engineering problems encountered and resolved in production AI systems, data pipelines, and research workflows.
+      </p>
+      <div className="rounded-2xl border border-border-primary bg-bg-tertiary/60 p-4 mb-8 flex gap-3">
+        <span className="text-purple text-[1.1rem] flex-shrink-0 mt-0.5">↻</span>
+        <p className="text-[0.82rem] text-text-secondary leading-[1.75]">
+          Many of these challenges are recurring across most projects in this portfolio. The shared nature of computer vision deployments - multi-country rollouts, evolving product catalogs, and real-world field conditions - means that class imbalance, data quality, and distribution shift are constant engineering concerns rather than isolated incidents.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-10">
+        {projects.map((proj, pi) => (
+          <motion.div
+            key={pi}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+          >
+            <div className="rounded-2xl border border-purple/20 bg-bg-secondary overflow-hidden">
+              <div className="px-6 py-4 border-b border-border-primary bg-bg-tertiary/40">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="font-mono text-[0.65rem] text-purple uppercase tracking-[0.12em] bg-purple/10 border border-purple/20 px-3 py-1 rounded-full">
+                    {proj.projectNum}
+                  </span>
+                  <h3 className="text-[0.97rem] font-semibold text-text-primary">{proj.title}</h3>
+                </div>
+                <p className="font-mono text-[0.71rem] text-text-tertiary mt-1.5">{proj.context}</p>
+              </div>
+
+              <div className="p-6 flex flex-col gap-5">
+                {proj.challenges.map((ch, ci) => (
+                  <motion.div
+                    key={ci}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: ci * 0.07 }}
+                    className={ci > 0 ? "pt-5 border-t border-border-primary" : ""}
+                  >
+                    <div className="flex items-start gap-3 mb-3">
+                      <span className="font-mono text-[0.72rem] font-bold text-purple/50 flex-shrink-0 mt-0.5">{ch.num}</span>
+                      <h4 className="text-[0.9rem] font-semibold text-text-primary leading-snug">{ch.title}</h4>
+                    </div>
+
+                    <div className="flex flex-col gap-2.5 ml-7">
+                      {ch.blocks.map((block, bi) => (
+                        <div key={bi} className="flex gap-3">
+                          <span
+                            className="font-mono text-[0.6rem] font-bold tracking-wide flex-shrink-0 mt-1 w-[90px]"
+                            style={{ color: labelColorMap[block.labelColor] ?? "#6C47FF" }}
+                          >
+                            {block.label}
+                          </span>
+                          <div className="flex-1">
+                            {block.isList ? (
+                              <ul className="space-y-1">
+                                {block.content.split("|||").map((item, ii) => (
+                                  <li
+                                    key={ii}
+                                    className="text-[0.82rem] text-text-secondary leading-[1.6] pl-3 relative before:content-['›'] before:absolute before:left-0 before:text-purple/60"
+                                  >
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-[0.82rem] text-text-secondary leading-[1.65]">{block.content}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {ch.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mt-3 ml-7">
+                        {ch.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="font-mono text-[0.66rem] text-text-tertiary bg-bg-tertiary border border-border-primary px-2 py-0.5 rounded-full"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </GridWrapper>
+  );
+}

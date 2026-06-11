@@ -7,6 +7,7 @@ const links = [
   { href: "#education", label: "education" },
   { href: "#experience", label: "experience" },
   { href: "#research", label: "research" },
+  { href: "#problem-solving", label: "problem-solving" },
   { href: "#skills", label: "skills" },
   { href: "#projects", label: "projects" },
   { href: "#certifications", label: "certifications" },
@@ -41,7 +42,7 @@ export default function Nav() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="max-w-5xl mx-auto flex items-center justify-between h-12 px-5 rounded-full border border-border-primary bg-white/92 backdrop-blur-xl shadow-sm"
+        className="max-w-6xl mx-auto flex items-center justify-between h-12 px-5 rounded-full border border-border-primary bg-white/92 backdrop-blur-xl shadow-sm"
         style={{ borderColor: scrolled ? "rgba(214,218,222,0.8)" : "rgba(214,218,222,0.5)" }}
       >
         <span className="font-mono font-bold text-sm text-text-primary tracking-tight">
@@ -68,7 +69,9 @@ export default function Nav() {
 
         <div className="flex items-center gap-2">
           <a
-            href="mailto:priscille.e.ebwala@gmail.com"
+            href="https://mail.google.com/mail/?view=cm&to=priscille.e.ebwala@gmail.com"
+            target="_blank"
+            rel="noreferrer"
             className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-white bg-purple px-4 py-1.5 rounded-full hover:opacity-90 transition-opacity"
           >
             Hire me
@@ -94,7 +97,7 @@ export default function Nav() {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="lg:hidden max-w-5xl mx-auto mt-2 px-5 py-4 rounded-2xl border border-border-primary bg-white/95 backdrop-blur-xl shadow-md"
+          className="lg:hidden max-w-6xl mx-auto mt-2 px-5 py-4 rounded-2xl border border-border-primary bg-white/95 backdrop-blur-xl shadow-md"
         >
           <ul className="flex flex-col gap-3">
             {links.map((l) => (

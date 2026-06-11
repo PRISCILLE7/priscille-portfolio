@@ -7,11 +7,11 @@ const certs = [
     issuer: "Duke University / Coursera",
     title: "MLOps | Machine Learning Operations Specialization",
     desc: "AWS SageMaker · Azure ML · MLflow · GitHub Actions · CI/CD",
-    date: "2026 — ongoing",
+    date: "2026 - ongoing",
   },
   {
     issuer: "IBM / Coursera",
-    title: "IBM Generative AI Engineering — Professional Certificate",
+    title: "IBM Generative AI Engineering - Professional Certificate",
     desc: "LLMs · LangChain · RAG · Prompt Engineering · Hugging Face · watsonx.ai",
     date: "2025",
   },
