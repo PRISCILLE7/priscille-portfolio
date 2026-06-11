@@ -12,11 +12,11 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Priscille E. Ebwala — AI/ML Engineer",
+  title: "Priscille E. Ebwala - AI/ML Engineer",
   description:
-    "AI/ML Engineer and researcher building intelligent systems that cross from research into reality — turning data into decisions, models into products, and ideas into impact.",
+    "AI/ML Engineer and researcher building intelligent systems that cross from research into reality - turning data into decisions, models into products, and ideas into impact.",
   openGraph: {
-    title: "Priscille E. Ebwala — AI/ML Engineer",
+    title: "Priscille E. Ebwala - AI/ML Engineer",
     description: "AI/ML Engineer building intelligent systems across research and industry.",
     siteName: "Priscille E. Ebwala",
     locale: "en_US",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Priscille E. Ebwala — AI/ML Engineer",
+    title: "Priscille E. Ebwala - AI/ML Engineer",
   },
 };
 
