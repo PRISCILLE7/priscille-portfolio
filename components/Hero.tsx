@@ -141,9 +141,10 @@ export default function Hero() {
         transition={{ delay: 0.75, duration: 0.5 }}
         className="relative z-10 flex gap-2.5 items-center justify-center px-6 pb-10 flex-wrap w-full max-w-3xl"
       >
-        {["/image4.jpg", "/image2.jpg", "/image3.jpg"].map((src, i) => (
-          <div key={i} className="w-[110px] h-[140px] rounded-[70px_70px_16px_16px] overflow-hidden shadow-md flex-shrink-0">
-            <Image src={src} alt="Priscille" width={110} height={140} className="w-full h-full object-cover object-[center_15%]" />
+        {["/image5.jpg", "/image4.jpg", "/image2.jpg", "/image3.jpg"].map((src, i) => (
+          <div key={i} className="w-[110px] h-[140px] rounded-[70px_70px_16px_16px] overflow-hidden shadow-md flex-shrink-0 bg-[#EDEEF0]">
+            <Image src={src} alt="Priscille" width={110} height={140}
+              className={`w-full h-full object-cover ${i === 0 ? "object-[center_10%]" : "object-[center_15%]"}`} />
           </div>
         ))}
         <span className="font-mono text-[0.66rem] text-purple border border-purple/25 bg-purple/5 px-3.5 py-2 rounded-full whitespace-nowrap">
