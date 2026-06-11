@@ -43,7 +43,7 @@ const projects: Project[] = [
             label: "ROOT CAUSE",
             labelColor: "text-orange-500",
             content:
-              "The Prediction Server ran a multi-model workflow (Maggi, Milk, NCF, POSM) but only loaded the skus.csv of the first model, ignoring class mappings for all subsequent models.",
+              "The Prediction Server ran a multi-model workflow but only loaded the skus.csv of the first model, ignoring class mappings for all subsequent models.",
           },
           {
             label: "RESOLUTION",
