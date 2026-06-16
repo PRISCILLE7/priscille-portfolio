@@ -266,6 +266,54 @@ const projects: Project[] = [
         ],
         tags: ["Python", "GCP/GCS", "Label Studio", "Hasty", "Data integrity"],
       },
+      {
+        num: "04",
+        title: "Validating operational continuity after migration: adding new images without breaking existing annotations",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "After migrating thousands of annotated tasks from Hasty to Label Studio, the labeling team needed to continue adding new images to existing projects. The key risk: would syncing new data accidentally delete existing tasks, modify historical annotations, or create duplicates? With projects containing tens of thousands of already-migrated images, any synchronization error could have caused significant data loss.",
+          },
+          {
+            label: "INVESTIGATION",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Option 1 evaluated: manual image upload directly into Label Studio - risk of multiple data sources, no centralized traceability, complex to manage across teams",
+              "Option 2 evaluated: GCS as single source of truth - new images uploaded to GCS, Label Studio auto-syncs and creates new tasks",
+              "Label Studio documentation explained how to connect cloud storage but did not specify behavior on projects with pre-existing migrated tasks",
+              "Decision: validate experimentally on a real migrated project before recommending any workflow to the labeling team",
+            ].join("|||"),
+          },
+          {
+            label: "VALIDATION APPROACH",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Selected project: GHA - Nestle - BSO - deliberately chosen as the smallest migrated project (2,176 tasks) to minimize risk exposure in case the synchronization produced unexpected behavior",
+              "Created a dedicated GCS folder and uploaded exactly 3 test images",
+              "Configured a Source Cloud Storage connector in the existing Label Studio project",
+              "Triggered synchronization and compared task counts and annotation state before/after",
+              "Encountered a Label Studio UI bug during storage setup: NotFoundError: Failed to execute 'insertBefore' on 'Node' - confirmed the connector was correctly registered despite the error and verified tasks synchronized properly",
+            ].join("|||"),
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-purple",
+            content:
+              "Before sync: 2,176 tasks. After sync: 2,179 tasks. The 3 new images were added as new tasks. All previously migrated tasks remained intact. No annotations were modified. No task duplication observed.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "GCS-based workflow validated and recommended as the standard process for adding new data post-migration. Guarantees a single source of truth, full traceability, preservation of historical annotations, and scalability across all future labeling projects.",
+          },
+        ],
+        tags: ["GCP/GCS", "Label Studio", "Workflow validation", "Data integrity", "Operational continuity"],
+      },
     ],
   },
   {
