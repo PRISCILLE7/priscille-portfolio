@@ -58,6 +58,21 @@ const experience = [
     ],
     tags: [],
   },
+  {
+    title: "IT Engineer & Marketing Assistant",
+    company: "Intervision RDC",
+    location: "Kinshasa, DR Congo",
+    period: "Dec. 2022 - Nov. 2023 · 1 yr",
+    intro:
+      "Two successive roles within the same company, covering IT infrastructure and client operations.",
+    items: [
+      "IT Engineer (Jul - Nov 2023): installed and optimized CCTV video surveillance systems at access points; configured and assembled network hardware and routers",
+      "Marketing & Customer Assistant (Dec 2022 - Aug 2023): designed marketing materials (catalogs, product sheets, pricing guides, advertising brochures); managed client interactions via phone, email and chat",
+      "Maintained and improved product databases and customer files; collected and synthesized customer feedback",
+      "Coordinated shipping follow-ups and prepared expedition services for client accounts",
+    ],
+    tags: ["Networking", "CCTV Systems", "Client Relations", "Database Management"],
+  },
 ];
 
 export default function Experience() {
