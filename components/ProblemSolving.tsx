@@ -27,7 +27,7 @@ const projects: Project[] = [
   {
     projectNum: "Project 1",
     title: "Multi-Country Product Detection Model Industrialization",
-    context: "FieldPro (Optimetriks) · Nestlé & Coca-Cola · Vietnam, Senegal, Nigeria, Ivory Coast, Cameroon · YOLO v8/v11, GCP, Docker",
+    context: "FieldPro (Optimetriks) · FMCG clients · Vietnam, Senegal, Nigeria, Ivory Coast, Cameroon · YOLO v8/v11, GCP, Docker",
     challenges: [
       {
         num: "01",
@@ -62,7 +62,7 @@ const projects: Project[] = [
             content: "Correct product names displayed across all model categories. Bug validated by field operations teams.",
           },
         ],
-        tags: ["YOLO v8/v11", "GCP", "REST API", "Multi-model orchestration", "Production debugging"],
+        tags: ["YOLO v8/v11", "GCP", "REST API", "Multi-model orchestration", "Production debugging", "Jira"],
       },
       {
         num: "02",
@@ -99,7 +99,7 @@ const projects: Project[] = [
               "Improved detection reliability on previously failing classes. Structured process established for continuous annotation monitoring across all markets.",
           },
         ],
-        tags: ["Class balancing", "Dataset curation", "YOLO v8/v11", "Offline vs. online metrics"],
+        tags: ["Class balancing", "Dataset curation", "YOLO v8/v11", "Offline vs. online metrics", "Jira"],
       },
       {
         num: "03",
@@ -129,7 +129,7 @@ const projects: Project[] = [
               "Zero mapping-related deployment incidents on subsequent releases. Reusable validation process adopted for all new model versions.",
           },
         ],
-        tags: ["Class mapping", "YAML/CSV validation", "Deployment pipeline", "Hasty"],
+        tags: ["Class mapping", "YAML/CSV validation", "Deployment pipeline", "Hasty", "Jira"],
       },
       {
         num: "04",
@@ -159,7 +159,7 @@ const projects: Project[] = [
               "Cleaner datasets consistently improved model precision on difficult classes. Training data quality established as a core engineering concern - not an afterthought.",
           },
         ],
-        tags: ["Data quality", "Dataset audit", "Annotation quality", "Train/val split integrity"],
+        tags: ["Data quality", "Dataset audit", "Annotation quality", "Train/val split integrity", "Jira"],
       },
       {
         num: "05",
@@ -191,7 +191,7 @@ const projects: Project[] = [
               "Corrected all naming errors and standardized taxonomy across annotation platform, CSV files and SKU mapping",
               "Removed duplicate entries and realigned SKU IDs to their correct class definitions",
               "Cleaned inconsistent annotations and removed cross-contaminated images between classes",
-              "Collaborated with the business team to validate the corrected taxonomy end-to-end",
+              "Collaborated with the business team and the labeling team to validate the corrected taxonomy end-to-end",
               "Exported a clean dataset, retrained the model and deployed to the test environment",
               "Conducted a new field validation campaign with the updated model",
             ].join("|||"),
@@ -203,7 +203,7 @@ const projects: Project[] = [
               "Previously undetected product variants were correctly recognized after retraining. Class inconsistencies disappeared. Field user tests passed without regression. No architectural change to the model was needed - the root cause was entirely in data quality and taxonomy alignment.",
           },
         ],
-        tags: ["Production debugging", "Data quality", "Taxonomy alignment", "Annotation audit", "YOLO v8/v11", "MLOps"],
+        tags: ["Production debugging", "Data quality", "Taxonomy alignment", "Annotation audit", "YOLO", "MLOps", "Jira"],
       },
     ],
   },
@@ -238,7 +238,7 @@ const projects: Project[] = [
             content: "Zero silent failures. Full migration completed with automatic recovery from all rate-limit interruptions.",
           },
         ],
-        tags: ["Python", "REST API", "Hasty", "Retry / backoff"],
+        tags: ["Python", "REST API", "Hasty", "Retry / backoff", "Jira"],
       },
       {
         num: "02",
@@ -272,7 +272,7 @@ const projects: Project[] = [
             content: "CORS errors fully eliminated. No further manual intervention required for image access configuration.",
           },
         ],
-        tags: ["GCP/GCS", "CORS policy", "Label Studio", "Python"],
+        tags: ["GCP/GCS", "CORS policy", "Label Studio", "Python", "Jira"],
       },
       {
         num: "03",
@@ -305,10 +305,10 @@ const projects: Project[] = [
             label: "OUTCOME",
             labelColor: "text-green",
             content:
-              "Migration of multiple Nestlé projects (hundreds of thousands of images) completed with zero verified data loss.",
+              "Migration of multiple client projects (hundreds of thousands of images) completed with zero verified data loss.",
           },
         ],
-        tags: ["Python", "GCP/GCS", "Label Studio", "Hasty", "Data integrity"],
+        tags: ["Python", "GCP/GCS", "Label Studio", "Hasty", "Data integrity", "Jira"],
       },
       {
         num: "04",
@@ -336,7 +336,7 @@ const projects: Project[] = [
             labelColor: "text-blue-500",
             isList: true,
             content: [
-              "Selected project: GHA - Nestle - BSO - deliberately chosen as the smallest migrated project (2,176 tasks) to minimize risk exposure in case the synchronization produced unexpected behavior",
+              "Selected the smallest migrated project (2,176 tasks) as a test case to minimize risk exposure in case the synchronization produced unexpected behavior",
               "Created a dedicated GCS folder and uploaded exactly 3 test images",
               "Configured a Source Cloud Storage connector in the existing Label Studio project",
               "Triggered synchronization and compared task counts and annotation state before/after",
@@ -356,7 +356,7 @@ const projects: Project[] = [
               "GCS-based workflow validated and recommended as the standard process for adding new data post-migration. Guarantees a single source of truth, full traceability, preservation of historical annotations, and scalability across all future labeling projects.",
           },
         ],
-        tags: ["GCP/GCS", "Label Studio", "Workflow validation", "Data integrity", "Operational continuity"],
+        tags: ["GCP/GCS", "Label Studio", "Workflow validation", "Data integrity", "Operational continuity", "Jira"],
       },
     ],
   },
@@ -394,7 +394,7 @@ const projects: Project[] = [
               "Failure localized to the ML Server application layer (not auth or network). Incident turnaround time significantly reduced.",
           },
         ],
-        tags: ["Kubernetes / GKE", "REST API", "Incident management", "Production debugging"],
+        tags: ["Kubernetes / GKE", "REST API", "Incident management", "Production debugging", "Jira"],
       },
       {
         num: "02",
@@ -429,7 +429,7 @@ const projects: Project[] = [
               "Structured pre-deployment evaluation protocol introduced. Data collection guidelines updated for all markets.",
           },
         ],
-        tags: ["Distribution shift", "Offline/online evaluation", "Production monitoring", "Dataset strategy"],
+        tags: ["Distribution shift", "Offline/online evaluation", "Production monitoring", "Dataset strategy", "Jira"],
       },
     ],
   },
@@ -465,7 +465,7 @@ const projects: Project[] = [
               "Complete fault diagnosis pipeline operating without manual annotations. Framework published at IEA/AIE 2026, Kuala Lumpur, Malaysia.",
           },
         ],
-        tags: ["Self-supervised learning", "FEM simulation", "Pyleecan", "FEMM", "PyTorch", "Synthetic data"],
+        tags: ["Self-supervised learning", "FEM simulation", "Pyleecan", "FEMM", "PyTorch", "Synthetic data", "Jira"],
       },
       {
         num: "02",
@@ -494,7 +494,7 @@ const projects: Project[] = [
               "Dataset of 50+ motor variants generated at scale. Simulation time reduced from weeks to days through parallel execution.",
           },
         ],
-        tags: ["SLURM", "HPC", "Parallel computing", "Pyleecan", "Batch processing"],
+        tags: ["SLURM", "HPC", "Parallel computing", "Pyleecan", "Batch processing", "Jira"],
       },
     ],
   },
