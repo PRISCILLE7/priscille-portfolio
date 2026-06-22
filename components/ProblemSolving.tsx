@@ -161,6 +161,50 @@ const projects: Project[] = [
         ],
         tags: ["Data quality", "Dataset audit", "Annotation quality", "Train/val split integrity"],
       },
+      {
+        num: "05",
+        title: "Production regression traced to data sparsity and taxonomy naming errors",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Field teams reported that certain product variants in a specific category were no longer detected or behaved inconsistently in production. The issue was particularly confusing because some affected classes had acceptable validation metrics during training - suggesting the root cause was not straightforward.",
+          },
+          {
+            label: "INVESTIGATION",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Audited annotation statistics for all affected classes: found several with critically low volume - one class had as few as ~15 annotations",
+              "Reviewed annotation diversity: limited variation in angles, lighting and real-world capture conditions across affected classes",
+              "Conducted manual annotation review in the annotation platform: found naming errors, class inconsistencies, images assigned to wrong classes, and classes sharing identical data",
+              "Cross-referenced class names across annotation platform, CSV mapping files and deployment SKU databases: found multiple taxonomy misalignments",
+              "Discovered a critical naming error: one class was labeled as a packaging variant A but actually corresponded to variant B - causing data confusion between classes, model training and functional testing",
+            ].join("|||"),
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Corrected all naming errors and standardized taxonomy across annotation platform, CSV files and SKU mapping",
+              "Removed duplicate entries and realigned SKU IDs to their correct class definitions",
+              "Cleaned inconsistent annotations and removed cross-contaminated images between classes",
+              "Collaborated with the business team to validate the corrected taxonomy end-to-end",
+              "Exported a clean dataset, retrained the model and deployed to the test environment",
+              "Conducted a new field validation campaign with the updated model",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Previously undetected product variants were correctly recognized after retraining. Class inconsistencies disappeared. Field user tests passed without regression. No architectural change to the model was needed - the root cause was entirely in data quality and taxonomy alignment.",
+          },
+        ],
+        tags: ["Production debugging", "Data quality", "Taxonomy alignment", "Annotation audit", "YOLO v8/v11", "MLOps"],
+      },
     ],
   },
   {
