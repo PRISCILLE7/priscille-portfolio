@@ -50,7 +50,7 @@ const experience = [
     title: "Teaching & Research Assistant",
     company: "University of Kinshasa (UNIKIN)",
     location: "DR Congo",
-    period: "Nov. 2022 - Dec. 2023 · 1 yr 2 mo",
+    period: "Nov. 2022 - Jan. 2024 · 1 yr 3 mo",
     items: [
       "Supervised practical sessions in Programming Logic, Algorithms, Computer Science and Biometrics",
       "Mentored students on final-year projects and research work",
@@ -62,14 +62,13 @@ const experience = [
     title: "IT Engineer & Marketing Assistant",
     company: "Intervision RDC",
     location: "Kinshasa, DR Congo",
-    period: "Dec. 2022 - Nov. 2023 · 1 yr",
+    period: "Dec. 2022 - Dec. 2023 · 1 yr 1 mo",
     intro:
       "Two successive roles within the same company, covering IT infrastructure and client operations.",
     items: [
-      "IT Engineer (Jul - Nov 2023): installed and optimized CCTV video surveillance systems at access points; configured and assembled network hardware and routers",
       "Marketing & Customer Assistant (Dec 2022 - Aug 2023): designed marketing materials (catalogs, product sheets, pricing guides, advertising brochures); managed client interactions via phone, email and chat",
       "Maintained and improved product databases and customer files; collected and synthesized customer feedback",
-      "Coordinated shipping follow-ups and prepared expedition services for client accounts",
+      "IT Engineer (Jul - Dec 2023): installed and optimized CCTV video surveillance systems at access points; configured and assembled network hardware and routers",
     ],
     tags: ["Networking", "CCTV Systems", "Client Relations", "Database Management"],
   },
