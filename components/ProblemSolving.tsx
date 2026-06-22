@@ -465,7 +465,7 @@ const projects: Project[] = [
               "Complete fault diagnosis pipeline operating without manual annotations. Framework published at IEA/AIE 2026, Kuala Lumpur, Malaysia.",
           },
         ],
-        tags: ["Self-supervised learning", "FEM simulation", "Pyleecan", "FEMM", "PyTorch", "Synthetic data", "Jira"],
+        tags: ["Self-supervised learning", "FEM simulation", "Pyleecan", "FEMM", "PyTorch", "Synthetic data"],
       },
       {
         num: "02",
@@ -494,7 +494,7 @@ const projects: Project[] = [
               "Dataset of 50+ motor variants generated at scale. Simulation time reduced from weeks to days through parallel execution.",
           },
         ],
-        tags: ["SLURM", "HPC", "Parallel computing", "Pyleecan", "Batch processing", "Jira"],
+        tags: ["SLURM", "HPC", "Parallel computing", "Pyleecan", "Batch processing"],
       },
     ],
   },
