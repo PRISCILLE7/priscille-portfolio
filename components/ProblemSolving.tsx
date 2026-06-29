@@ -213,7 +213,7 @@ const projects: Project[] = [
             label: "PROBLEM",
             labelColor: "text-red-500",
             content:
-              "After deploying a new model version, field teams reported abnormally low detection volumes for several variants within the same product family. The impacted classes were visually similar products with multiple sizes and packagings. The risk: the system was systematically underestimating real shelf presence, directly affecting operational KPIs reported to the client.",
+              "A model had been running in production since February. Several months after deployment, the team noticed a regression: detection volumes for a specific product family were significantly lower compared to other categories. The affected classes covered visually similar variants with multiple sizes and packagings. The risk: the system was systematically underestimating real shelf presence, directly affecting operational KPIs reported to the client.",
           },
           {
             label: "INVESTIGATION",
