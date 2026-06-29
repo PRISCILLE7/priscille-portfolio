@@ -220,18 +220,18 @@ const projects: Project[] = [
             labelColor: "text-orange-500",
             isList: true,
             content: [
-              "Extracted historical detections from the production database by month and SKU — confirmed a significant drop on several variants after the new model deployment",
-              "Built a benchmark of 500 historical images covering the main impacted classes and one unaffected control class",
-              "Compared three model versions on this benchmark: current production model, first staging model, corrected staging model",
-              "First staging model showed no significant improvement — ruling out a pure training issue and pointing to a mapping or data problem",
-              "Manual visual inspection of historical images revealed that many contained multiple visually similar products in the same scene — historical detections could not be used as strict ground truth",
+              "Extracted historical detections from the production database by month and SKU - confirmed a significant drop on several variants after the new model deployment",
+              "Built a benchmark of 500 historical images (sourced from GCS) covering the main impacted classes and one unaffected control class",
+              "Evaluated three model versions by calling each model's REST API endpoint - production model and two staging versions - on the same image set to ensure a direct, controlled comparison",
+              "First staging model showed no significant improvement - ruling out a pure training issue and pointing to a mapping or data problem",
+              "Manual visual inspection of historical images revealed that many contained multiple visually similar products in the same scene - historical detections could not be used as strict ground truth",
             ].join("|||"),
           },
           {
             label: "ROOT CAUSE",
             labelColor: "text-orange-500",
             content:
-              "A combination of factors: new packagings were missing from the training set; some annotation classes were mixed; the SKU mapping file had incorrectly assigned new packagings to new SKU IDs rather than to the existing business SKU they represented. The key insight: a packaging update does not necessarily mean a new product — the model must learn multiple visuals but map them to the same business SKU.",
+              "A combination of factors: new packagings were missing from the training set; some annotation classes were mixed; the SKU mapping file had incorrectly assigned new packagings to new SKU IDs rather than to the existing business SKU they represented. The key insight: a packaging update does not necessarily mean a new product - the model must learn multiple visuals but map them to the same business SKU.",
           },
           {
             label: "RESOLUTION",
@@ -258,7 +258,7 @@ const projects: Project[] = [
               "Full incident lifecycle completed: production anomaly detected, root cause isolated across model, data, mapping and packaging dimensions, corrected mapping and enriched training set, model improved and validated. Field validation with the Ops team scheduled before final production deployment.",
           },
         ],
-        tags: ["Production debugging", "SKU mapping", "Packaging change", "Benchmark evaluation", "SQL analysis", "YOLO", "MLOps", "Jira"],
+        tags: ["Production debugging", "SKU mapping", "Packaging change", "Benchmark evaluation", "REST API", "GCP/GCS", "SQL analysis", "YOLO", "MLOps", "Jira"],
       },
     ],
   },
