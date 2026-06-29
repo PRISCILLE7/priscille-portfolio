@@ -205,6 +205,61 @@ const projects: Project[] = [
         ],
         tags: ["Production debugging", "Data quality", "Taxonomy alignment", "Annotation audit", "YOLO", "MLOps", "Jira"],
       },
+      {
+        num: "06",
+        title: "Detection collapse on a product family after packaging change",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "After deploying a new model version, field teams reported abnormally low detection volumes for several variants within the same product family. The impacted classes were visually similar products with multiple sizes and packagings. The risk: the system was systematically underestimating real shelf presence, directly affecting operational KPIs reported to the client.",
+          },
+          {
+            label: "INVESTIGATION",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Extracted historical detections from the production database by month and SKU — confirmed a significant drop on several variants after the new model deployment",
+              "Built a benchmark of 500 historical images covering the main impacted classes and one unaffected control class",
+              "Compared three model versions on this benchmark: current production model, first staging model, corrected staging model",
+              "First staging model showed no significant improvement — ruling out a pure training issue and pointing to a mapping or data problem",
+              "Manual visual inspection of historical images revealed that many contained multiple visually similar products in the same scene — historical detections could not be used as strict ground truth",
+            ].join("|||"),
+          },
+          {
+            label: "ROOT CAUSE",
+            labelColor: "text-orange-500",
+            content:
+              "A combination of factors: new packagings were missing from the training set; some annotation classes were mixed; the SKU mapping file had incorrectly assigned new packagings to new SKU IDs rather than to the existing business SKU they represented. The key insight: a packaging update does not necessarily mean a new product — the model must learn multiple visuals but map them to the same business SKU.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Corrected the SKU mapping file to align new packagings with their correct existing business SKU IDs",
+              "Integrated missing new packagings into the training dataset after validation with the labeling and ops teams",
+              "Retrained the model, deployed to staging, and re-evaluated on the 500-image historical benchmark",
+              "Completed evaluation with manual visual inspection to distinguish real model errors from historical annotation ambiguities",
+              "Produced a detailed comparison CSV for operational validation before production deployment",
+            ].join("|||"),
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-purple",
+            content:
+              "Variant A: 33% → 89% | Variant B: 50% → 85% | Variant C: 6% → 76% | Variant D: 27% → 55% | Control class: 97% → 99%. Significant improvement on all impacted classes with no regression on the control class.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Full incident lifecycle completed: production anomaly detected, root cause isolated across model, data, mapping and packaging dimensions, corrected mapping and enriched training set, model improved and validated. Field validation with the Ops team scheduled before final production deployment.",
+          },
+        ],
+        tags: ["Production debugging", "SKU mapping", "Packaging change", "Benchmark evaluation", "SQL analysis", "YOLO", "MLOps", "Jira"],
+      },
     ],
   },
   {
