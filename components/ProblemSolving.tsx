@@ -213,7 +213,7 @@ const projects: Project[] = [
             label: "PROBLEM",
             labelColor: "text-red-500",
             content:
-              "A model had been running in production since February. After 4 months, in May and June, the team observed a sharp regression: detection volumes for a specific product family dropped significantly compared to other categories. The affected classes covered visually similar variants with multiple sizes and packagings. The risk: the system was systematically underestimating real shelf presence, directly affecting operational KPIs reported to the client.",
+              "A model had been running in production since February. In April, the team noticed the first signs of regression on a specific product family. By May and June, a sharp drop in detection volumes was confirmed across several variants of that family, while other categories remained stable. The affected classes covered visually similar products with multiple sizes and packagings. The risk: the system was systematically underestimating real shelf presence, directly affecting operational KPIs reported to the client.",
           },
           {
             label: "INVESTIGATION",
