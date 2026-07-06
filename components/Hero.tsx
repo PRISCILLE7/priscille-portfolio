@@ -3,9 +3,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const stats = [
-  { n: "4+", label: "years experience" },
+  { n: "3+", label: "years experience" },
   { n: "2", label: "publications" },
-  { n: "5", label: "countries deployed" },
+  { n: "7", label: "countries deployed" },
   { n: "10+", label: "models shipped" },
 ];
 
