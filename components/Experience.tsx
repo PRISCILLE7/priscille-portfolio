@@ -38,7 +38,7 @@ const experience = [
       "Analyzed time/frequency-domain signals (magnetic flux, torque, field density) to extract discriminative fault signatures",
       "Applied transfer learning to adapt pre-trained models to fault diagnosis with limited real-world data",
       "Leveraged HPC infrastructure (SLURM, cluster) to scale electromagnetic batch simulations",
-      "Outcome: paper accepted at IEA/AIE 2026, Kuala Lumpur, Malaysia",
+      "Outcome: paper published at IEA/AIE 2026 (Kuala Lumpur, Malaysia) - available on Springer",
     ],
     tags: [
       "PyTorch", "TensorFlow", "Pyleecan", "FEMM",
