@@ -554,6 +554,43 @@ const projects: Project[] = [
         ],
         tags: ["Dataset enrichment", "Field data collection", "GCP/GCS", "Label Studio", "Labeling coordination", "YOLO", "MLOps", "Jira"],
       },
+      {
+        num: "03",
+        title: "Diagnosing a never-detected SKU: from data sparsity to structural visual confusion",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "A specific SKU had only 110 annotations in the training set - compared to thousands for other classes - and was never detected in the field. The immediate assumption was a data volume problem, but rather than acting on the first plausible hypothesis, a full diagnostic was conducted.",
+          },
+          {
+            label: "STEP 1 - TARGETED AUGMENTATION",
+            labelColor: "text-orange-500",
+            content:
+              "Applied synthetic copy-paste augmentation to artificially boost the class from 110 to 708 instances. Result: recall improved from 0 to 0.21 - the product became visible to the model - but precision remained low at 0.31. Augmentation alone unblocked detection but did not resolve the underlying problem.",
+          },
+          {
+            label: "STEP 2 - DEEP DIAGNOSIS",
+            labelColor: "text-orange-500",
+            content:
+              "Analyzed the confusion matrix in detail and conducted field verification. Finding: the model was confusing the target SKU with another product with a nearly identical packaging - 20 confusions vs only 8 correct detections. The root cause was not data volume but structural visual ambiguity between two packaging variants that the model could not reliably distinguish.",
+          },
+          {
+            label: "DECISION",
+            labelColor: "text-blue-500",
+            content:
+              "Rather than launching a blind data collection effort, the model was deployed to a test environment to observe the exact confusion patterns under real field conditions. This targeted approach allows identifying precisely which field images are needed to resolve the visual ambiguity - collecting data with intent, not at random.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Demonstrated the ability to go beyond the first plausible hypothesis: reading ML metrics in depth (not just the global score), interpreting a confusion matrix to identify structural model errors, and directing a data collection decision based on a precise diagnosis rather than intuition.",
+          },
+        ],
+        tags: ["Confusion matrix analysis", "Synthetic augmentation", "Low-data class", "Visual ambiguity", "Precision / Recall", "YOLO", "MLOps", "Jira"],
+      },
     ],
   },
   {
