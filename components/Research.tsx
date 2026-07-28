@@ -10,11 +10,14 @@ const publications = [
     yearAccent: true,
     title: "Self2Self+-based Self-Supervision for Magnetic Fault Denoising in PMSMs",
     venue: "IEA/AIE 2026 - International Conference on Industrial, Engineering & Applied AI · Kuala Lumpur, Malaysia",
-    status: "Accepted · Apr. 2026",
+    status: "Published · Springer 2026",
     description:
       "Self-supervised pipeline for magnetic fault denoising and localization in Permanent Magnet Synchronous Machines (PMSMs). Combines FEM simulation (Pyleecan), Self2Self+ denoising and automatic segmentation to detect defective regions in magnetic flux maps (Br/Bt) without manual annotations. Case study: Tesla Model 3.",
     topics: ["Self-supervised learning", "PMSMs", "FEM Simulation", "Fault Diagnosis", "Industrial AI"],
-    links: [{ label: "Code GitHub ↗", href: "https://github.com/PRISCILLE7/Self2SelfPlus-MagneticFaultDiagnosis" }],
+    links: [
+      { label: "Read on Springer ↗", href: "https://link.springer.com/chapter/10.1007/978-981-92-2888-1_3" },
+      { label: "Code GitHub ↗", href: "https://github.com/PRISCILLE7/Self2SelfPlus-MagneticFaultDiagnosis" },
+    ],
   },
   {
     badge: "Workshop",
