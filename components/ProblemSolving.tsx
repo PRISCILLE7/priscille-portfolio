@@ -490,6 +490,74 @@ const projects: Project[] = [
   },
   {
     projectNum: "Project 4",
+    title: "Production Monitoring and Dataset Improvement for SKU Detection",
+    context: "FieldPro (Optimetriks) · FMCG clients · YOLO v11, GCP/GCS, REST API, Label Studio, Python · Jira",
+    challenges: [
+      {
+        num: "01",
+        title: "Identifying underperforming classes through continuous production monitoring",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "After a model was deployed in production, ongoing monitoring revealed that certain SKU classes consistently showed low detection counts compared to others. The issue was not a sudden failure but a gradual drift - some classes were systematically underdetected in real field conditions without triggering any hard error.",
+          },
+          {
+            label: "INVESTIGATION",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Extracted and analyzed production detection statistics per class over time to identify classes with abnormally low detection volumes",
+              "Cross-checked detection counts against known field deployment conditions to confirm the underperformance was not explained by product absence in the market",
+              "Analyzed visual confusion patterns between classes with similar packagings, sizes, or color schemes",
+              "Verified class IDs and mapping files to rule out a mapping or configuration error before concluding on a data or model issue",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Weak classes clearly identified and distinguished from mapping errors. Root cause confirmed: insufficient and low-diversity training data for the affected SKUs.",
+          },
+        ],
+        tags: ["Production monitoring", "Detection analysis", "Class performance audit", "SKU mapping", "YOLO", "GCP/GCS", "Jira"],
+      },
+      {
+        num: "02",
+        title: "Building a targeted field dataset to fix underperforming classes",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Once weak classes were identified, the challenge was to collect field images representative of real deployment conditions - not clean studio shots - and prepare a targeted enrichment dataset without disrupting the existing training pipeline.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Retrieved real field images from GCS for the underperforming classes - images captured in actual store conditions with variable angles, lighting and occlusions",
+              "Filtered and selected the most representative samples to maximize diversity within the new batch",
+              "Coordinated with the labeling team to prioritize and annotate the selected images, providing clear guidelines on the specific classes and packaging variants to target",
+              "Prepared the enriched dataset for a targeted retraining cycle focused on the weak classes",
+              "Monitored detection performance after redeployment to validate the improvement and ensure no regression on stable classes",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Targeted dataset enrichment improved detection rates on previously weak classes. Full monitoring and improvement cycle completed: production analysis - weak class identification - field data collection - labeling coordination - retraining - redeployment - validation.",
+          },
+        ],
+        tags: ["Dataset enrichment", "Field data collection", "GCP/GCS", "Label Studio", "Labeling coordination", "YOLO", "MLOps", "Jira"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 5",
     title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
     context: "LGI2A Laboratory · University of Artois & EDF · France · Paper accepted at IEA/AIE 2026",
     challenges: [
