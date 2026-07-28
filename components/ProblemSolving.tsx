@@ -591,6 +591,54 @@ const projects: Project[] = [
         ],
         tags: ["Confusion matrix analysis", "Synthetic augmentation", "Low-data class", "Visual ambiguity", "Precision / Recall", "YOLO", "MLOps", "Jira"],
       },
+      {
+        num: "04",
+        title: "Rebalancing a dataset to reduce confusion between two visually identical packagings",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "A model was regularly confusing two versions of the same product with nearly identical packaging - an old and a new variant. The new variant was sometimes detected correctly on clean images but was frequently misclassified as the old variant on slightly blurry, poorly lit, or noisy field images.",
+          },
+          {
+            label: "ROOT CAUSE",
+            labelColor: "text-orange-500",
+            content:
+              "Analysis of the training split revealed a severe imbalance: the old packaging had ~49,000 annotations vs ~1,200 for the new variant - a ratio of approximately 42:1. Beyond raw volume, the new class lacked diversity: its images came mostly from clean, controlled conditions that did not represent real field capture conditions.",
+          },
+          {
+            label: "FIRST APPROACH & LIMIT",
+            labelColor: "text-orange-500",
+            content:
+              "An initial attempt to aggressively undersample the old class was abandoned after analysis: only 1,865 of its ~49,000 annotations came from single-product images. The remaining 47,605 came from multi-product images shared with other classes. Removing those images would have caused significant annotation loss across the entire dataset.",
+          },
+          {
+            label: "SOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Removed only images containing exclusively the old packaging variant - preserving all multi-product images to protect annotations for other classes",
+              "Applied targeted oversampling on the new packaging class with diverse augmentations: brightness/contrast variations, slight blur, visual noise, small rotations and translations, scale changes, image compression, horizontal flips",
+              "Automatically recalculated bounding boxes after each transformation to maintain annotation integrity",
+              "Verified annotation counts per class before and after rebalancing",
+            ].join("|||"),
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-purple",
+            content:
+              "Ratio reduced from 42:1 to approximately 5:1. Generated 4,263 new augmented images and 8,176 additional annotations for the minority class - with zero invalid augmentations. Other classes present in the same images also benefited from augmentation while retaining correct annotations.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "New packaging correctly detected on clean and well-lit field images. Confusion with the old variant significantly reduced. Limits persist on very blurry or heavily noisy images - addressed by extracting 296 new real field images for the next enrichment cycle. Established a reusable method for handling old/new packaging confusion across any product family.",
+          },
+        ],
+        tags: ["Class imbalance", "Data augmentation", "Oversampling", "Multi-class dataset", "Bounding box integrity", "Dataset debugging", "YOLO", "MLOps", "Jira"],
+      },
     ],
   },
   {
