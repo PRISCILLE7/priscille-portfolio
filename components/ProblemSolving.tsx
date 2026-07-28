@@ -417,6 +417,128 @@ const projects: Project[] = [
   },
   {
     projectNum: "Project 3",
+    title: "Large-Scale Cross-Project Annotation Transfer",
+    context: "FieldPro (Optimetriks) · Annotation platform REST API · Python, GCP/GCS · 65,000+ images · 1M+ annotations",
+    challenges: [
+      {
+        num: "01",
+        title: "Scaling annotation transfer: two failed API approaches before the right architecture",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Multiple annotation projects shared a recurring need: a SKU already richly annotated in one project was absent or underrepresented in another. The default option - re-labeling from scratch - was costly for data that already existed. The annotation platform offered no native cross-project transfer, so everything had to go through its REST API. One source project alone had 65,000+ images and over one million annotations.",
+          },
+          {
+            label: "APPROACH 1 - INVALIDATED",
+            labelColor: "text-orange-500",
+            content:
+              "Image-by-image iteration: query each image, read its annotations, recreate them in the target project. Worked on small volumes but projected to dozens of hours for a single project at scale, with frequent connection drops on long-running sessions. Not viable.",
+          },
+          {
+            label: "APPROACH 2 - INVALIDATED",
+            labelColor: "text-orange-500",
+            content:
+              "Project-level API query with a class filter, expecting only the relevant annotations to be returned. Discovered empirically that the API silently ignored the class filter and returned the entire million-annotation dataset on every call. A plausible hypothesis on paper, invalidated by real testing.",
+          },
+          {
+            label: "SOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Triggered a full server-side export of the source project (single async operation) rather than querying annotations one by one",
+              "Filtered and processed the exported data locally - avoiding repeated heavy API calls",
+              "Built a shared image index once and reused it across all class migrations in the same project",
+              "Result: processing time reduced from dozens of projected hours to a few minutes",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Architecture validated at scale. The right approach emerged from empirical testing of each hypothesis - not from documentation, which did not describe actual API behavior at volume.",
+          },
+        ],
+        tags: ["REST API", "Scale engineering", "Python", "Data pipeline", "GCP/GCS", "Jira"],
+      },
+      {
+        num: "02",
+        title: "Diagnosing an undocumented server-side constraint by systematic elimination",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Once the image transfer pipeline worked correctly, the annotation creation step failed systematically with a generic 500 Internal Server Error and no usable error message.",
+          },
+          {
+            label: "ELIMINATION PROCESS",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Annotation geometry: validated manually - correct",
+              "Target class type: verified via API - compliant",
+              "Image availability after async upload: tested with active polling - no effect",
+              "Isolated the variable: tested the raw API call outside any script, on a fresh image never touched by the migration - error still reproduced in this minimal case",
+            ].join("|||"),
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            content:
+              "The minimal reproduction excluded any script-side cause. Contacted vendor support with concrete evidence: exact payload, server response, test identifiers. Support confirmed an undocumented API requirement: certain optional fields had to be omitted entirely rather than sent as null, and one apparently secondary field required a real value. Once corrected, the entire pipeline unblocked.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Systematic elimination - narrowing to a minimal reproducible case - made vendor support immediately actionable. A generic 500 error resolved through methodical diagnosis rather than guesswork.",
+          },
+        ],
+        tags: ["API debugging", "Systematic elimination", "Vendor collaboration", "REST API", "Python", "Jira"],
+      },
+      {
+        num: "03",
+        title: "Production resilience and generalization to a reusable tool",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "The pipeline needed to run reliably over multi-hour sessions on real volumes. Several failure modes only appeared in production: connection interruptions mid-transfer, expired signed URLs, and a silent data integrity issue invisible in the happy path.",
+          },
+          {
+            label: "MECHANISMS IMPLEMENTED",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Checkpoint per image AND per annotation class - handling images containing multiple objects of different classes",
+              "Duplicate detection and reuse rather than recreation on resume",
+              "Signed URL refresh immediately before use - limited lifetime, invisible when cached from the previous day",
+              "Retry with exponential backoff, differentiated between transient errors (network, 5xx) and permanent failures (4xx)",
+              "Silent bug fix: images imported via API remained invisible in status-filtered exports, breaking downstream training pipelines without any error",
+            ].join("|||"),
+          },
+          {
+            label: "GENERALIZATION",
+            labelColor: "text-purple",
+            content:
+              "After validation on several real migrations (thousands of images across different project pairs), the pipeline was generalized into a reusable tool: migration logic decoupled from the annotation platform connector, an interactive flow guiding the user through project/class/volume selection, and class name matching handling slight naming differences between projects.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Thousands of images and annotations transferred successfully without manual re-labeling. Full engineering cycle completed: prototype - scale failure - fix - production hardening - generalization to reusable tool.",
+          },
+        ],
+        tags: ["Production resilience", "Checkpoint / recovery", "REST API", "Python", "GCP/GCS", "Tool design", "Jira"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 4",
     title: "Production ML System Monitoring & Incident Investigation",
     context: "FieldPro (Optimetriks) · GCP / GKE / Kubernetes · REST API, Python · 5 simultaneous country deployments",
     challenges: [
@@ -489,7 +611,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 4",
+    projectNum: "Project 5",
     title: "Production Monitoring and Dataset Improvement for SKU Detection",
     context: "FieldPro (Optimetriks) · FMCG clients · YOLO v11, GCP/GCS, REST API, Label Studio, Python · Jira",
     challenges: [
@@ -642,7 +764,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 5",
+    projectNum: "Project 6",
     title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
     context: "LGI2A Laboratory · University of Artois & EDF · France · Paper accepted at IEA/AIE 2026",
     challenges: [
