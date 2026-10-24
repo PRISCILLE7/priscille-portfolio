@@ -11,7 +11,7 @@ const experience = [
     intro:
       "Development and industrialization of AI solutions for field execution, deployed across multiple countries in Africa and Asia for FMCG clients (Nestlé, Coca-Cola).",
     items: [
-      "Designed, trained, fine-tuned and deployed YOLO v8/v11 models in production across 5 countries (Vietnam, Senegal, Nigeria, Ivory Coast, Cameroon)",
+      "Designed, trained, fine-tuned and deployed YOLO v8/v11 models in production across 9 countries (Vietnam, Senegal, Nigeria, Ivory Coast, Ghana, Burkina Faso, DR Congo, Cameroon, Angola)",
       "Owned the full ML lifecycle end-to-end: data curation, class balancing, training, evaluation, deployment, retraining, monitoring",
       "Migrated 40,000+ annotated images (Hasty → GCS → Label Studio) with robust pipeline and error recovery; retroactively corrected 587,000+ annotations",
       "Validated annotation quality across 90,000+ labeled images",

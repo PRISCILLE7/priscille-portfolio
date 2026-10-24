@@ -32,12 +32,16 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={34} y={13} textAnchor="middle" fontSize={7} fill="#0A1628" fontFamily="monospace" fontWeight="bold">0.94</text>
           <rect x={203} y={42} width={38} height={12} rx={6} fill={ac} opacity={0.9}/>
           <text x={222} y={51} textAnchor="middle" fontSize={7} fill="#0A1628" fontFamily="monospace" fontWeight="bold">0.87</text>
-          <text x={30} y={148} fontSize={15}>🇨🇮</text>
-          <text x={100} y={148} fontSize={15}>🇨🇲</text>
-          <text x={175} y={148} fontSize={15}>🇧🇯</text>
-          <text x={248} y={148} fontSize={15}>🇸🇳</text>
-          <text x={318} y={148} fontSize={15}>🇨🇩</text>
-          <text x={200} y={132} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé · Coca-Cola · 5 countries · 90k+ images</text>
+          <text x={18} y={148} fontSize={15}>🇻🇳</text>
+          <text x={60} y={148} fontSize={15}>🇸🇳</text>
+          <text x={102} y={148} fontSize={15}>🇳🇬</text>
+          <text x={144} y={148} fontSize={15}>🇨🇮</text>
+          <text x={186} y={148} fontSize={15}>🇬🇭</text>
+          <text x={228} y={148} fontSize={15}>🇧🇫</text>
+          <text x={270} y={148} fontSize={15}>🇨🇩</text>
+          <text x={312} y={148} fontSize={15}>🇨🇲</text>
+          <text x={354} y={148} fontSize={15}>🇦🇴</text>
+          <text x={200} y={132} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé · Coca-Cola · 9 countries · 90k+ images</text>
         </>
       );
     case "price-audit":
