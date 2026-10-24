@@ -765,6 +765,72 @@ const projects: Project[] = [
   },
   {
     projectNum: "Project 6",
+    title: "Automated Price Audit with Generative AI - Nestlé Vietnam",
+    context: "FieldPro (Optimetriks) · Nestlé Vietnam · Google Gemini API, Python, PostgreSQL, ETL, Apache Superset · Jira",
+    challenges: [
+      {
+        num: "01",
+        title: "Unreliable prices extracted from retail shelf images",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "The Gemini pipeline had to read regular and promotional prices from real retail photos. Some extracted values were unrealistic, irrelevant images entered the pipeline, and batch responses had to be matched reliably to their source images.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Implemented price validation rules to filter unrealistic values",
+              "Restricted image selection to the relevant retail audit activity",
+              "Worked on Gemini Batch API integration and response-to-image mapping",
+              "Contributed to the evaluation of extraction accuracy and to confidence-based validation strategies",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "More reliable price and promotion data, with a more robust batch processing flow.",
+          },
+        ],
+        tags: ["Google Gemini", "Batch API", "Data validation", "Model evaluation"],
+      },
+      {
+        num: "02",
+        title: "Vietnamese characters corrupted across the data chain",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Vietnamese product and store names were displayed incorrectly in the reports, and the issue could come from any step: CSV exports, data ingestion, PostgreSQL or the BI dashboards.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Traced the encoding step by step through CSV exports, ingestion workflows, PostgreSQL and Apache Superset",
+              "Resolved the encoding issues along the chain",
+              "Validated production results and resolved integration issues with engineering and business teams",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Consistent Vietnamese data from extraction to dashboards, supporting Nestlé Vietnam's retail audit reporting.",
+          },
+        ],
+        tags: ["Encoding / UTF-8", "ETL", "PostgreSQL", "Apache Superset", "Jira"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 7",
     title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
     context: "LGI2A Laboratory · University of Artois & EDF · France · Paper accepted at IEA/AIE 2026",
     challenges: [
