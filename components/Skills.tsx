@@ -46,6 +46,7 @@ const skillGroups = [
       { name: "NLTK" },
       { name: "Word2Vec / Gensim" },
       { name: "watsonx.ai" },
+      { name: "Google Gemini API" },
     ],
   },
   {
@@ -91,6 +92,8 @@ const skillGroups = [
       { name: "Google Colab" },
       { name: "VS Code" },
       { name: "Jira" },
+      { name: "ETL Workflows" },
+      { name: "Apache Superset" },
       { name: "DBeaver" },
       { name: "Bruno" },
       { name: "Overleaf" },

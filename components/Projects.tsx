@@ -40,6 +40,31 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={200} y={132} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé · Coca-Cola · 5 countries · 90k+ images</text>
         </>
       );
+    case "price-audit":
+      return (
+        <>
+          {[0,1].map(r => [0,1,2].map(c => (
+            <rect key={`${r}-${c}`} x={15+c*58} y={18+r*62} width={48} height={40} rx={3}
+              fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" strokeWidth={0.5}/>
+          )))}
+          <line x1={10} y1={62} x2={190} y2={62} stroke="rgba(255,255,255,0.15)" strokeWidth={1}/>
+          <line x1={10} y1={124} x2={190} y2={124} stroke="rgba(255,255,255,0.15)" strokeWidth={1}/>
+          <rect x={20} y={48} width={38} height={12} rx={2} fill={ac} opacity={0.9}/>
+          <text x={39} y={57} textAnchor="middle" fontSize={7} fill="#0A1628" fontFamily="monospace" fontWeight="bold">32.000₫</text>
+          <rect x={136} y={110} width={38} height={12} rx={2} fill="#FCA5A5" opacity={0.9}/>
+          <text x={155} y={119} textAnchor="middle" fontSize={7} fill="#3B0A0A" fontFamily="monospace" fontWeight="bold">-15%</text>
+          <line x1={196} y1={70} x2={226} y2={70} stroke={ac} strokeWidth={1.5}/>
+          <polygon points="223,66 233,70 223,74" fill={ac}/>
+          <rect x={235} y={22} width={150} height={96} rx={6} fill="rgba(255,255,255,0.06)" stroke={ac} strokeWidth={1}/>
+          <text x={310} y={38} textAnchor="middle" fontSize={8} fill={ac} fontFamily="monospace" fontWeight="bold">GEMINI EXTRACTION</text>
+          <text x={247} y={58} fontSize={7} fill="rgba(255,255,255,0.6)" fontFamily="monospace">regular_price: 32000</text>
+          <text x={247} y={72} fontSize={7} fill="rgba(255,255,255,0.6)" fontFamily="monospace">promo: true</text>
+          <text x={247} y={86} fontSize={7} fill="rgba(255,255,255,0.6)" fontFamily="monospace">promo_price: 27200</text>
+          <rect x={247} y={96} width={126} height={14} rx={7} fill="rgba(16,185,129,0.25)" stroke="rgba(16,185,129,0.5)" strokeWidth={1}/>
+          <text x={310} y={106} textAnchor="middle" fontSize={7} fill="#6EE7B7" fontFamily="monospace">✓ validation rules passed</text>
+          <text x={200} y={148} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé Vietnam · shelf images → prices → BI dashboards</text>
+        </>
+      );
     case "annotation-pipe":
       return (
         <>
@@ -412,6 +437,14 @@ const categories: { label: string; projects: Project[] }[] = [
   {
     label: "Production & MLOps",
     projects: [
+      {
+        vid: "price-audit",
+        type: "Generative AI · Computer Vision · Data",
+        badge: "Industry", featured: true,
+        title: "Automated Price Audit - Nestlé Vietnam",
+        desc: "Production-deployed AI solution that analyzes retail shelf images to extract regular and promotional prices with Google Gemini. Added price validation rules to filter unrealistic values, restricted image selection to the relevant audit activity, worked on Gemini Batch API integration and response-to-image mapping, and fixed Vietnamese character encoding from CSV exports through PostgreSQL to BI dashboards.",
+        tags: ["Python", "Google Gemini API", "Generative AI", "PostgreSQL", "ETL", "Apache Superset"],
+      },
       {
         vid: "yolo-prod",
         img: "/fieldprod.jpg",
