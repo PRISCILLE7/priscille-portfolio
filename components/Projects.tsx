@@ -442,8 +442,8 @@ const categories: { label: string; projects: Project[] }[] = [
         type: "Generative AI · Computer Vision · Data",
         badge: "Industry", featured: true,
         title: "Automated Price Audit - Nestlé Vietnam",
-        desc: "Production-deployed AI solution that analyzes retail shelf images to extract regular and promotional prices with Google Gemini. Added price validation rules to filter unrealistic values, restricted image selection to the relevant audit activity, worked on Gemini Batch API integration and response-to-image mapping, and fixed Vietnamese character encoding from CSV exports through PostgreSQL to BI dashboards.",
-        tags: ["Python", "Google Gemini API", "Generative AI", "PostgreSQL", "ETL", "Apache Superset"],
+        desc: "Led the core development of a Gemini-based pipeline, from proof of concept to production, that reads regular and promotional prices from retail shelf images and matches each price tag to the right SKU. Compared several extraction strategies (full image, cropping, grouped regions) and prompt versions on a 1,000-image annotated benchmark measuring precision, coverage and matching reliability. Added validation rules, confidence-based double-call checks and safe Batch API response-to-image mapping, then integrated the pipeline into SQL/ETL workflows feeding PostgreSQL and Apache Superset.",
+        tags: ["Python", "Google Gemini API", "Prompt Engineering", "Computer Vision", "SQL / ETL", "PostgreSQL", "Apache Superset"],
       },
       {
         vid: "yolo-prod",
