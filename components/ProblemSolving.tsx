@@ -766,17 +766,111 @@ const projects: Project[] = [
   {
     projectNum: "Project 6",
     title: "Automated Price Audit with Generative AI - Nestlé Vietnam",
-    context: "FieldPro (Optimetriks) · Nestlé Vietnam · Google Gemini API, Python, PostgreSQL, ETL, Apache Superset · Jira",
+    context: "FieldPro (Optimetriks) · Nestlé Vietnam · Core developer, from PoC to production · Python, Google Gemini API, Prompt Engineering, SQL/ETL, PostgreSQL, Apache Superset",
     challenges: [
       {
         num: "01",
-        title: "Unreliable prices extracted from retail shelf images",
+        title: "Designing the extraction pipeline: from shelf photo to SKU-level prices",
         blocks: [
           {
             label: "PROBLEM",
             labelColor: "text-red-500",
             content:
-              "The Gemini pipeline had to read regular and promotional prices from real retail photos. Some extracted values were unrealistic, irrelevant images entered the pipeline, and batch responses had to be matched reliably to their source images.",
+              "Retail audits required regular and promotional prices for each Nestlé product, read directly from shelf photos taken in stores. Reading a price is not enough: each price tag must also be associated with the correct product (SKU) before the data can be used for reporting.",
+          },
+          {
+            label: "INVESTIGATION",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Full-image analysis: sending the whole shelf photo to Gemini in a single call",
+              "Image cropping: isolating price tags and products before extraction",
+              "Grouped regions: processing related areas of the shelf together",
+              "Iterative prompt engineering to improve price recognition and product association",
+            ].join("|||"),
+          },
+          {
+            label: "SOLUTION",
+            labelColor: "text-blue-500",
+            content:
+              "Designed and developed the core Python and Google Gemini-based pipeline, combining image analysis, structured data extraction and SKU-to-price matching.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "A single pipeline that turns shelf images into structured, SKU-level price and promotion data ready for audit reporting.",
+          },
+        ],
+        tags: ["Google Gemini API", "Python", "Computer Vision", "Structured extraction", "Prompt engineering"],
+      },
+      {
+        num: "02",
+        title: "Measuring accuracy instead of guessing: a 1,000-image benchmark",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "A generative model can return answers that look right but are wrong. Without a reference dataset, there was no objective way to compare extraction strategies or prompt versions.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Built evaluation workflows on annotated datasets, including a 1,000-image benchmark",
+              "Measured three dimensions separately: extraction precision, coverage and SKU matching reliability",
+              "Used the benchmark to compare each strategy and prompt version before adopting it",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "A systematic evaluation framework for price extraction accuracy and coverage, turning every pipeline change into a measurable decision.",
+          },
+        ],
+        tags: ["Model evaluation", "Benchmarking", "Annotated datasets", "Precision / coverage"],
+      },
+      {
+        num: "03",
+        title: "Improving price recognition and SKU matching",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "The benchmark revealed extraction and matching errors: prices misread, and price tags associated with the wrong product.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Investigated extraction and matching errors case by case",
+              "Refined Gemini prompts across multiple experimental versions",
+              "Implemented targeted improvements to price recognition, SKU matching and confidence assessment",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "More accurate price recognition and more reliable product association, validated against the benchmark.",
+          },
+        ],
+        tags: ["Prompt engineering", "Error analysis", "SKU matching", "Confidence scoring"],
+      },
+      {
+        num: "04",
+        title: "Making the pipeline reliable: validation rules and safe batch processing",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Some outputs were unrealistic or inconsistent between runs. With Gemini Batch API processing, responses come back asynchronously, so a response could be attached to the wrong image.",
           },
           {
             label: "RESOLUTION",
@@ -784,48 +878,77 @@ const projects: Project[] = [
             isList: true,
             content: [
               "Implemented price validation rules to filter unrealistic values",
-              "Restricted image selection to the relevant retail audit activity",
-              "Worked on Gemini Batch API integration and response-to-image mapping",
-              "Contributed to the evaluation of extraction accuracy and to confidence-based validation strategies",
+              "Handled inconsistent extraction results",
+              "Contributed to confidence-based double-call validation strategies",
+              "Contributed to Gemini Batch API integration and strengthened response-to-image mapping to prevent incorrect associations",
             ].join("|||"),
           },
           {
             label: "OUTCOME",
             labelColor: "text-green",
             content:
-              "More reliable price and promotion data, with a more robust batch processing flow.",
+              "Unrealistic values filtered out before reporting, and each batch response reliably tied to its source image.",
           },
         ],
-        tags: ["Google Gemini", "Batch API", "Data validation", "Model evaluation"],
+        tags: ["Data validation", "Gemini Batch API", "Asynchronous processing", "Reliability"],
       },
       {
-        num: "02",
-        title: "Vietnamese characters corrupted across the data chain",
+        num: "05",
+        title: "Integrating the pipeline into production data workflows",
         blocks: [
           {
             label: "PROBLEM",
             labelColor: "text-red-500",
             content:
-              "Vietnamese product and store names were displayed incorrectly in the reports, and the issue could come from any step: CSV exports, data ingestion, PostgreSQL or the BI dashboards.",
+              "Moving from experiments to production meant running the pipeline automatically on real audit data and delivering its results into the existing reporting stack.",
           },
           {
             label: "RESOLUTION",
             labelColor: "text-blue-500",
             isList: true,
             content: [
-              "Traced the encoding step by step through CSV exports, ingestion workflows, PostgreSQL and Apache Superset",
-              "Resolved the encoding issues along the chain",
-              "Validated production results and resolved integration issues with engineering and business teams",
+              "Integrated and refined the pipeline within automated SQL and ETL workflows",
+              "Added activity-based image filtering so only images from the relevant retail audit activity are processed",
+              "Produced structured CSV outputs and handled PostgreSQL ingestion",
+              "Supported production deployment, verified real-world results and resolved integration issues with engineering and business stakeholders",
             ].join("|||"),
           },
           {
             label: "OUTCOME",
             labelColor: "text-green",
             content:
-              "Consistent Vietnamese data from extraction to dashboards, supporting Nestlé Vietnam's retail audit reporting.",
+              "Production-deployed AI pipeline supporting automated retail price and promotion auditing for Nestlé Vietnam.",
           },
         ],
-        tags: ["Encoding / UTF-8", "ETL", "PostgreSQL", "Apache Superset", "Jira"],
+        tags: ["SQL", "ETL workflows", "PostgreSQL", "Production deployment", "Stakeholder coordination"],
+      },
+      {
+        num: "06",
+        title: "Vietnamese characters corrupted across the data chain",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Vietnamese text was displayed incorrectly in the reports, and the issue could come from any step: data ingestion, PostgreSQL or the BI dashboards.",
+          },
+          {
+            label: "RESOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Traced the encoding step by step through ingestion workflows, PostgreSQL and Apache Superset",
+              "Diagnosed and resolved the encoding issues along the chain",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Consistent Vietnamese data from extraction to dashboards, improving reporting reliability.",
+          },
+        ],
+        tags: ["Encoding / UTF-8", "ETL", "PostgreSQL", "Apache Superset", "Debugging"],
       },
     ],
   },

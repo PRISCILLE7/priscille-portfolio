@@ -19,7 +19,7 @@ const experience = [
       "Led structured A/B experiments and offline/online evaluations to drive continuous model improvement",
       "Investigated production incidents (Kubernetes/GKE), coordinated with ML teams for resolution",
       "Integrated MLflow for experiment tracking, model versioning and deployment lifecycle management",
-      "Contributed to a production-deployed Gemini-based price audit solution for Nestlé Vietnam: price extraction from shelf images, validation rules, Batch API integration and Vietnamese encoding fixes from CSV to BI dashboards",
+      "Led the core development of a Gemini-based retail price audit pipeline for Nestlé Vietnam, from PoC to production: price extraction and SKU matching from shelf images, 1,000-image evaluation benchmark, validation rules, Batch API integration, SQL/ETL and PostgreSQL integration",
     ],
     tags: [
       "Python", "PyTorch", "YOLO v8/v11", "GCP/GCS", "Docker",
