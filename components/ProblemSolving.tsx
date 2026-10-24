@@ -27,7 +27,7 @@ const projects: Project[] = [
   {
     projectNum: "Project 1",
     title: "Multi-Country Product Detection Model Industrialization",
-    context: "FieldPro (Optimetriks) · FMCG clients · Vietnam, Senegal, Nigeria, Ivory Coast, Cameroon · YOLO v8/v11, GCP, Docker",
+    context: "FieldPro (Optimetriks) · FMCG clients · Vietnam, Senegal, Nigeria, Ivory Coast, Ghana, Burkina Faso, DR Congo, Cameroon, Angola · YOLO v8/v11, GCP, Docker",
     challenges: [
       {
         num: "01",
@@ -540,7 +540,7 @@ const projects: Project[] = [
   {
     projectNum: "Project 4",
     title: "Production ML System Monitoring & Incident Investigation",
-    context: "FieldPro (Optimetriks) · GCP / GKE / Kubernetes · REST API, Python · 5 simultaneous country deployments",
+    context: "FieldPro (Optimetriks) · GCP / GKE / Kubernetes · REST API, Python · 9 country deployments",
     challenges: [
       {
         num: "01",
