@@ -10,12 +10,13 @@ type Project = {
 
 type RGB = [string, string, string];
 const CC: Record<string, RGB> = {
-  "Production & MLOps":               ["#061020", "#1D4ED8", "#93C5FD"],
-  "Computer Vision & Deep Learning":  ["#100020", "#5B21B6", "#C4B5FD"],
-  "NLP & Generative AI":              ["#011510", "#047857", "#6EE7B7"],
-  "Simulation & Multi-Agent Systems": ["#200A00", "#C2410C", "#FDBA74"],
-  "Classical ML & Data Science":      ["#0F0A1E", "#7C3AED", "#DDD6FE"],
+  "Production & MLOps":                    ["#061020", "#1D4ED8", "#93C5FD"],
+  "Applied AI: Vision, Multimodal & LLMs": ["#100020", "#5B21B6", "#C4B5FD"],
+  "Research & Simulation":                 ["#200A00", "#C2410C", "#FDBA74"],
+  "Academic & Personal Projects":          ["#0F0A1E", "#7C3AED", "#DDD6FE"],
 };
+
+const SECONDARY = "Academic & Personal Projects";
 
 function renderVisual(vid: string, ac: string): React.ReactNode {
   switch (vid) {
@@ -534,7 +535,7 @@ const categories: { label: string; projects: Project[] }[] = [
     ],
   },
   {
-    label: "Computer Vision & Deep Learning",
+    label: "Applied AI: Vision, Multimodal & LLMs",
     projects: [
       {
         vid: "frost-detect",
@@ -561,6 +562,51 @@ const categories: { label: string; projects: Project[] }[] = [
         tags: ["YOLOv8", "FaceNet", "Flask", "Python"],
         github: "https://github.com/PRISCILLE7/-exam-surveillance-system",
       },
+      {
+        vid: "text-summarize",
+        type: "NLP · LLM · CI/CD · Deployment",
+        title: "Multilingual text summarization app - Hugging Face Spaces",
+        desc: "AI-powered multilingual summarization (EN/FR/ES) with length selection, deployed on HF Spaces via GitHub Actions CI/CD pipeline.",
+        tags: ["Transformers", "Gradio", "GitHub Actions", "HF Spaces"],
+        github: "https://github.com/PRISCILLE7/ai-text-summarization-app",
+      },
+      {
+        vid: "medical-nlp",
+        type: "NLP · LLM · Medical accessibility",
+        title: "Automatic simplification of French medical texts",
+        desc: "NLP pipeline to automatically simplify French medical terminology using LLMs, improving accessibility for non-expert patients.",
+        tags: ["GPT-4", "spaCy-fr", "NLTK", "Hugging Face"],
+      },
+    ],
+  },
+  {
+    label: "Research & Simulation",
+    projects: [
+      {
+        vid: "pyleecan-fault",
+        img: "/diagnostic_machine_electric.jpg",
+        type: "Simulation · Deep Learning · Industrial AI",
+        title: "Pyleecan MultiDefect Simulation - Fault diagnosis of electric machines",
+        desc: "Physics-based synthetic data generation pipeline using Pyleecan & FEMM - 50+ PMSM motor variants (Tesla Model 3, Toyota Prius) under healthy and faulty conditions. Self-supervised deep learning for magnetic fault diagnosis, addressing the scarcity of real-world fault data.",
+        tags: ["Pyleecan", "FEMM", "PyTorch", "Self-supervised", "Python"],
+        github: "https://github.com/PRISCILLE7/Pyleecan-MultiDefect-Simulation",
+      },
+      {
+        vid: "waste-sim",
+        img: "/simulation_poubel.jpg",
+        type: "Multi-Agent · Simulation · Publication",
+        badge: "AFIA 2025", featured: true,
+        title: "Multi-agent simulation for urban waste collection optimization",
+        desc: "Multi-agent system (GAMA) to model and optimize waste collection operations in an urban environment - reducing travel time and distance. Published in AFIA Bulletin n°129.",
+        tags: ["GAMA", "GAML", "Multi-Agent", "Optimization"],
+        github: "https://github.com/PRISCILLE7/simulation_camion_poubelle",
+        pub: "https://afia.asso.fr/wp-content/uploads/2025/09/129_jui25.pdf",
+      },
+    ],
+  },
+  {
+    label: "Academic & Personal Projects",
+    projects: [
       {
         vid: "cbir",
         type: "Computer Vision · CBIR · Multimedia",
@@ -593,25 +639,13 @@ const categories: { label: string; projects: Project[] }[] = [
         tags: ["Python", "Deep Learning", "Medical AI"],
         github: "https://github.com/PRISCILLE7/SkinAI_Project",
       },
-    ],
-  },
-  {
-    label: "NLP & Generative AI",
-    projects: [
       {
-        vid: "text-summarize",
-        type: "NLP · LLM · CI/CD · Deployment",
-        title: "Multilingual text summarization app - Hugging Face Spaces",
-        desc: "AI-powered multilingual summarization (EN/FR/ES) with length selection, deployed on HF Spaces via GitHub Actions CI/CD pipeline.",
-        tags: ["Transformers", "Gradio", "GitHub Actions", "HF Spaces"],
-        github: "https://github.com/PRISCILLE7/ai-text-summarization-app",
-      },
-      {
-        vid: "medical-nlp",
-        type: "NLP · LLM · Medical accessibility",
-        title: "Automatic simplification of French medical texts",
-        desc: "NLP pipeline to automatically simplify French medical terminology using LLMs, improving accessibility for non-expert patients.",
-        tags: ["GPT-4", "spaCy-fr", "NLTK", "Hugging Face"],
+        vid: "info-spotting",
+        type: "Document AI · Visual spotting",
+        title: "Information spotting in scanned paper documents",
+        desc: "Visual information retrieval system in scanned paper documents from video capture, using visual feature extraction.",
+        tags: ["Python", "OpenCV", "Document AI"],
+        github: "https://github.com/PRISCILLE7/Projet-InformationSpotting",
       },
       {
         vid: "bias-reviews",
@@ -637,31 +671,6 @@ const categories: { label: string; projects: Project[] }[] = [
         tags: ["Gensim", "NLTK", "Word2Vec"],
         github: "https://github.com/PRISCILLE7/TP-WordEmbedding",
       },
-    ],
-  },
-  {
-    label: "Simulation & Multi-Agent Systems",
-    projects: [
-      {
-        vid: "waste-sim",
-        img: "/simulation_poubel.jpg",
-        type: "Multi-Agent · Simulation · Publication",
-        badge: "AFIA 2025", featured: true,
-        title: "Multi-agent simulation for urban waste collection optimization",
-        desc: "Multi-agent system (GAMA) to model and optimize waste collection operations in an urban environment - reducing travel time and distance. Published in AFIA Bulletin n°129.",
-        tags: ["GAMA", "GAML", "Multi-Agent", "Optimization"],
-        github: "https://github.com/PRISCILLE7/simulation_camion_poubelle",
-        pub: "https://afia.asso.fr/wp-content/uploads/2025/09/129_jui25.pdf",
-      },
-      {
-        vid: "pyleecan-fault",
-        img: "/diagnostic_machine_electric.jpg",
-        type: "Simulation · Deep Learning · Industrial AI",
-        title: "Pyleecan MultiDefect Simulation - Fault diagnosis of electric machines",
-        desc: "Physics-based synthetic data generation pipeline using Pyleecan & FEMM - 50+ PMSM motor variants (Tesla Model 3, Toyota Prius) under healthy and faulty conditions. Self-supervised deep learning for magnetic fault diagnosis, addressing the scarcity of real-world fault data.",
-        tags: ["Pyleecan", "FEMM", "PyTorch", "Self-supervised", "Python"],
-        github: "https://github.com/PRISCILLE7/Pyleecan-MultiDefect-Simulation",
-      },
       {
         vid: "pedestrian-sim",
         img: "/unity.jpg",
@@ -671,11 +680,6 @@ const categories: { label: string; projects: Project[] }[] = [
         tags: ["Unity", "Blender", "C#"],
         github: "https://github.com/PRISCILLE7/unity-urban-pedestrian-simulation",
       },
-    ],
-  },
-  {
-    label: "Classical ML & Data Science",
-    projects: [
       {
         vid: "bmi-automl",
         type: "ML · AutoML · Health",
@@ -691,14 +695,6 @@ const categories: { label: string; projects: Project[] }[] = [
         desc: "Academic project combining PCA, MCA, clustering and supervised models (KNN, CART) for sleep disorder prediction.",
         tags: ["PCA", "Clustering", "KNN", "CART"],
         github: "https://github.com/PRISCILLE7/sleep-disorder-prediction",
-      },
-      {
-        vid: "info-spotting",
-        type: "Document AI · Visual spotting",
-        title: "Information spotting in scanned paper documents",
-        desc: "Visual information retrieval system in scanned paper documents from video capture, using visual feature extraction.",
-        tags: ["Python", "OpenCV", "Document AI"],
-        github: "https://github.com/PRISCILLE7/Projet-InformationSpotting",
       },
     ],
   },
@@ -728,7 +724,7 @@ export default function Projects() {
                   p.featured ? "border-purple/25" : "border-border-primary"
                 }`}
               >
-                <ProjectVisual vid={p.vid} cat={cat.label} img={p.img} />
+                {cat.label !== SECONDARY && <ProjectVisual vid={p.vid} cat={cat.label} img={p.img} />}
                 <div className="flex justify-between items-center gap-2 flex-wrap">
                   <span className="font-mono text-[0.65rem] text-purple uppercase tracking-wide">{p.type}</span>
                   {p.badge && (

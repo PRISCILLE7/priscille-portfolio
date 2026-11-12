@@ -6,17 +6,17 @@ const skillGroups = [
   {
     title: "MLOps & Infrastructure",
     skills: [
-      { name: "AWS SageMaker", core: true },
       { name: "GCP / GCS", core: true },
       { name: "Docker", core: true },
       { name: "Kubernetes / GKE", core: true },
       { name: "MLflow", core: true },
       { name: "GitHub Actions / CI/CD", core: true },
-      { name: "Azure ML" },
       { name: "Model monitoring" },
       { name: "FastAPI" },
       { name: "SLURM / HPC" },
       { name: "REST API" },
+      { name: "AWS SageMaker" },
+      { name: "Azure ML" },
     ],
   },
   {

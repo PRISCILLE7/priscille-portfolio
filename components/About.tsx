@@ -68,8 +68,8 @@ export default function About() {
           {/* Location card */}
           <div className="mt-3 rounded-2xl border border-border-primary bg-bg-secondary p-4">
             <span className="font-mono text-[0.62rem] text-purple uppercase tracking-[0.1em] mb-2 block">Location</span>
-            <p className="text-[0.95rem] font-semibold text-text-primary mb-1">🌐 Worldwide</p>
-            <p className="text-[0.75rem] text-text-secondary">Open to relocation worldwide</p>
+            <p className="text-[0.95rem] font-semibold text-text-primary mb-1">📍 Ho Chi Minh City, Vietnam</p>
+            <p className="text-[0.75rem] text-text-secondary">Open to remote work and relocation worldwide</p>
           </div>
         </motion.div>
       </div>

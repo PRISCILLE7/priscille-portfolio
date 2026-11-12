@@ -47,6 +47,7 @@ const personJsonLd = {
   name: "Priscille E. Ebwala",
   url: SITE_URL,
   jobTitle: "AI/ML Engineer",
+  address: { "@type": "PostalAddress", addressLocality: "Ho Chi Minh City", addressCountry: "VN" },
   description,
   knowsAbout: [
     "Computer Vision", "Object Detection", "YOLO", "MLOps", "Multimodal AI",
