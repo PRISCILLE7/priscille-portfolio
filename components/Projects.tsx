@@ -69,6 +69,37 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={200} y={148} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé Vietnam · shelf images → prices → BI dashboards</text>
         </>
       );
+    case "frost-detect":
+      return (
+        <>
+          <rect x={20} y={14} width={92} height={118} rx={5} fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.25)" strokeWidth={1}/>
+          <line x1={20} y1={73} x2={112} y2={73} stroke="rgba(255,255,255,0.15)" strokeWidth={1}/>
+          <rect x={104} y={30} width={3} height={20} rx={1.5} fill="rgba(255,255,255,0.3)"/>
+          <path d="M24 18 l10 0 l-4 8 l6 -2 l-3 9 l8 -4 l-2 8 l9 -6 l0 -13 Z" fill="rgba(224,242,254,0.55)"/>
+          <path d="M24 128 l14 0 l-3 -7 l7 3 l-1 -8 l8 5 l1 -7 l7 9 l0 5 l-33 0 Z" fill="rgba(224,242,254,0.45)"/>
+          <rect x={20} y={14} width={92} height={118} rx={5} fill="none" stroke={ac} strokeWidth={1.5} strokeDasharray="5 2"/>
+          <text x={66} y={146} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.35)" fontFamily="monospace">field image</text>
+          <line x1={116} y1={73} x2={140} y2={73} stroke={ac} strokeWidth={1.5}/>
+          <line x1={140} y1={40} x2={140} y2={106} stroke={ac} strokeWidth={1.5}/>
+          <line x1={140} y1={40} x2={158} y2={40} stroke={ac} strokeWidth={1.5}/>
+          <line x1={140} y1={106} x2={158} y2={106} stroke={ac} strokeWidth={1.5}/>
+          <rect x={160} y={24} width={110} height={32} rx={6} fill="rgba(255,255,255,0.1)" stroke={ac} strokeWidth={1.5}/>
+          <text x={215} y={37} textAnchor="middle" fontSize={7.5} fill={ac} fontFamily="monospace" fontWeight="bold">A · DIRECT</text>
+          <text x={215} y={49} textAnchor="middle" fontSize={6} fill="rgba(255,255,255,0.5)" fontFamily="monospace">1 Gemini call</text>
+          <rect x={160} y={90} width={110} height={32} rx={6} fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.25)" strokeWidth={1}/>
+          <text x={215} y={103} textAnchor="middle" fontSize={7.5} fill="rgba(255,255,255,0.6)" fontFamily="monospace" fontWeight="bold">B · VISIBILITY-AWARE</text>
+          <text x={215} y={115} textAnchor="middle" fontSize={6} fill="rgba(255,255,255,0.4)" fontFamily="monospace">2 calls + rule layer</text>
+          <line x1={272} y1={40} x2={292} y2={40} stroke={ac} strokeWidth={1.5}/>
+          <polygon points="290,36 298,40 290,44" fill={ac}/>
+          <rect x={300} y={20} width={88} height={56} rx={6} fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.5)" strokeWidth={1}/>
+          <text x={344} y={36} textAnchor="middle" fontSize={7} fill="#6EE7B7" fontFamily="monospace" fontWeight="bold">16/16 frost</text>
+          <text x={344} y={49} textAnchor="middle" fontSize={7} fill="#6EE7B7" fontFamily="monospace">98% coverage</text>
+          <text x={344} y={62} textAnchor="middle" fontSize={7} fill="#6EE7B7" fontFamily="monospace">~$0.004 / img</text>
+          <text x={344} y={100} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.45)" fontFamily="monospace">✓ selected</text>
+          <text x={344} y={111} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.45)" fontFamily="monospace">baseline: A</text>
+          <text x={260} y={146} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">49-image PoC evaluation · 2 runs</text>
+        </>
+      );
     case "annotation-pipe":
       return (
         <>
@@ -472,6 +503,14 @@ const categories: { label: string; projects: Project[] }[] = [
   {
     label: "Computer Vision & Deep Learning",
     projects: [
+      {
+        vid: "frost-detect",
+        type: "Multimodal AI · Computer Vision · PoC",
+        badge: "Industry", featured: true,
+        title: "Frost Detection with Multimodal AI",
+        desc: "Can a foundation model spot frost in freezer photos taken by field agents, without training a custom model? Designed and compared two Gemini Vision architectures: a single-call direct detector and a visibility-aware pipeline with a rule-based decision layer. On a 49-image reference set over two independent runs, Direct Detection caught 16/16 frost cases with 98% decision coverage at about $0.004 per image, and was selected as the baseline.",
+        tags: ["Gemini Vision API", "Multimodal AI", "Prompt Engineering", "AI Evaluation", "Python", "JavaScript"],
+      },
       {
         vid: "license-plate",
         img: "/plaque_imatriculation.jpg",

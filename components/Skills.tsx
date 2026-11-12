@@ -32,6 +32,7 @@ const skillGroups = [
       { name: "Segmentation" },
       { name: "OCR (Tesseract, EasyOCR)" },
       { name: "SIFT" },
+      { name: "AI evaluation" },
     ],
   },
   {
@@ -43,6 +44,7 @@ const skillGroups = [
       { name: "GPT-4 / Mistral", core: true },
       { name: "Google Gemini API", core: true },
       { name: "Prompt Engineering", core: true },
+      { name: "Multimodal AI", core: true },
       { name: "spaCy" },
       { name: "NLTK" },
       { name: "Word2Vec / Gensim" },
@@ -74,6 +76,7 @@ const skillGroups = [
       { name: "Streamlit" },
       { name: "Matplotlib" },
       { name: "JavaScript" },
+      { name: "HTML / CSS" },
       { name: "C#" },
     ],
   },

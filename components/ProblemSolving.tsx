@@ -954,6 +954,160 @@ const projects: Project[] = [
   },
   {
     projectNum: "Project 7",
+    title: "Frost Detection with Multimodal AI (Proof of Concept)",
+    context: "FieldPro (Optimetriks) · AI Engineer, end-to-end PoC · Gemini Vision API, Python, Prompt Engineering, rule-based decision logic, HTML/CSS/JavaScript",
+    challenges: [
+      {
+        num: "01",
+        title: "Business challenge: detecting frost in freezer photos taken in the field",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Field agents regularly inspect commercial freezers. The goal was to find out whether a multimodal foundation model could detect frost and estimate its severity from their photos, without training a custom computer vision model for the first PoC.",
+          },
+          {
+            label: "CONSTRAINTS",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Reflections on glass doors",
+              "Varying camera angles and partially visible freezer surfaces",
+              "Poor lighting",
+              "Frost easily confused with naturally white surfaces",
+            ].join("|||"),
+          },
+          {
+            label: "MY ROLE",
+            labelColor: "text-purple",
+            isList: true,
+            content: [
+              "Owned the PoC end to end: exploration, implementation, evaluation and demonstration",
+              "Collected and curated a 50-image freezer dataset; prepared and reviewed reference annotations for frost presence and severity",
+              "Designed structured prompts for Gemini Vision",
+              "Built an interactive HTML/JavaScript dashboard to visualize predictions and compare approaches",
+            ].join("|||"),
+          },
+        ],
+        tags: ["Business framing", "Dataset curation", "Annotation", "Gemini Vision API"],
+      },
+      {
+        num: "02",
+        title: "Solution architecture: two inference designs",
+        blocks: [
+          {
+            label: "APPROACH A",
+            labelColor: "text-blue-500",
+            content:
+              "Direct Detection: a single Gemini Vision call analyzes the image and predicts frost presence and severity. Built for simplicity, lower latency and lower cost.",
+          },
+          {
+            label: "APPROACH B",
+            labelColor: "text-blue-500",
+            content:
+              "Visibility-Aware Detection: two separate analyses, one for the visibility of the relevant freezer surfaces and one for frost presence and severity. A rule-based decision layer combines them to accept the prediction or flag it for review.",
+          },
+          {
+            label: "WHY",
+            labelColor: "text-purple",
+            content:
+              "The goal was not only to compare detection performance, but also reliability, consistency and operational trade-offs.",
+          },
+        ],
+        tags: ["AI system design", "Multimodal AI", "Rule-based decision logic", "Prompt engineering"],
+      },
+      {
+        num: "03",
+        title: "Evaluation methodology",
+        blocks: [
+          {
+            label: "DATASET",
+            labelColor: "text-orange-500",
+            content:
+              "50 freezer images, 49 of them in the reference evaluation, with annotations for frost presence and severity.",
+          },
+          {
+            label: "PROTOCOL",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Ran both architectures in two independent experimental runs on the same dataset to measure consistency",
+              "Measured precision, recall, decision coverage, severity classification, latency and API cost",
+              "Performed image-level error analysis to understand each failure",
+              "Compared both approaches side by side in the interactive dashboard",
+            ].join("|||"),
+          },
+        ],
+        tags: ["AI evaluation", "Precision / recall", "Consistency testing", "Error analysis"],
+      },
+      {
+        num: "04",
+        title: "Key results and engineering decision",
+        blocks: [
+          {
+            label: "APPROACH A",
+            labelColor: "text-green",
+            isList: true,
+            content: [
+              "16/16 frost-positive cases detected in both runs",
+              "73-76% precision",
+              "98% decision coverage",
+              "50-56% exact severity classification",
+              "About $0.004 per image in API cost",
+            ].join("|||"),
+          },
+          {
+            label: "APPROACH B",
+            labelColor: "text-green",
+            content:
+              "Detected 15-16 of the 16 frost-positive cases, with 71-79% decision coverage.",
+          },
+          {
+            label: "DECISION",
+            labelColor: "text-purple",
+            content:
+              "Direct Detection was selected as the baseline for further experimentation: it offered the best balance of recall, coverage, simplicity and inference cost.",
+          },
+        ],
+        tags: ["Trade-off analysis", "Cost / performance", "Technical decision-making"],
+      },
+      {
+        num: "05",
+        title: "Limitations and future improvements",
+        blocks: [
+          {
+            label: "LIMITATIONS",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Exploratory results on a small dataset, not production-level performance",
+              "Severity level 1 was not represented in the final reference annotations",
+            ].join("|||"),
+          },
+          {
+            label: "NEXT STEPS",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Pre-inference image quality checks",
+              "Confidence estimation",
+              "Broader field validation",
+            ].join("|||"),
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "An end-to-end Vision AI PoC, from dataset preparation to architecture design, quantitative evaluation and an interactive demo. It gave a technical basis for assessing feasibility, and was presented internally with positive feedback from the technical team and management.",
+          },
+        ],
+        tags: ["Proof of concept", "Technical reporting", "Feasibility study"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 8",
     title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
     context: "LGI2A Laboratory · University of Artois & EDF · France · Paper accepted at IEA/AIE 2026",
     challenges: [
