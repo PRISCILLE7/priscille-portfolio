@@ -13,6 +13,7 @@ const skillGroups = [
       { name: "MLflow", core: true },
       { name: "GitHub Actions / CI/CD", core: true },
       { name: "Azure ML" },
+      { name: "Model monitoring" },
       { name: "FastAPI" },
       { name: "SLURM / HPC" },
       { name: "REST API" },
@@ -21,6 +22,7 @@ const skillGroups = [
   {
     title: "Computer Vision & ML",
     skills: [
+      { name: "Object Detection", core: true },
       { name: "YOLO v5/v8/v11", core: true },
       { name: "PyTorch", core: true },
       { name: "TensorFlow", core: true },
@@ -46,6 +48,7 @@ const skillGroups = [
       { name: "Google Gemini API", core: true },
       { name: "Prompt Engineering", core: true },
       { name: "Multimodal AI", core: true },
+      { name: "Vision-Language Models" },
       { name: "spaCy" },
       { name: "NLTK" },
       { name: "Word2Vec / Gensim" },

@@ -253,7 +253,7 @@ export default function HighlightsBento() {
             <div className="z-20 mt-auto w-full text-balance text-center pb-1">
               <h2 className="text-base font-medium">Projects</h2>
               <p className="mt-1 text-[0.8rem] text-text-secondary">
-                An evolving list of projects I&apos;ve built and those I wish to start.
+                Production systems, research and personal projects, from object detection to multimodal AI.
               </p>
             </div>
 

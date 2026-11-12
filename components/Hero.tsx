@@ -79,7 +79,7 @@ export default function Hero() {
           transition={{ delay: 0.35, duration: 0.5 }}
           className="font-mono text-xs text-text-secondary tracking-wide mb-5"
         >
-          &gt;_ AI/ML Engineer &nbsp;·&nbsp; Industrial AI Systems &nbsp;·&nbsp; Applied Research &amp; MLOps
+          &gt;_ AI/ML Engineer &nbsp;·&nbsp; Computer Vision &nbsp;·&nbsp; Multimodal AI &nbsp;·&nbsp; MLOps
         </motion.p>
 
         <motion.p
@@ -88,8 +88,9 @@ export default function Hero() {
           transition={{ delay: 0.45, duration: 0.5 }}
           className="text-[0.93rem] text-text-secondary leading-[1.85] max-w-[520px] mb-8"
         >
-          I build intelligent systems that cross from research into reality - turning data into
-          decisions, models into products, and ideas into impact across industries.
+          I build computer vision and multimodal AI systems that hold up in production: object
+          detection models deployed in 9 countries for Nestlé &amp; Coca-Cola, Gemini-based vision
+          pipelines, and published research in self-supervised learning.
         </motion.p>
 
         <motion.div
