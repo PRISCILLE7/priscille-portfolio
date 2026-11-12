@@ -502,7 +502,7 @@ const categories: { label: string; projects: Project[] }[] = [
         type: "Computer Vision · MLOps · Data-Centric AI",
         badge: "Industry", featured: true,
         title: "Rare-class recall in production YOLO11: contextual crop oversampling",
-        desc: "Newly added SKUs entered multi-country YOLO11 models with ~80-330 annotations vs. ~2,250 on average. Used dataset statistics to decide which classes truly needed help, then oversampled them with contextual crops instead of whole-image duplication, so co-occurring classes stay balanced. Classes with only 4-14 annotations were sent to field data collection, not duplicated. One SKU with 80 annotations reached 1.00 recall and 0.995 mAP50 on validation; the model is in production.",
+        desc: "Newly added SKUs entered multi-country YOLO11 models with ~80-330 annotations vs. ~2,250 on average. Used dataset statistics to decide which classes truly needed help, then oversampled them with contextual crops instead of whole-image duplication, so co-occurring classes stay balanced. Classes with only 4-14 annotations were sent to field data collection, not duplicated. One SKU with 80 annotations reached 1.00 recall and 0.995 mAP50 on validation. The method was reused on a second country model, and both are in production.",
         tags: ["YOLO11", "Oversampling", "Class imbalance", "Bounding box geometry", "Python", "GCS", "Label Studio"],
       },
       {
@@ -519,7 +519,7 @@ const categories: { label: string; projects: Project[] }[] = [
         type: "Production · MLOps · Computer Vision",
         badge: "Industry", featured: true,
         title: "Multi-country product detection model industrialization",
-        desc: "Deployment and maintenance of YOLO v8/v11 models in production for Nestlé & Coca-Cola. Solved an invisible staging bug: a multi-model workflow was using only the first model's skus.csv, corrupting predictions in the prod WebApp. Analyzed distribution of 90k+ images, identified a 1:14 class imbalance, ran targeted retraining.",
+        desc: "Deployment and maintenance of YOLO v8/v11 models in production for Nestlé & Coca-Cola. Solved an invisible staging bug: a multi-model workflow was using only the first model's class mapping, corrupting predictions in the production web app. Analyzed distribution of 90k+ images, identified a 1:14 class imbalance, ran targeted retraining.",
         tags: ["YOLO v8/v11", "GCP", "Docker", "Python", "REST API"],
       },
       {

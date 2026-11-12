@@ -43,7 +43,7 @@ const projects: Project[] = [
             label: "ROOT CAUSE",
             labelColor: "text-orange-500",
             content:
-              "The Prediction Server ran a multi-model workflow but only loaded the skus.csv of the first model, ignoring class mappings for all subsequent models.",
+              "The prediction service ran a multi-model workflow but only loaded the class mapping file of the first model, ignoring class mappings for all subsequent models.",
           },
           {
             label: "RESOLUTION",
@@ -51,8 +51,8 @@ const projects: Project[] = [
             isList: true,
             content: [
               "Isolated the exact pipeline stage where behavior diverged between staging and production",
-              "Identified the skus.csv / classes_map conflict in the multi-model workflow",
-              "Updated the shared classes_map to correctly reference SKU mappings for all four models",
+              "Identified the class mapping conflict in the multi-model workflow",
+              "Updated the shared mapping configuration to correctly reference SKU mappings for all four models",
               "Validated fix in production with field teams - zero regression on existing models",
             ].join("|||"),
           },
@@ -347,7 +347,7 @@ const projects: Project[] = [
             label: "OUTCOME",
             labelColor: "text-green",
             content:
-              "Recall improved on the targeted classes without degrading classes already stable in production. The retrained models are deployed across several country pipelines.",
+              "Recall improved on the targeted classes without degrading classes already stable in production. The same method was then applied to a second country model with a different product portfolio, where augmented classes, including point-of-sale display materials, now perform in production. The retrained models are deployed across several country pipelines.",
           },
         ],
         tags: ["Recall", "mAP50", "Production deployment", "Regression-safe retraining"],
@@ -642,14 +642,14 @@ const projects: Project[] = [
             label: "PROBLEM",
             labelColor: "text-red-500",
             content:
-              "The /get_models endpoint returned 500 Internal Server Error while /predict worked correctly on the same environment. Not reproducible locally - cause ambiguous between auth failure, network issue, or application bug.",
+              "The model listing endpoint returned 500 Internal Server Error while the prediction endpoint worked correctly on the same environment. Not reproducible locally - cause ambiguous between auth failure, network issue, or application bug.",
           },
           {
             label: "RESOLUTION",
             labelColor: "text-blue-500",
             isList: true,
             content: [
-              "Verified authentication tokens - tokens valid, same token worked on /predict",
+              "Verified authentication tokens - tokens valid, same token worked on the prediction endpoint",
               "Tested all available endpoints to map the exact perimeter of the failure",
               "Investigated Kubernetes workloads on GKE to distinguish infrastructure from application-level failure",
               "Analyzed pod logs and workload states to identify whether ML server process was in degraded state",
@@ -782,13 +782,13 @@ const projects: Project[] = [
             label: "STEP 1 - TARGETED AUGMENTATION",
             labelColor: "text-orange-500",
             content:
-              "Applied synthetic copy-paste augmentation to artificially boost the class from 110 to 708 instances. Result: recall improved from 0 to 0.21 - the product became visible to the model - but precision remained low at 0.31. Augmentation alone unblocked detection but did not resolve the underlying problem.",
+              "Applied synthetic copy-paste augmentation to boost the class from 110 to 708 instances. Result: the product went from never detected to detected by the model, but precision stayed low. Augmentation alone unblocked detection but did not resolve the underlying problem.",
           },
           {
             label: "STEP 2 - DEEP DIAGNOSIS",
             labelColor: "text-orange-500",
             content:
-              "Analyzed the confusion matrix in detail and conducted field verification. Finding: the model was confusing the target SKU with another product with a nearly identical packaging - 20 confusions vs only 8 correct detections. The root cause was not data volume but structural visual ambiguity between two packaging variants that the model could not reliably distinguish.",
+              "Analyzed the confusion matrix in detail and conducted field verification. Finding: most errors on the target SKU were confusions with another product with a nearly identical packaging. The root cause was not data volume but structural visual ambiguity between two packaging variants that the model could not reliably distinguish.",
           },
           {
             label: "DECISION",
