@@ -32,7 +32,7 @@ export default function Contact() {
             <strong className="text-text-primary font-semibold">applied industrial AI research</strong>.
           </p>
           <p className="text-[0.94rem] text-text-secondary leading-[1.8] mb-6">
-            Available immediately.{" "}
+            Currently freelancing with FieldPro.{" "}
             <span className="text-green font-medium">● Open to opportunities</span>
           </p>
           <div className="rounded-2xl border border-border-primary bg-bg-secondary p-4 font-mono text-[0.74rem] text-text-tertiary leading-[1.7]">

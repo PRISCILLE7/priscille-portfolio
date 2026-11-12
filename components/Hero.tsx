@@ -152,7 +152,7 @@ export default function Hero() {
           ML Engineer · Data Scientist · Computer Vision · MLOps · Industrial AI · R&amp;D
         </span>
         <span className="font-mono text-[0.66rem] text-green border border-green/25 bg-green/5 px-3.5 py-2 rounded-full whitespace-nowrap">
-          ● Available · Industry · PhD · R&amp;D
+          ● Open to opportunities · Industry · PhD · R&amp;D
         </span>
       </motion.div>
     </section>
