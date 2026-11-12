@@ -33,6 +33,7 @@ const skillGroups = [
       { name: "OCR (Tesseract, EasyOCR)" },
       { name: "SIFT" },
       { name: "AI evaluation" },
+      { name: "Oversampling / data augmentation" },
     ],
   },
   {

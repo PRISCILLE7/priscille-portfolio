@@ -6,7 +6,7 @@ import BentoCard from "./BentoCard";
 const milestones = [
   { emoji: "🧠", text: "ML Engineer at FieldPro (Optimetriks)", date: "Since Oct. 2025" },
   { emoji: "🎓", text: "Master's Double Degree - IFI-VNU & Univ. La Rochelle", date: "2024-2026" },
-  { emoji: "🔬", text: "R&D Intern - LGI2A, Univ. Artois & EDF", date: "Jun.-Dec. 2025" },
+  { emoji: "🔬", text: "R&D Intern - LGI2A, Univ. Artois & EDF", date: "May-Dec. 2025" },
   { emoji: "🌍", text: "9 countries deployed - Nestlé & Coca-Cola", date: "Since 2025" },
   { emoji: "👩‍🏫", text: "Teaching Assistant - UNIKIN", date: "2022-2024" },
 ];

@@ -69,6 +69,31 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={200} y={148} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé Vietnam · shelf images → prices → BI dashboards</text>
         </>
       );
+    case "rare-class":
+      return (
+        <>
+          {[18,40,62,84,106].map((y, i) => (
+            <rect key={i} x={20} y={y} width={[150,72,96,40,26][i]} height={14} rx={2}
+              fill={i === 3 ? ac : "rgba(255,255,255,0.12)"} opacity={i === 3 ? 0.9 : 1}/>
+          ))}
+          <line x1={110} y1={12} x2={110} y2={126} stroke="rgba(255,255,255,0.35)" strokeWidth={1} strokeDasharray="3 3"/>
+          <text x={113} y={132} fontSize={6} fill="rgba(255,255,255,0.4)" fontFamily="monospace">median</text>
+          <text x={24} y={94} fontSize={6} fill="#1E1B4B" fontFamily="monospace" fontWeight="bold">rare SKU</text>
+          <text x={50} y={117} fontSize={6} fill="rgba(255,255,255,0.4)" fontFamily="monospace">4-14 → field data</text>
+          <line x1={186} y1={91} x2={214} y2={91} stroke={ac} strokeWidth={1.5}/>
+          <polygon points="211,87 219,91 211,95" fill={ac}/>
+          {[0,1,2].map(i => (
+            <g key={i}>
+              <rect x={226+i*56} y={58+(i%2)*10} width={48} height={48} rx={3} fill="rgba(255,255,255,0.05)" stroke={ac} strokeWidth={1.2} strokeDasharray="4 2"/>
+              <rect x={240+i*56+(i-1)*4} y={72+(i%2)*10} width={18} height={22} rx={2} fill={ac} opacity={0.85}/>
+            </g>
+          ))}
+          <text x={310} y={48} textAnchor="middle" fontSize={7} fill={ac} fontFamily="monospace" fontWeight="bold">contextual crops</text>
+          <rect x={244} y={122} width={128} height={16} rx={8} fill="rgba(16,185,129,0.25)" stroke="rgba(16,185,129,0.5)" strokeWidth={1}/>
+          <text x={308} y={133} textAnchor="middle" fontSize={7} fill="#6EE7B7" fontFamily="monospace">80 annot. → recall 1.00</text>
+          <text x={100} y={150} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">annotations per class</text>
+        </>
+      );
     case "frost-detect":
       return (
         <>
@@ -472,6 +497,14 @@ const categories: { label: string; projects: Project[] }[] = [
   {
     label: "Production & MLOps",
     projects: [
+      {
+        vid: "rare-class",
+        type: "Computer Vision · MLOps · Data-Centric AI",
+        badge: "Industry", featured: true,
+        title: "Rare-class recall in production YOLO11: contextual crop oversampling",
+        desc: "Newly added SKUs entered multi-country YOLO11 models with ~80-330 annotations vs. ~2,250 on average. Used dataset statistics to decide which classes truly needed help, then oversampled them with contextual crops instead of whole-image duplication, so co-occurring classes stay balanced. Classes with only 4-14 annotations were sent to field data collection, not duplicated. One SKU with 80 annotations reached 1.00 recall and 0.995 mAP50 on validation; the model is in production.",
+        tags: ["YOLO11", "Oversampling", "Class imbalance", "Bounding box geometry", "Python", "GCS", "Label Studio"],
+      },
       {
         vid: "price-audit",
         type: "Generative AI · Computer Vision · Data",

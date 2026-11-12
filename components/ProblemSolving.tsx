@@ -264,6 +264,98 @@ const projects: Project[] = [
   },
   {
     projectNum: "Project 2",
+    title: "Rare-Class Recall in Production YOLO11: Data-Driven Oversampling with Contextual Crops",
+    context: "FieldPro (Optimetriks) · Retail shelf product detection · 80+ SKU classes per country model · Côte d'Ivoire, Vietnam, Senegal and more · YOLO11, Python, Google Colab, GCS, Label Studio",
+    challenges: [
+      {
+        num: "01",
+        title: "Newly added SKUs arriving with too few annotations",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "New product variants were added to multi-country YOLO11 models with only ~80 to ~330 annotations each, against a dataset average of ~2,250 per class. Left as is, these SKUs risked low recall once in production.",
+          },
+          {
+            label: "DIAGNOSIS",
+            labelColor: "text-orange-500",
+            isList: true,
+            content: [
+              "Computed the mean and median number of annotations per class across the dataset",
+              "Used these statistics to judge objectively whether a class was truly under-represented",
+              "Sized the oversampling target from the data, instead of applying an arbitrary multiplication factor",
+            ].join("|||"),
+          },
+        ],
+        tags: ["Statistical analysis", "Class imbalance", "Dataset diagnostics", "YOLO11"],
+      },
+      {
+        num: "02",
+        title: "Contextual crop oversampling instead of duplicating whole images",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Shelf images contain many products. Duplicating a whole image to boost one class also boosts every other class in it, which simply moves the imbalance elsewhere.",
+          },
+          {
+            label: "SOLUTION",
+            labelColor: "text-blue-500",
+            isList: true,
+            content: [
+              "Generated crops around each occurrence of the target class, with a random context margin so the model sees varied surroundings",
+              "Kept other classes inside a crop only if they remained sufficiently visible, to avoid artificially inflating co-occurring classes and training on cut-off objects",
+              "Recomputed bounding box geometry in each crop's coordinate system",
+              "Ran it inside the existing Colab / GCS / Label Studio pipeline, with retry and resilience mechanisms",
+            ].join("|||"),
+          },
+        ],
+        tags: ["Oversampling", "Contextual crops", "Bounding box geometry", "Data pipelines", "MLOps"],
+      },
+      {
+        num: "03",
+        title: "Knowing when oversampling is the wrong answer",
+        blocks: [
+          {
+            label: "PROBLEM",
+            labelColor: "text-red-500",
+            content:
+              "Some classes had only 4 to 14 annotations in total.",
+          },
+          {
+            label: "DECISION",
+            labelColor: "text-purple",
+            content:
+              "No oversampling for these classes. Duplicating so few examples leads the model to memorize them rather than learn the product. They were flagged for real field data collection instead.",
+          },
+        ],
+        tags: ["Engineering judgment", "Overfitting risk", "Data collection strategy"],
+      },
+      {
+        num: "04",
+        title: "Results in production",
+        blocks: [
+          {
+            label: "RESULT",
+            labelColor: "text-green",
+            content:
+              "One newly added SKU with only 80 labeled annotations reached 1.00 recall, 0.95 precision and 0.995 mAP50 on its validation instances after targeted oversampling.",
+          },
+          {
+            label: "OUTCOME",
+            labelColor: "text-green",
+            content:
+              "Recall improved on the targeted classes without degrading classes already stable in production. The retrained models are deployed across several country pipelines.",
+          },
+        ],
+        tags: ["Recall", "mAP50", "Production deployment", "Regression-safe retraining"],
+      },
+    ],
+  },
+  {
+    projectNum: "Project 3",
     title: "Large-Scale Annotation Pipeline Migration: Hasty → GCS → Label Studio",
     context: "FieldPro (Optimetriks) · 40,000+ images · 587,000+ annotations · GCP/GCS, Python, REST API, Label Studio, Hasty",
     challenges: [
@@ -416,7 +508,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 3",
+    projectNum: "Project 4",
     title: "Large-Scale Cross-Project Annotation Transfer",
     context: "FieldPro (Optimetriks) · Annotation platform REST API · Python, GCP/GCS · 65,000+ images · 1M+ annotations",
     challenges: [
@@ -538,7 +630,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 4",
+    projectNum: "Project 5",
     title: "Production ML System Monitoring & Incident Investigation",
     context: "FieldPro (Optimetriks) · GCP / GKE / Kubernetes · REST API, Python · 9 country deployments",
     challenges: [
@@ -611,7 +703,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 5",
+    projectNum: "Project 6",
     title: "Production Monitoring and Dataset Improvement for SKU Detection",
     context: "FieldPro (Optimetriks) · FMCG clients · YOLO v11, GCP/GCS, REST API, Label Studio, Python · Jira",
     challenges: [
@@ -764,7 +856,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 6",
+    projectNum: "Project 7",
     title: "Automated Price Audit with Generative AI - Nestlé Vietnam",
     context: "FieldPro (Optimetriks) · Nestlé Vietnam · Core developer, from PoC to production · Python, Google Gemini API, Prompt Engineering, SQL/ETL, PostgreSQL, Apache Superset",
     challenges: [
@@ -953,7 +1045,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 7",
+    projectNum: "Project 8",
     title: "Frost Detection with Multimodal AI (Proof of Concept)",
     context: "FieldPro (Optimetriks) · AI Engineer, end-to-end PoC · Gemini Vision API, Python, Prompt Engineering, rule-based decision logic, HTML/CSS/JavaScript",
     challenges: [
@@ -1107,7 +1199,7 @@ const projects: Project[] = [
     ],
   },
   {
-    projectNum: "Project 8",
+    projectNum: "Project 9",
     title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
     context: "LGI2A Laboratory · University of Artois & EDF · France · Paper published at IEA/AIE 2026 (Springer)",
     challenges: [

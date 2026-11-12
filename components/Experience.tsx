@@ -15,6 +15,7 @@ const experience = [
       "Owned the full ML lifecycle end-to-end: data curation, class balancing, training, evaluation, deployment, retraining, monitoring",
       "Migrated 40,000+ annotated images (Hasty → GCS → Label Studio) with robust pipeline and error recovery; retroactively corrected 587,000+ annotations",
       "Validated annotation quality across 90,000+ labeled images",
+      "Designed a data-driven contextual-crop oversampling strategy for rare SKU classes in YOLO11: a class with only 80 annotations reached 1.00 recall on validation without degrading stable classes in production",
       "Built automated data pipelines on GCP/GCS with REST API integration, checkpoint recovery and consistency validation",
       "Led structured A/B experiments and offline/online evaluations to drive continuous model improvement",
       "Investigated production incidents (Kubernetes/GKE), coordinated with ML teams for resolution",
@@ -32,7 +33,7 @@ const experience = [
     title: "R&D Intern - AI-based Fault Diagnosis of Electric Machines",
     company: "LGI2A Laboratory · University of Artois & EDF",
     location: "France",
-    period: "Jun. - Dec. 2025 · 7 months",
+    period: "May - Dec. 2025 · 8 months",
     intro:
       "Research project on intelligent predictive maintenance of Permanent Magnet Synchronous Machines (PMSMs) using AI and physics-based simulation.",
     items: [
