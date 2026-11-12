@@ -558,9 +558,8 @@ const categories: { label: string; projects: Project[] }[] = [
         vid: "surveillance",
         type: "Computer Vision · Surveillance · Flask",
         title: "Real-time exam surveillance system",
-        desc: "Real-time detection of suspicious behaviors in an exam room via YOLOv8 + FaceNet, with a Flask web interface.",
+        desc: "Team project: real-time detection of suspicious behaviors in an exam room via YOLOv8 + FaceNet, with a Flask web interface.",
         tags: ["YOLOv8", "FaceNet", "Flask", "Python"],
-        github: "https://github.com/PRISCILLE7/-exam-surveillance-system",
       },
       {
         vid: "text-summarize",
