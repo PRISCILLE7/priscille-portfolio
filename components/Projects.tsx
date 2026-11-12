@@ -502,7 +502,7 @@ const categories: { label: string; projects: Project[] }[] = [
         type: "Computer Vision · MLOps · Data-Centric AI",
         badge: "Industry", featured: true,
         title: "Rare-class recall in production YOLO11: contextual crop oversampling",
-        desc: "Newly added SKUs entered multi-country YOLO11 models with ~80-330 annotations vs. ~2,250 on average. Used dataset statistics to decide which classes truly needed help, then oversampled them with contextual crops instead of whole-image duplication, so co-occurring classes stay balanced. Classes with only 4-14 annotations were sent to field data collection, not duplicated. One SKU with 80 annotations reached 1.00 recall and 0.995 mAP50 on validation. The method was reused on a second country model, and both are in production.",
+        desc: "New SKUs entered production with up to 28× less data than average. I let dataset statistics decide which classes needed help, designed an oversampling method that boosts only the target class on crowded shelf images, and refused to oversample where real field data was the only honest fix. A class with 80 annotations reached 1.00 recall on validation; the method now runs in production in two country models.",
         tags: ["YOLO11", "Oversampling", "Class imbalance", "Bounding box geometry", "Python", "GCS", "Label Studio"],
       },
       {
@@ -510,7 +510,7 @@ const categories: { label: string; projects: Project[] }[] = [
         type: "Generative AI · Computer Vision · Data",
         badge: "Industry", featured: true,
         title: "Automated Price Audit - Nestlé Vietnam",
-        desc: "Led the core development of a Gemini-based pipeline, from proof of concept to production, that reads regular and promotional prices from retail shelf images and matches each price tag to the right SKU. Compared several extraction strategies (full image, cropping, grouped regions) and prompt versions on a 1,000-image annotated benchmark measuring precision, coverage and matching reliability. Added validation rules, confidence-based double-call checks and safe Batch API response-to-image mapping, then integrated the pipeline into SQL/ETL workflows feeding PostgreSQL and Apache Superset.",
+        desc: "Led the core development, from proof of concept to production, of a Gemini-based pipeline that reads regular and promotional prices from shelf photos and matches each one to the right SKU. Every strategy and prompt change was judged on a 1,000-image annotated benchmark rather than by eye. Validation layers and ETL integration then turned the prototype into data that feeds Nestlé Vietnam's audit dashboards.",
         tags: ["Python", "Google Gemini API", "Prompt Engineering", "Computer Vision", "SQL / ETL", "PostgreSQL", "Apache Superset"],
       },
       {
@@ -519,7 +519,7 @@ const categories: { label: string; projects: Project[] }[] = [
         type: "Production · MLOps · Computer Vision",
         badge: "Industry", featured: true,
         title: "Multi-country product detection model industrialization",
-        desc: "Deployment and maintenance of YOLO v8/v11 models in production for Nestlé & Coca-Cola. Solved an invisible staging bug: a multi-model workflow was using only the first model's class mapping, corrupting predictions in the production web app. Analyzed distribution of 90k+ images, identified a 1:14 class imbalance, ran targeted retraining.",
+        desc: "Training, deploying and maintaining YOLO v8/v11 models for Nestlé & Coca-Cola in 9 countries. When a product family collapsed in production, I traced it to a packaging change rather than the model: detection rates went from 6% to 76% on the worst variant, with no regression elsewhere. Also fixed a bug that passed every test environment but broke the production app.",
         tags: ["YOLO v8/v11", "GCP", "Docker", "Python", "REST API"],
       },
       {
@@ -527,8 +527,8 @@ const categories: { label: string; projects: Project[] }[] = [
         img: "/migration_hasty_Ls.png",
         type: "Data Engineering · Pipeline",
         badge: "Industry", featured: true,
-        title: "Large-scale annotation pipeline migration: Hasty → GCS → Label Studio",
-        desc: "Migrated 40,000+ annotated images with retroactive correction of 587,000+ annotations. Robust Python pipeline: auto-retry on 429 errors (2-min backoff), automatic CORS rule correction on GCS bucket, cross-platform validation of image/annotation/label consistency. Zero data loss verified by scripts.",
+        title: "Annotation infrastructure at scale: 1M+ annotations, zero data loss",
+        desc: "Moved 40,000+ images and 587,000+ annotations across three platforms with zero verified data loss, then built a cross-project transfer tool that cut a dozens-of-hours job to minutes on a project with over a million annotations. Built for long, unattended runs, and validated on real data before every recommendation.",
         tags: ["Python", "GCP/GCS", "Label Studio", "REST API", "Hasty"],
       },
     ],

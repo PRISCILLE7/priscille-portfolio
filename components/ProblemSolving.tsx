@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import GridWrapper from "./GridWrapper";
+import { CAL_URL } from "./HighlightsBento";
 
 type Block = {
   label: string;
@@ -21,1248 +22,343 @@ type Project = {
   title: string;
   context: string;
   challenges: Challenge[];
+  askMe?: string;
 };
 
 const projects: Project[] = [
   {
-    projectNum: "Project 1",
-    title: "Multi-Country Product Detection Model Industrialization",
-    context: "FieldPro (Optimetriks) · FMCG clients · Vietnam, Senegal, Nigeria, Ivory Coast, Ghana, Burkina Faso, DR Congo, Cameroon, Angola · YOLO v8/v11, GCP, Docker",
+    projectNum: "Case 01",
+    title: "Keeping product detection reliable in production across 9 countries",
+    context: "FieldPro (Optimetriks) · Nestlé & Coca-Cola · YOLO v8/v11 in production · GCP, REST API, SQL",
     challenges: [
       {
         num: "01",
-        title: "Invisible production bug in a multi-model workflow",
+        title: "A product family quietly disappearing from production results",
         blocks: [
           {
-            label: "PROBLEM",
+            label: "CHALLENGE",
             labelColor: "text-red-500",
             content:
-              "A computer vision model produced correct results in every test environment - Colab, REST API, staging - but failed silently in the production WebApp. SKUs displayed as raw codes instead of product names, and certain products were not detected at all.",
+              "Months after deployment, detections dropped sharply on one product family while everything else looked fine. The client's shelf-presence KPIs were being underestimated, and historical detections couldn't be trusted as ground truth.",
           },
           {
-            label: "ROOT CAUSE",
-            labelColor: "text-orange-500",
-            content:
-              "The prediction service ran a multi-model workflow but only loaded the class mapping file of the first model, ignoring class mappings for all subsequent models.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Isolated the exact pipeline stage where behavior diverged between staging and production",
-              "Identified the class mapping conflict in the multi-model workflow",
-              "Updated the shared mapping configuration to correctly reference SKU mappings for all four models",
-              "Validated fix in production with field teams - zero regression on existing models",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content: "Correct product names displayed across all model categories. Bug validated by field operations teams.",
-          },
-        ],
-        tags: ["YOLO v8/v11", "GCP", "REST API", "Multi-model orchestration", "Production debugging", "Jira"],
-      },
-      {
-        num: "02",
-        title: "Severe class imbalance causing systematic detection failures",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Field teams reported products not detected or confused with similar variants. Offline evaluation metrics appeared acceptable, masking real production degradation.",
-          },
-          {
-            label: "ROOT CAUSE",
-            labelColor: "text-orange-500",
-            content:
-              "Critical annotation imbalances - e.g., similar SKUs with size variants showed ratios up to 1:14 (230 vs 3,348 annotations). Several classes had as few as 6 annotations.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Ran full annotation distribution analysis across all classes per country model",
-              "Defined a critical threshold: under 500 annotations flagged as high-risk",
-              "Coordinated targeted data collection with the labeling team for under-represented classes",
-              "Ran targeted retraining cycles after data enrichment, with controlled field evaluation",
-              "Identified training-distribution mismatch: clean studio shots vs. real-world field images",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Improved detection reliability on previously failing classes. Structured process established for continuous annotation monitoring across all markets.",
-          },
-        ],
-        tags: ["Class balancing", "Dataset curation", "YOLO v8/v11", "Offline vs. online metrics", "Jira"],
-      },
-      {
-        num: "03",
-        title: "Class mapping inconsistencies across training artifacts",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Discrepancies between class names in Hasty, CSV mapping files, and deployment tickets. Old/New packaging variants created duplicate entries; certain newly added variants went undetected in production.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Cross-verified class names across Hasty, YAML configs, and CSV mapping files",
-              "Preserved exact YAML used during training to prevent index-to-class-name drift at deployment",
-              "Documented missing packaging variants and triggered retraining for affected models",
-              "Established a validation checklist: Hasty → CSV → YAML → deployment ticket",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Zero mapping-related deployment incidents on subsequent releases. Reusable validation process adopted for all new model versions.",
-          },
-        ],
-        tags: ["Class mapping", "YAML/CSV validation", "Deployment pipeline", "Hasty", "Jira"],
-      },
-      {
-        num: "04",
-        title: "Training data quality as a silent performance bottleneck",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Some models showed inconsistent performance that couldn't be explained by class imbalance or mapping issues alone. Training datasets contained noisy annotations, near-duplicate images across train/val splits, and inconsistent labeling conventions across different annotation sessions.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Conducted systematic data audits: identified and removed near-duplicate images between train and validation sets",
-              "Flagged low-confidence and inconsistent annotations for relabeling",
-              "Standardized labeling conventions and guidelines across annotation sessions",
-              "Established training data quality as a first-class step in the ML lifecycle - before any model training begins",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Cleaner datasets consistently improved model precision on difficult classes. Training data quality established as a core engineering concern - not an afterthought.",
-          },
-        ],
-        tags: ["Data quality", "Dataset audit", "Annotation quality", "Train/val split integrity", "Jira"],
-      },
-      {
-        num: "05",
-        title: "Production regression traced to data sparsity and taxonomy naming errors",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Field teams reported that certain product variants in a specific category were no longer detected or behaved inconsistently in production. The issue was particularly confusing because some affected classes had acceptable validation metrics during training - suggesting the root cause was not straightforward.",
-          },
-          {
-            label: "INVESTIGATION",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Audited annotation statistics for all affected classes: found several with critically low volume - one class had as few as ~15 annotations",
-              "Reviewed annotation diversity: limited variation in angles, lighting and real-world capture conditions across affected classes",
-              "Conducted manual annotation review in the annotation platform: found naming errors, class inconsistencies, images assigned to wrong classes, and classes sharing identical data",
-              "Cross-referenced class names across annotation platform, CSV mapping files and deployment SKU databases: found multiple taxonomy misalignments",
-              "Discovered a critical naming error: one class was labeled as a packaging variant A but actually corresponded to variant B - causing data confusion between classes, model training and functional testing",
-            ].join("|||"),
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Corrected all naming errors and standardized taxonomy across annotation platform, CSV files and SKU mapping",
-              "Removed duplicate entries and realigned SKU IDs to their correct class definitions",
-              "Cleaned inconsistent annotations and removed cross-contaminated images between classes",
-              "Collaborated with the business team and the labeling team to validate the corrected taxonomy end-to-end",
-              "Exported a clean dataset, retrained the model and deployed to the test environment",
-              "Conducted a new field validation campaign with the updated model",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Previously undetected product variants were correctly recognized after retraining. Class inconsistencies disappeared. Field user tests passed without regression. No architectural change to the model was needed - the root cause was entirely in data quality and taxonomy alignment.",
-          },
-        ],
-        tags: ["Production debugging", "Data quality", "Taxonomy alignment", "Annotation audit", "YOLO", "MLOps", "Jira"],
-      },
-      {
-        num: "06",
-        title: "Detection collapse on a product family after packaging change",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "A model had been running in production since February. In April, the team noticed the first signs of regression on a specific product family. By May and June, a sharp drop in detection volumes was confirmed across several variants of that family, while other categories remained stable. The affected classes covered visually similar products with multiple sizes and packagings. The risk: the system was systematically underestimating real shelf presence, directly affecting operational KPIs reported to the client.",
-          },
-          {
-            label: "INVESTIGATION",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Extracted historical detections from the production database by month and SKU - confirmed a significant drop on several variants after the new model deployment",
-              "Built a benchmark of 500 historical images (sourced from GCS) covering the main impacted classes and one unaffected control class",
-              "Evaluated three model versions by calling each model's REST API endpoint - production model and two staging versions - on the same image set to ensure a direct, controlled comparison",
-              "First staging model showed no significant improvement - ruling out a pure training issue and pointing to a mapping or data problem",
-              "Manual visual inspection of historical images revealed that many contained multiple visually similar products in the same scene - historical detections could not be used as strict ground truth",
-            ].join("|||"),
-          },
-          {
-            label: "ROOT CAUSE",
-            labelColor: "text-orange-500",
-            content:
-              "A combination of factors: new packagings were missing from the training set; some annotation classes were mixed; the SKU mapping file had incorrectly assigned new packagings to new SKU IDs rather than to the existing business SKU they represented. The key insight: a packaging update does not necessarily mean a new product - the model must learn multiple visuals but map them to the same business SKU.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Corrected the SKU mapping file to align new packagings with their correct existing business SKU IDs",
-              "Integrated missing new packagings into the training dataset after validation with the labeling and ops teams",
-              "Retrained the model, deployed to staging, and re-evaluated on the 500-image historical benchmark",
-              "Completed evaluation with manual visual inspection to distinguish real model errors from historical annotation ambiguities",
-              "Produced a detailed comparison CSV for operational validation before production deployment",
-            ].join("|||"),
-          },
-          {
-            label: "RESULT",
+            label: "MY CALL",
             labelColor: "text-purple",
             content:
-              "Variant A: 33% → 89% | Variant B: 50% → 85% | Variant C: 6% → 76% | Variant D: 27% → 55% | Control class: 97% → 99%. Significant improvement on all impacted classes with no regression on the control class.",
+              "Before touching the model, I built a controlled benchmark with a control class to compare production and staging models on equal terms. That showed the problem wasn't training. A packaging update had been treated as a new product, when it should have been a new visual of the same business SKU.",
           },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Full incident lifecycle completed: production anomaly detected, root cause isolated across model, data, mapping and packaging dimensions, corrected mapping and enriched training set, model improved and validated. Field validation with the Ops team scheduled before final production deployment.",
-          },
-        ],
-        tags: ["Production debugging", "SKU mapping", "Packaging change", "Benchmark evaluation", "REST API", "GCP/GCS", "SQL analysis", "YOLO", "MLOps", "Jira"],
-      },
-    ],
-  },
-  {
-    projectNum: "Project 2",
-    title: "Rare-Class Recall in Production YOLO11: Data-Driven Oversampling with Contextual Crops",
-    context: "FieldPro (Optimetriks) · Retail shelf product detection · 80+ SKU classes per country model · Côte d'Ivoire, Vietnam, Senegal and more · YOLO11, Python, Google Colab, GCS, Label Studio",
-    challenges: [
-      {
-        num: "01",
-        title: "Newly added SKUs arriving with too few annotations",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "New product variants were added to multi-country YOLO11 models with only ~80 to ~330 annotations each, against a dataset average of ~2,250 per class. Left as is, these SKUs risked low recall once in production.",
-          },
-          {
-            label: "DIAGNOSIS",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Computed the mean and median number of annotations per class across the dataset",
-              "Used these statistics to judge objectively whether a class was truly under-represented",
-              "Sized the oversampling target from the data, instead of applying an arbitrary multiplication factor",
-            ].join("|||"),
-          },
-        ],
-        tags: ["Statistical analysis", "Class imbalance", "Dataset diagnostics", "YOLO11"],
-      },
-      {
-        num: "02",
-        title: "Contextual crop oversampling instead of duplicating whole images",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Shelf images contain many products. Duplicating a whole image to boost one class also boosts every other class in it, which simply moves the imbalance elsewhere.",
-          },
-          {
-            label: "SOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Generated crops around each occurrence of the target class, with a random context margin so the model sees varied surroundings",
-              "Kept other classes inside a crop only if they remained sufficiently visible, to avoid artificially inflating co-occurring classes and training on cut-off objects",
-              "Recomputed bounding box geometry in each crop's coordinate system",
-              "Ran it inside the existing Colab / GCS / Label Studio pipeline, with retry and resilience mechanisms",
-            ].join("|||"),
-          },
-        ],
-        tags: ["Oversampling", "Contextual crops", "Bounding box geometry", "Data pipelines", "MLOps"],
-      },
-      {
-        num: "03",
-        title: "Knowing when oversampling is the wrong answer",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Some classes had only 4 to 14 annotations in total.",
-          },
-          {
-            label: "DECISION",
-            labelColor: "text-purple",
-            content:
-              "No oversampling for these classes. Duplicating so few examples leads the model to memorize them rather than learn the product. They were flagged for real field data collection instead.",
-          },
-        ],
-        tags: ["Engineering judgment", "Overfitting risk", "Data collection strategy"],
-      },
-      {
-        num: "04",
-        title: "Results in production",
-        blocks: [
           {
             label: "RESULT",
             labelColor: "text-green",
             content:
-              "One newly added SKU with only 80 labeled annotations reached 1.00 recall, 0.95 precision and 0.995 mAP50 on its validation instances after targeted oversampling.",
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Recall improved on the targeted classes without degrading classes already stable in production. The same method was then applied to a second country model with a different product portfolio, where augmented classes, including point-of-sale display materials, now perform in production. The retrained models are deployed across several country pipelines.",
+              "Detection rates on impacted variants: 6% → 76%, 33% → 89%, 50% → 85%. Control class 97% → 99%, so no regression.",
           },
         ],
-        tags: ["Recall", "mAP50", "Production deployment", "Regression-safe retraining"],
-      },
-    ],
-  },
-  {
-    projectNum: "Project 3",
-    title: "Large-Scale Annotation Pipeline Migration: Hasty → GCS → Label Studio",
-    context: "FieldPro (Optimetriks) · 40,000+ images · 587,000+ annotations · GCP/GCS, Python, REST API, Label Studio, Hasty",
-    challenges: [
-      {
-        num: "01",
-        title: "Rate limiting causing silent pipeline failures",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "The Hasty API rejected requests after a certain volume (429 Too Many Requests). Without error handling, the pipeline failed silently mid-migration, leaving an incomplete and inconsistent dataset state.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Implemented automatic retry with exponential backoff: on 429 errors, pause 2 minutes then resume",
-              "Added request rate throttling (time.sleep(1.0)) between calls to stay within API limits",
-              "Logged all failed requests with context for post-hoc recovery without restarting the full migration",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content: "Zero silent failures. Full migration completed with automatic recovery from all rate-limit interruptions.",
-          },
-        ],
-        tags: ["Python", "REST API", "Hasty", "Retry / backoff", "Jira"],
+        tags: ["Production debugging", "Benchmark design", "SKU mapping", "SQL analysis", "YOLO"],
       },
       {
         num: "02",
-        title: "CORS policy blocking image access from Label Studio",
+        title: "A model that passed every test and still failed in production",
         blocks: [
           {
-            label: "PROBLEM",
+            label: "CHALLENGE",
             labelColor: "text-red-500",
             content:
-              "Label Studio failed to load images hosted on GCS due to CORS violations. The error was intermittent - only certain image sizes during import triggered it - making it hard to reproduce reliably.",
+              "Correct results in Colab, through the API and in staging. In the production app, products showed up as raw codes or weren't detected at all.",
           },
           {
-            label: "ROOT CAUSE",
-            labelColor: "text-orange-500",
-            content:
-              "Other GCS bucket operations were silently overwriting the CORS configuration, removing the rules that allowed Label Studio's origin.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Identified the CORS rule overwrite pattern by tracking bucket configuration changes over time",
-              "Integrated automatic CORS reapplication into the pipeline after any bucket operation that could modify it",
-              "Validated cross-origin access as part of the pipeline's pre-import checks",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content: "CORS errors fully eliminated. No further manual intervention required for image access configuration.",
-          },
-        ],
-        tags: ["GCP/GCS", "CORS policy", "Label Studio", "Python", "Jira"],
-      },
-      {
-        num: "03",
-        title: "Guaranteeing image / annotation / label synchronization at scale",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Migrating 40,000+ images with bounding boxes and labels across three platforms created multiple opportunities for silent desynchronization - images without annotations, label-index drift between platforms.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Built cross-platform validation scripts verifying for every image: presence in GCS, bounding boxes in Hasty, correct label assignment",
-              "Ran validation at 3 stages: after Hasty export, after GCS upload, after Label Studio import",
-              "Implemented checkpoint recovery: pipeline could resume from any validated checkpoint",
-              "Retroactively corrected 587,000+ annotations where label assignments had drifted from source mapping",
-            ].join("|||"),
-          },
-          {
-            label: "CONCRETE DETAIL",
+            label: "MY CALL",
             labelColor: "text-purple",
             content:
-              "The retroactive correction required tracing the exact class index mapping used during annotation, comparing it against the current mapping, and applying deterministic remapping without altering bounding box geometry.",
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Migration of multiple client projects (hundreds of thousands of images) completed with zero verified data loss.",
-          },
-        ],
-        tags: ["Python", "GCP/GCS", "Label Studio", "Hasty", "Data integrity", "Jira"],
-      },
-      {
-        num: "04",
-        title: "Validating operational continuity after migration: adding new images without breaking existing annotations",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "After migrating thousands of annotated tasks from Hasty to Label Studio, the labeling team needed to continue adding new images to existing projects. The key risk: would syncing new data accidentally delete existing tasks, modify historical annotations, or create duplicates? With projects containing tens of thousands of already-migrated images, any synchronization error could have caused significant data loss.",
-          },
-          {
-            label: "INVESTIGATION",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Option 1 evaluated: manual image upload directly into Label Studio - risk of multiple data sources, no centralized traceability, complex to manage across teams",
-              "Option 2 evaluated: GCS as single source of truth - new images uploaded to GCS, Label Studio auto-syncs and creates new tasks",
-              "Label Studio documentation explained how to connect cloud storage but did not specify behavior on projects with pre-existing migrated tasks",
-              "Decision: validate experimentally on a real migrated project before recommending any workflow to the labeling team",
-            ].join("|||"),
-          },
-          {
-            label: "VALIDATION APPROACH",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Selected the smallest migrated project (2,176 tasks) as a test case to minimize risk exposure in case the synchronization produced unexpected behavior",
-              "Created a dedicated GCS folder and uploaded exactly 3 test images",
-              "Configured a Source Cloud Storage connector in the existing Label Studio project",
-              "Triggered synchronization and compared task counts and annotation state before/after",
-              "Encountered a Label Studio UI bug during storage setup: NotFoundError: Failed to execute 'insertBefore' on 'Node' - confirmed the connector was correctly registered despite the error and verified tasks synchronized properly",
-            ].join("|||"),
+              "Retraining would have changed nothing. I traced exactly where staging and production behavior diverged and found a configuration issue in how the multi-model workflow loaded class mappings.",
           },
           {
             label: "RESULT",
-            labelColor: "text-purple",
-            content:
-              "Before sync: 2,176 tasks. After sync: 2,179 tasks. The 3 new images were added as new tasks. All previously migrated tasks remained intact. No annotations were modified. No task duplication observed.",
-          },
-          {
-            label: "OUTCOME",
             labelColor: "text-green",
             content:
-              "GCS-based workflow validated and recommended as the standard process for adding new data post-migration. Guarantees a single source of truth, full traceability, preservation of historical annotations, and scalability across all future labeling projects.",
+              "Fixed for all four models, validated with field teams, zero regression. Together with the mapping validation checklist I introduced, there were no mapping-related deployment incidents on later releases.",
           },
         ],
-        tags: ["GCP/GCS", "Label Studio", "Workflow validation", "Data integrity", "Operational continuity", "Jira"],
-      },
-    ],
-  },
-  {
-    projectNum: "Project 4",
-    title: "Large-Scale Cross-Project Annotation Transfer",
-    context: "FieldPro (Optimetriks) · Annotation platform REST API · Python, GCP/GCS · 65,000+ images · 1M+ annotations",
-    challenges: [
-      {
-        num: "01",
-        title: "Scaling annotation transfer: two failed API approaches before the right architecture",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Multiple annotation projects shared a recurring need: a SKU already richly annotated in one project was absent or underrepresented in another. The default option - re-labeling from scratch - was costly for data that already existed. The annotation platform offered no native cross-project transfer, so everything had to go through its REST API. One source project alone had 65,000+ images and over one million annotations.",
-          },
-          {
-            label: "APPROACH 1 - INVALIDATED",
-            labelColor: "text-orange-500",
-            content:
-              "Image-by-image iteration: query each image, read its annotations, recreate them in the target project. Worked on small volumes but projected to dozens of hours for a single project at scale, with frequent connection drops on long-running sessions. Not viable.",
-          },
-          {
-            label: "APPROACH 2 - INVALIDATED",
-            labelColor: "text-orange-500",
-            content:
-              "Project-level API query with a class filter, expecting only the relevant annotations to be returned. Discovered empirically that the API silently ignored the class filter and returned the entire million-annotation dataset on every call. A plausible hypothesis on paper, invalidated by real testing.",
-          },
-          {
-            label: "SOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Triggered a full server-side export of the source project (single async operation) rather than querying annotations one by one",
-              "Filtered and processed the exported data locally - avoiding repeated heavy API calls",
-              "Built a shared image index once and reused it across all class migrations in the same project",
-              "Result: processing time reduced from dozens of projected hours to a few minutes",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Architecture validated at scale. The right approach emerged from empirical testing of each hypothesis - not from documentation, which did not describe actual API behavior at volume.",
-          },
-        ],
-        tags: ["REST API", "Scale engineering", "Python", "Data pipeline", "GCP/GCS", "Jira"],
-      },
-      {
-        num: "02",
-        title: "Diagnosing an undocumented server-side constraint by systematic elimination",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Once the image transfer pipeline worked correctly, the annotation creation step failed systematically with a generic 500 Internal Server Error and no usable error message.",
-          },
-          {
-            label: "ELIMINATION PROCESS",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Annotation geometry: validated manually - correct",
-              "Target class type: verified via API - compliant",
-              "Image availability after async upload: tested with active polling - no effect",
-              "Isolated the variable: tested the raw API call outside any script, on a fresh image never touched by the migration - error still reproduced in this minimal case",
-            ].join("|||"),
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            content:
-              "The minimal reproduction excluded any script-side cause. Contacted vendor support with concrete evidence: exact payload, server response, test identifiers. Support confirmed an undocumented API requirement: certain optional fields had to be omitted entirely rather than sent as null, and one apparently secondary field required a real value. Once corrected, the entire pipeline unblocked.",
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Systematic elimination - narrowing to a minimal reproducible case - made vendor support immediately actionable. A generic 500 error resolved through methodical diagnosis rather than guesswork.",
-          },
-        ],
-        tags: ["API debugging", "Systematic elimination", "Vendor collaboration", "REST API", "Python", "Jira"],
+        tags: ["Root cause analysis", "Multi-model orchestration", "Release process"],
       },
       {
         num: "03",
-        title: "Production resilience and generalization to a reusable tool",
+        title: "Not stopping at the first plausible explanation",
         blocks: [
           {
-            label: "PROBLEM",
+            label: "CHALLENGE",
             labelColor: "text-red-500",
             content:
-              "The pipeline needed to run reliably over multi-hour sessions on real volumes. Several failure modes only appeared in production: connection interruptions mid-transfer, expired signed URLs, and a silent data integrity issue invisible in the happy path.",
+              "One SKU was never detected in the field. It had very few annotations, so \"more data\" looked like the obvious answer.",
           },
           {
-            label: "MECHANISMS IMPLEMENTED",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Checkpoint per image AND per annotation class - handling images containing multiple objects of different classes",
-              "Duplicate detection and reuse rather than recreation on resume",
-              "Signed URL refresh immediately before use - limited lifetime, invisible when cached from the previous day",
-              "Retry with exponential backoff, differentiated between transient errors (network, 5xx) and permanent failures (4xx)",
-              "Silent bug fix: images imported via API remained invisible in status-filtered exports, breaking downstream training pipelines without any error",
-            ].join("|||"),
-          },
-          {
-            label: "GENERALIZATION",
+            label: "MY CALL",
             labelColor: "text-purple",
             content:
-              "After validation on several real migrations (thousands of images across different project pairs), the pipeline was generalized into a reusable tool: migration logic decoupled from the annotation platform connector, an interactive flow guiding the user through project/class/volume selection, and class name matching handling slight naming differences between projects.",
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Thousands of images and annotations transferred successfully without manual re-labeling. Full engineering cycle completed: prototype - scale failure - fix - production hardening - generalization to reusable tool.",
-          },
-        ],
-        tags: ["Production resilience", "Checkpoint / recovery", "REST API", "Python", "GCP/GCS", "Tool design", "Jira"],
-      },
-    ],
-  },
-  {
-    projectNum: "Project 5",
-    title: "Production ML System Monitoring & Incident Investigation",
-    context: "FieldPro (Optimetriks) · GCP / GKE / Kubernetes · REST API, Python · 9 country deployments",
-    challenges: [
-      {
-        num: "01",
-        title: "Ambiguous 500 error on ML endpoint with no local reproduction",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "The model listing endpoint returned 500 Internal Server Error while the prediction endpoint worked correctly on the same environment. Not reproducible locally - cause ambiguous between auth failure, network issue, or application bug.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Verified authentication tokens - tokens valid, same token worked on the prediction endpoint",
-              "Tested all available endpoints to map the exact perimeter of the failure",
-              "Investigated Kubernetes workloads on GKE to distinguish infrastructure from application-level failure",
-              "Analyzed pod logs and workload states to identify whether ML server process was in degraded state",
-              "Documented findings and created tickets for the ML infrastructure team with full technical context",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Failure localized to the ML Server application layer (not auth or network). Incident turnaround time significantly reduced.",
-          },
-        ],
-        tags: ["Kubernetes / GKE", "REST API", "Incident management", "Production debugging", "Jira"],
-      },
-      {
-        num: "02",
-        title: "Training-distribution mismatch causing production performance degradation",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Several SKUs showed strong offline validation scores but consistently failed in real field conditions. The degradation was only visible after deployment, not during standard model evaluation.",
-          },
-          {
-            label: "ROOT CAUSE",
-            labelColor: "text-orange-500",
-            content:
-              "Training images were clean, centered, professionally lit product shots. Field images contained variable angles, complex backgrounds, partial occlusions, and motion blur - a distribution severely underrepresented in training data.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Documented the exact performance gap per SKU: offline validation score vs. field test success rate",
-              "Produced per-market data collection recommendations specifying required image diversity",
-              "Established a protocol for comparing offline and online evaluation before each production deployment",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Structured pre-deployment evaluation protocol introduced. Data collection guidelines updated for all markets.",
-          },
-        ],
-        tags: ["Distribution shift", "Offline/online evaluation", "Production monitoring", "Dataset strategy", "Jira"],
-      },
-    ],
-  },
-  {
-    projectNum: "Project 6",
-    title: "Production Monitoring and Dataset Improvement for SKU Detection",
-    context: "FieldPro (Optimetriks) · FMCG clients · YOLO v11, GCP/GCS, REST API, Label Studio, Python · Jira",
-    challenges: [
-      {
-        num: "01",
-        title: "Identifying underperforming classes through continuous production monitoring",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "After a model was deployed in production, ongoing monitoring revealed that certain SKU classes consistently showed low detection counts compared to others. The issue was not a sudden failure but a gradual drift - some classes were systematically underdetected in real field conditions without triggering any hard error.",
-          },
-          {
-            label: "INVESTIGATION",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Extracted and analyzed production detection statistics per class over time to identify classes with abnormally low detection volumes",
-              "Cross-checked detection counts against known field deployment conditions to confirm the underperformance was not explained by product absence in the market",
-              "Analyzed visual confusion patterns between classes with similar packagings, sizes, or color schemes",
-              "Verified class IDs and mapping files to rule out a mapping or configuration error before concluding on a data or model issue",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Weak classes clearly identified and distinguished from mapping errors. Root cause confirmed: insufficient and low-diversity training data for the affected SKUs.",
-          },
-        ],
-        tags: ["Production monitoring", "Detection analysis", "Class performance audit", "SKU mapping", "YOLO", "GCP/GCS", "Jira"],
-      },
-      {
-        num: "02",
-        title: "Building a targeted field dataset to fix underperforming classes",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Once weak classes were identified, the challenge was to collect field images representative of real deployment conditions - not clean studio shots - and prepare a targeted enrichment dataset without disrupting the existing training pipeline.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Retrieved real field images from GCS for the underperforming classes - images captured in actual store conditions with variable angles, lighting and occlusions",
-              "Filtered and selected the most representative samples to maximize diversity within the new batch",
-              "Coordinated with the labeling team to prioritize and annotate the selected images, providing clear guidelines on the specific classes and packaging variants to target",
-              "Prepared the enriched dataset for a targeted retraining cycle focused on the weak classes",
-              "Monitored detection performance after redeployment to validate the improvement and ensure no regression on stable classes",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Targeted dataset enrichment improved detection rates on previously weak classes. Full monitoring and improvement cycle completed: production analysis - weak class identification - field data collection - labeling coordination - retraining - redeployment - validation.",
-          },
-        ],
-        tags: ["Dataset enrichment", "Field data collection", "GCP/GCS", "Label Studio", "Labeling coordination", "YOLO", "MLOps", "Jira"],
-      },
-      {
-        num: "03",
-        title: "Diagnosing a never-detected SKU: from data sparsity to structural visual confusion",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "A specific SKU had only 110 annotations in the training set - compared to thousands for other classes - and was never detected in the field. The immediate assumption was a data volume problem, but rather than acting on the first plausible hypothesis, a full diagnostic was conducted.",
-          },
-          {
-            label: "STEP 1 - TARGETED AUGMENTATION",
-            labelColor: "text-orange-500",
-            content:
-              "Applied synthetic copy-paste augmentation to boost the class from 110 to 708 instances. Result: the product went from never detected to detected by the model, but precision stayed low. Augmentation alone unblocked detection but did not resolve the underlying problem.",
-          },
-          {
-            label: "STEP 2 - DEEP DIAGNOSIS",
-            labelColor: "text-orange-500",
-            content:
-              "Analyzed the confusion matrix in detail and conducted field verification. Finding: most errors on the target SKU were confusions with another product with a nearly identical packaging. The root cause was not data volume but structural visual ambiguity between two packaging variants that the model could not reliably distinguish.",
-          },
-          {
-            label: "DECISION",
-            labelColor: "text-blue-500",
-            content:
-              "Rather than launching a blind data collection effort, the model was deployed to a test environment to observe the exact confusion patterns under real field conditions. This targeted approach allows identifying precisely which field images are needed to resolve the visual ambiguity - collecting data with intent, not at random.",
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Demonstrated the ability to go beyond the first plausible hypothesis: reading ML metrics in depth (not just the global score), interpreting a confusion matrix to identify structural model errors, and directing a data collection decision based on a precise diagnosis rather than intuition.",
-          },
-        ],
-        tags: ["Confusion matrix analysis", "Synthetic augmentation", "Low-data class", "Visual ambiguity", "Precision / Recall", "YOLO", "MLOps", "Jira"],
-      },
-      {
-        num: "04",
-        title: "Rebalancing a dataset to reduce confusion between two visually identical packagings",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "A model was regularly confusing two versions of the same product with nearly identical packaging - an old and a new variant. The new variant was sometimes detected correctly on clean images but was frequently misclassified as the old variant on slightly blurry, poorly lit, or noisy field images.",
-          },
-          {
-            label: "ROOT CAUSE",
-            labelColor: "text-orange-500",
-            content:
-              "Analysis of the training split revealed a severe imbalance: the old packaging had ~49,000 annotations vs ~1,200 for the new variant - a ratio of approximately 42:1. Beyond raw volume, the new class lacked diversity: its images came mostly from clean, controlled conditions that did not represent real field capture conditions.",
-          },
-          {
-            label: "FIRST APPROACH & LIMIT",
-            labelColor: "text-orange-500",
-            content:
-              "An initial attempt to aggressively undersample the old class was abandoned after analysis: only 1,865 of its ~49,000 annotations came from single-product images. The remaining 47,605 came from multi-product images shared with other classes. Removing those images would have caused significant annotation loss across the entire dataset.",
-          },
-          {
-            label: "SOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Removed only images containing exclusively the old packaging variant - preserving all multi-product images to protect annotations for other classes",
-              "Applied targeted oversampling on the new packaging class with diverse augmentations: brightness/contrast variations, slight blur, visual noise, small rotations and translations, scale changes, image compression, horizontal flips",
-              "Automatically recalculated bounding boxes after each transformation to maintain annotation integrity",
-              "Verified annotation counts per class before and after rebalancing",
-            ].join("|||"),
+              "Augmentation made the product detectable, but precision stayed low, so I kept digging. The confusion matrix showed the real issue: two packagings that were visually almost identical. I deployed to a test environment to see exactly which field images were missing, and collected data with intent instead of at random.",
           },
           {
             label: "RESULT",
-            labelColor: "text-purple",
-            content:
-              "Ratio reduced from 42:1 to approximately 5:1. Generated 4,263 new augmented images and 8,176 additional annotations for the minority class - with zero invalid augmentations. Other classes present in the same images also benefited from augmentation while retaining correct annotations.",
-          },
-          {
-            label: "OUTCOME",
             labelColor: "text-green",
             content:
-              "New packaging correctly detected on clean and well-lit field images. Confusion with the old variant significantly reduced. Limits persist on very blurry or heavily noisy images - addressed by extracting 296 new real field images for the next enrichment cycle. Established a reusable method for handling old/new packaging confusion across any product family.",
+              "A precise diagnosis and a targeted data plan, instead of an expensive blind collection campaign.",
           },
         ],
-        tags: ["Class imbalance", "Data augmentation", "Oversampling", "Multi-class dataset", "Bounding box integrity", "Dataset debugging", "YOLO", "MLOps", "Jira"],
+        tags: ["Confusion matrix analysis", "Hypothesis testing", "Data strategy"],
       },
     ],
+    askMe: "how I tell a model problem from a data, mapping or packaging problem when production numbers drop.",
   },
   {
-    projectNum: "Project 7",
+    projectNum: "Case 02",
+    title: "Data-centric fixes for rare and imbalanced classes",
+    context: "FieldPro (Optimetriks) · Multi-country YOLO11 models · 80+ SKU classes per model · Python, GCS, Label Studio",
+    challenges: [
+      {
+        num: "01",
+        title: "New SKUs entering production with up to 28× less data than average",
+        blocks: [
+          {
+            label: "CHALLENGE",
+            labelColor: "text-red-500",
+            content:
+              "New product variants arrived with ~80 to ~330 annotations, against ~2,250 per class on average. On shelf photos with many products, duplicating images to boost one class inflates all the others too.",
+          },
+          {
+            label: "MY CALL",
+            labelColor: "text-purple",
+            content:
+              "Let dataset statistics decide which classes really needed help, and design an oversampling method that boosts only the target class. Just as important: classes with only 4 to 14 annotations were not oversampled. They needed real field data, not a model that memorizes.",
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-green",
+            content:
+              "A class with only 80 annotations reached 1.00 recall on validation. The method was reused on a second country model, and both run in production without degrading stable classes.",
+          },
+        ],
+        tags: ["Oversampling", "Statistical analysis", "Engineering judgment", "YOLO11"],
+      },
+      {
+        num: "02",
+        title: "A 42:1 imbalance where the obvious fix would have broken the dataset",
+        blocks: [
+          {
+            label: "CHALLENGE",
+            labelColor: "text-red-500",
+            content:
+              "A new packaging was constantly confused with the old one, which had 42 times more annotations.",
+          },
+          {
+            label: "MY CALL",
+            labelColor: "text-purple",
+            content:
+              "Undersampling the old class looked simple, but analysis showed that 96% of its annotations sat in images shared with other products. Removing them would have damaged the whole dataset, so I rebalanced in a way that protected every other class.",
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-green",
+            content:
+              "Ratio brought from 42:1 to about 5:1 with 8,000+ new annotations and zero invalid boxes. Confusion between the two packagings dropped significantly.",
+          },
+        ],
+        tags: ["Class imbalance", "Data augmentation", "Dataset integrity"],
+      },
+    ],
+    askMe: "how I keep co-occurring classes balanced when oversampling multi-product images.",
+  },
+  {
+    projectNum: "Case 03",
+    title: "Annotation infrastructure at scale: 1M+ annotations, zero data loss",
+    context: "FieldPro (Optimetriks) · Hasty → GCS → Label Studio · Python, REST APIs, GCP/GCS",
+    challenges: [
+      {
+        num: "01",
+        title: "Migrating 40,000+ images and 587,000+ annotations across three platforms",
+        blocks: [
+          {
+            label: "CHALLENGE",
+            labelColor: "text-red-500",
+            content:
+              "Three platforms, many ways to silently desynchronize images, boxes and labels, and a labeling team that had to keep working afterwards.",
+          },
+          {
+            label: "MY CALL",
+            labelColor: "text-purple",
+            content:
+              "Validate at every stage, and never recommend a workflow before proving it on real data. Before rolling out the post-migration process, I tested it on the smallest live project to make sure nothing existing could be touched.",
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-green",
+            content:
+              "Migration of multiple client projects with zero verified data loss, 587,000+ drifted labels corrected, and a single-source-of-truth workflow recommended as the labeling team's standard process.",
+          },
+        ],
+        tags: ["Data integrity", "Pipeline design", "GCP/GCS", "Label Studio"],
+      },
+      {
+        num: "02",
+        title: "Cross-project annotation transfer: from dozens of hours to minutes",
+        blocks: [
+          {
+            label: "CHALLENGE",
+            labelColor: "text-red-500",
+            content:
+              "Reuse existing annotations across projects instead of paying to relabel them. The source alone had 65,000+ images and over a million annotations, and the platform had no native way to do it.",
+          },
+          {
+            label: "MY CALL",
+            labelColor: "text-purple",
+            content:
+              "I tested each hypothesis against reality instead of trusting the documentation. Two approaches failed at scale, and the third changed the architecture entirely. When an opaque server error blocked everything, I reduced it to a minimal reproducible case, which got the vendor to confirm an undocumented constraint.",
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-green",
+            content:
+              "Processing time down from dozens of projected hours to a few minutes, hardened for multi-hour runs, then turned into a reusable internal tool.",
+          },
+        ],
+        tags: ["Scale engineering", "API debugging", "Production resilience", "Tool design"],
+      },
+    ],
+    askMe: "the undocumented API constraint, and how I tracked it down.",
+  },
+  {
+    projectNum: "Case 04",
     title: "Automated Price Audit with Generative AI - Nestlé Vietnam",
-    context: "FieldPro (Optimetriks) · Nestlé Vietnam · Core developer, from PoC to production · Python, Google Gemini API, Prompt Engineering, SQL/ETL, PostgreSQL, Apache Superset",
+    context: "FieldPro (Optimetriks) · Core developer, PoC to production · Google Gemini API, Python, SQL/ETL, PostgreSQL, Apache Superset",
     challenges: [
       {
         num: "01",
-        title: "Designing the extraction pipeline: from shelf photo to SKU-level prices",
+        title: "Turning shelf photos into reliable, SKU-level price data",
         blocks: [
           {
-            label: "PROBLEM",
+            label: "CHALLENGE",
             labelColor: "text-red-500",
             content:
-              "Retail audits required regular and promotional prices for each Nestlé product, read directly from shelf photos taken in stores. Reading a price is not enough: each price tag must also be associated with the correct product (SKU) before the data can be used for reporting.",
+              "Read regular and promotional prices from real store photos, and match each price tag to the right product. A generative model can return answers that look right but aren't.",
           },
           {
-            label: "INVESTIGATION",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Full-image analysis: sending the whole shelf photo to Gemini in a single call",
-              "Image cropping: isolating price tags and products before extraction",
-              "Grouped regions: processing related areas of the shelf together",
-              "Iterative prompt engineering to improve price recognition and product association",
-            ].join("|||"),
-          },
-          {
-            label: "SOLUTION",
-            labelColor: "text-blue-500",
+            label: "MY CALL",
+            labelColor: "text-purple",
             content:
-              "Designed and developed the core Python and Google Gemini-based pipeline, combining image analysis, structured data extraction and SKU-to-price matching.",
+              "Measure before optimizing. I built a 1,000-image annotated benchmark that scores precision, coverage and SKU matching separately, then used it to compare extraction strategies and prompt versions instead of judging by eye.",
           },
           {
-            label: "OUTCOME",
+            label: "RESULT",
             labelColor: "text-green",
             content:
-              "A single pipeline that turns shelf images into structured, SKU-level price and promotion data ready for audit reporting.",
+              "Every pipeline change became a measurable decision, and the pipeline went from proof of concept to production.",
           },
         ],
-        tags: ["Google Gemini API", "Python", "Computer Vision", "Structured extraction", "Prompt engineering"],
+        tags: ["Google Gemini", "Evaluation design", "Prompt engineering", "Computer Vision"],
       },
       {
         num: "02",
-        title: "Measuring accuracy instead of guessing: a 1,000-image benchmark",
+        title: "From a working prototype to data the business can trust",
         blocks: [
           {
-            label: "PROBLEM",
+            label: "CHALLENGE",
             labelColor: "text-red-500",
             content:
-              "A generative model can return answers that look right but are wrong. Without a reference dataset, there was no objective way to compare extraction strategies or prompt versions.",
+              "Some outputs were unrealistic or inconsistent, asynchronous batch responses could be attached to the wrong image, and Vietnamese text was broken somewhere between ingestion and dashboards.",
           },
           {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Built evaluation workflows on annotated datasets, including a 1,000-image benchmark",
-              "Measured three dimensions separately: extraction precision, coverage and SKU matching reliability",
-              "Used the benchmark to compare each strategy and prompt version before adopting it",
-            ].join("|||"),
+            label: "MY CALL",
+            labelColor: "text-purple",
+            content:
+              "Treat reliability as part of the product. I added price validation rules, contributed to confidence-based checks and safe batch mapping, and integrated the pipeline into the existing SQL/ETL workflows. I traced the encoding issue end to end instead of patching the dashboard.",
           },
           {
-            label: "OUTCOME",
+            label: "RESULT",
             labelColor: "text-green",
             content:
-              "A systematic evaluation framework for price extraction accuracy and coverage, turning every pipeline change into a measurable decision.",
+              "A production-deployed pipeline feeding PostgreSQL and Apache Superset for Nestlé Vietnam's retail audit reporting.",
           },
         ],
-        tags: ["Model evaluation", "Benchmarking", "Annotated datasets", "Precision / coverage"],
-      },
-      {
-        num: "03",
-        title: "Improving price recognition and SKU matching",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "The benchmark revealed extraction and matching errors: prices misread, and price tags associated with the wrong product.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Investigated extraction and matching errors case by case",
-              "Refined Gemini prompts across multiple experimental versions",
-              "Implemented targeted improvements to price recognition, SKU matching and confidence assessment",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "More accurate price recognition and more reliable product association, validated against the benchmark.",
-          },
-        ],
-        tags: ["Prompt engineering", "Error analysis", "SKU matching", "Confidence scoring"],
-      },
-      {
-        num: "04",
-        title: "Making the pipeline reliable: validation rules and safe batch processing",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Some outputs were unrealistic or inconsistent between runs. With Gemini Batch API processing, responses come back asynchronously, so a response could be attached to the wrong image.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Implemented price validation rules to filter unrealistic values",
-              "Handled inconsistent extraction results",
-              "Contributed to confidence-based double-call validation strategies",
-              "Contributed to Gemini Batch API integration and strengthened response-to-image mapping to prevent incorrect associations",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Unrealistic values filtered out before reporting, and each batch response reliably tied to its source image.",
-          },
-        ],
-        tags: ["Data validation", "Gemini Batch API", "Asynchronous processing", "Reliability"],
-      },
-      {
-        num: "05",
-        title: "Integrating the pipeline into production data workflows",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Moving from experiments to production meant running the pipeline automatically on real audit data and delivering its results into the existing reporting stack.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Integrated and refined the pipeline within automated SQL and ETL workflows",
-              "Added activity-based image filtering so only images from the relevant retail audit activity are processed",
-              "Produced structured CSV outputs and handled PostgreSQL ingestion",
-              "Supported production deployment, verified real-world results and resolved integration issues with engineering and business stakeholders",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Production-deployed AI pipeline supporting automated retail price and promotion auditing for Nestlé Vietnam.",
-          },
-        ],
-        tags: ["SQL", "ETL workflows", "PostgreSQL", "Production deployment", "Stakeholder coordination"],
-      },
-      {
-        num: "06",
-        title: "Vietnamese characters corrupted across the data chain",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Vietnamese text was displayed incorrectly in the reports, and the issue could come from any step: data ingestion, PostgreSQL or the BI dashboards.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Traced the encoding step by step through ingestion workflows, PostgreSQL and Apache Superset",
-              "Diagnosed and resolved the encoding issues along the chain",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Consistent Vietnamese data from extraction to dashboards, improving reporting reliability.",
-          },
-        ],
-        tags: ["Encoding / UTF-8", "ETL", "PostgreSQL", "Apache Superset", "Debugging"],
+        tags: ["Data validation", "Batch processing", "ETL", "PostgreSQL", "Production deployment"],
       },
     ],
+    askMe: "which extraction strategies I compared, and what the benchmark changed in our decisions.",
   },
   {
-    projectNum: "Project 8",
+    projectNum: "Case 05",
     title: "Frost Detection with Multimodal AI (Proof of Concept)",
-    context: "FieldPro (Optimetriks) · AI Engineer, end-to-end PoC · Gemini Vision API, Python, Prompt Engineering, rule-based decision logic, HTML/CSS/JavaScript",
+    context: "FieldPro (Optimetriks) · End-to-end PoC owner · Gemini Vision API, Python, rule-based decision logic, HTML/JS dashboard",
     challenges: [
       {
         num: "01",
-        title: "Business challenge: detecting frost in freezer photos taken in the field",
+        title: "Can a foundation model replace a custom vision model for freezer inspections?",
         blocks: [
           {
-            label: "PROBLEM",
+            label: "CHALLENGE",
             labelColor: "text-red-500",
             content:
-              "Field agents regularly inspect commercial freezers. The goal was to find out whether a multimodal foundation model could detect frost and estimate its severity from their photos, without training a custom computer vision model for the first PoC.",
+              "Detect frost and estimate its severity from field agents' freezer photos (reflections, poor lighting, partial views, white surfaces that look like frost) without training a model for the first PoC.",
           },
           {
-            label: "CONSTRAINTS",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Reflections on glass doors",
-              "Varying camera angles and partially visible freezer surfaces",
-              "Poor lighting",
-              "Frost easily confused with naturally white surfaces",
-            ].join("|||"),
-          },
-          {
-            label: "MY ROLE",
-            labelColor: "text-purple",
-            isList: true,
-            content: [
-              "Owned the PoC end to end: exploration, implementation, evaluation and demonstration",
-              "Collected and curated a 50-image freezer dataset; prepared and reviewed reference annotations for frost presence and severity",
-              "Designed structured prompts for Gemini Vision",
-              "Built an interactive HTML/JavaScript dashboard to visualize predictions and compare approaches",
-            ].join("|||"),
-          },
-        ],
-        tags: ["Business framing", "Dataset curation", "Annotation", "Gemini Vision API"],
-      },
-      {
-        num: "02",
-        title: "Solution architecture: two inference designs",
-        blocks: [
-          {
-            label: "APPROACH A",
-            labelColor: "text-blue-500",
-            content:
-              "Direct Detection: a single Gemini Vision call analyzes the image and predicts frost presence and severity. Built for simplicity, lower latency and lower cost.",
-          },
-          {
-            label: "APPROACH B",
-            labelColor: "text-blue-500",
-            content:
-              "Visibility-Aware Detection: two separate analyses, one for the visibility of the relevant freezer surfaces and one for frost presence and severity. A rule-based decision layer combines them to accept the prediction or flag it for review.",
-          },
-          {
-            label: "WHY",
+            label: "MY CALL",
             labelColor: "text-purple",
             content:
-              "The goal was not only to compare detection performance, but also reliability, consistency and operational trade-offs.",
-          },
-        ],
-        tags: ["AI system design", "Multimodal AI", "Rule-based decision logic", "Prompt engineering"],
-      },
-      {
-        num: "03",
-        title: "Evaluation methodology",
-        blocks: [
-          {
-            label: "DATASET",
-            labelColor: "text-orange-500",
-            content:
-              "50 freezer images, 49 of them in the reference evaluation, with annotations for frost presence and severity.",
+              "Compare architectures on reliability and cost, not just accuracy. I built a single-call detector and a visibility-aware pipeline with a rule-based decision layer, ran both twice on an annotated set, and picked the simpler one because the data supported it.",
           },
           {
-            label: "PROTOCOL",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Ran both architectures in two independent experimental runs on the same dataset to measure consistency",
-              "Measured precision, recall, decision coverage, severity classification, latency and API cost",
-              "Performed image-level error analysis to understand each failure",
-              "Compared both approaches side by side in the interactive dashboard",
-            ].join("|||"),
-          },
-        ],
-        tags: ["AI evaluation", "Precision / recall", "Consistency testing", "Error analysis"],
-      },
-      {
-        num: "04",
-        title: "Key results and engineering decision",
-        blocks: [
-          {
-            label: "APPROACH A",
-            labelColor: "text-green",
-            isList: true,
-            content: [
-              "16/16 frost-positive cases detected in both runs",
-              "73-76% precision",
-              "98% decision coverage",
-              "50-56% exact severity classification",
-              "About $0.004 per image in API cost",
-            ].join("|||"),
-          },
-          {
-            label: "APPROACH B",
+            label: "RESULT",
             labelColor: "text-green",
             content:
-              "Detected 15-16 of the 16 frost-positive cases, with 71-79% decision coverage.",
-          },
-          {
-            label: "DECISION",
-            labelColor: "text-purple",
-            content:
-              "Direct Detection was selected as the baseline for further experimentation: it offered the best balance of recall, coverage, simplicity and inference cost.",
+              "16/16 frost cases detected in both runs, 98% decision coverage, about $0.004 per image. Presented internally with positive feedback, with clear limits (small dataset) and next steps.",
           },
         ],
-        tags: ["Trade-off analysis", "Cost / performance", "Technical decision-making"],
-      },
-      {
-        num: "05",
-        title: "Limitations and future improvements",
-        blocks: [
-          {
-            label: "LIMITATIONS",
-            labelColor: "text-orange-500",
-            isList: true,
-            content: [
-              "Exploratory results on a small dataset, not production-level performance",
-              "Severity level 1 was not represented in the final reference annotations",
-            ].join("|||"),
-          },
-          {
-            label: "NEXT STEPS",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Pre-inference image quality checks",
-              "Confidence estimation",
-              "Broader field validation",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "An end-to-end Vision AI PoC, from dataset preparation to architecture design, quantitative evaluation and an interactive demo. It gave a technical basis for assessing feasibility, and was presented internally with positive feedback from the technical team and management.",
-          },
-        ],
-        tags: ["Proof of concept", "Technical reporting", "Feasibility study"],
+        tags: ["Multimodal AI", "AI system design", "Evaluation", "Trade-off analysis"],
       },
     ],
+    askMe: "why the more sophisticated architecture lost, and what I would test next.",
   },
   {
-    projectNum: "Project 9",
+    projectNum: "Case 06",
     title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
-    context: "LGI2A Laboratory · University of Artois & EDF · France · Paper published at IEA/AIE 2026 (Springer)",
+    context: "LGI2A Laboratory · University of Artois & EDF · Published at IEA/AIE 2026 (Springer)",
     challenges: [
       {
         num: "01",
-        title: "No labeled real-world data available for supervised training",
+        title: "Diagnosing faults when there is no labeled real-world data",
         blocks: [
           {
-            label: "PROBLEM",
+            label: "CHALLENGE",
             labelColor: "text-red-500",
             content:
-              "Magnetic faults in PMSMs are rare, expensive to reproduce experimentally, and require deep expert knowledge to annotate - making conventional supervised learning impractical for real-world deployment.",
+              "Magnetic faults in electric motors are rare, expensive to reproduce and hard to annotate, so supervised learning wasn't realistic.",
           },
           {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Designed a physics-based synthetic data generation pipeline using Pyleecan and FEMM - 50+ motor variants (Tesla Model 3, Toyota Prius) under healthy and faulty conditions",
-              "Developed a self-supervised denoising framework (Self2Self+) that learns fault signatures directly from unlabeled flux map data",
-              "Combined FEM simulation, Self2Self+ denoising, and automatic segmentation into a unified diagnostic pipeline",
-            ].join("|||"),
+            label: "MY CALL",
+            labelColor: "text-purple",
+            content:
+              "Generate the data with physics, then learn without labels. I built a simulation pipeline over 50+ motor variants and a self-supervised framework (Self2Self+), and parallelized the simulations on an HPC cluster.",
           },
           {
-            label: "OUTCOME",
+            label: "RESULT",
             labelColor: "text-green",
             content:
-              "Complete fault diagnosis pipeline operating without manual annotations. Framework published at IEA/AIE 2026, Kuala Lumpur, Malaysia.",
+              "A complete diagnosis pipeline that needs no manual annotations, simulation time cut from weeks to days, and a paper published at IEA/AIE 2026.",
           },
         ],
-        tags: ["Self-supervised learning", "FEM simulation", "Pyleecan", "FEMM", "PyTorch", "Synthetic data"],
-      },
-      {
-        num: "02",
-        title: "Scaling electromagnetic simulations on limited infrastructure",
-        blocks: [
-          {
-            label: "PROBLEM",
-            labelColor: "text-red-500",
-            content:
-              "Generating a sufficiently large and diverse synthetic dataset required hundreds of electromagnetic simulations across different motor geometries, fault types, and severity levels. Running these sequentially was computationally prohibitive.",
-          },
-          {
-            label: "RESOLUTION",
-            labelColor: "text-blue-500",
-            isList: true,
-            content: [
-              "Configured the simulation pipeline on HPC cluster infrastructure using SLURM job scheduling",
-              "Parallelized batch electromagnetic simulations across multiple compute nodes",
-              "Structured the output dataset with standardized naming and metadata for full traceability",
-            ].join("|||"),
-          },
-          {
-            label: "OUTCOME",
-            labelColor: "text-green",
-            content:
-              "Dataset of 50+ motor variants generated at scale. Simulation time reduced from weeks to days through parallel execution.",
-          },
-        ],
-        tags: ["SLURM", "HPC", "Parallel computing", "Pyleecan", "Batch processing"],
+        tags: ["Self-supervised learning", "Synthetic data", "FEM simulation", "HPC / SLURM", "Research"],
       },
     ],
   },
+];
+
+const alsoSolved = [
+  "Class mapping drift between annotation tools, configs and deployment",
+  "Near-duplicate images leaking between train and validation sets",
+  "Taxonomy naming errors silently mixing two product variants",
+  "Offline scores that didn't hold up in field conditions",
+  "Ambiguous 500 errors on ML endpoints, localized on Kubernetes / GKE",
+  "Rate limits and storage permission issues breaking long-running pipelines",
+  "Vietnamese character encoding across ETL, PostgreSQL and BI dashboards",
+  "Monitoring weak classes in production and building targeted field datasets",
 ];
 
 const labelColorMap: Record<string, string> = {
@@ -1280,15 +376,9 @@ export default function ProblemSolving() {
         <span className="font-mono text-[0.72rem] text-purple/70 tracking-[0.1em] font-normal">05.</span>
         Problem-Solving
       </h2>
-      <p className="text-[0.9rem] text-text-secondary leading-[1.8] mb-5">
-        A documented record of real engineering problems encountered and resolved in production AI systems, data pipelines, and research workflows.
+      <p className="text-[0.9rem] text-text-secondary leading-[1.8] mb-8">
+        Real problems from production AI systems and research. For each one: what made it hard, the call I made, and what it changed. The implementation details are better discussed in person.
       </p>
-      <div className="rounded-2xl border border-border-primary bg-bg-tertiary/60 p-4 mb-8 flex gap-3">
-        <span className="text-purple text-[1.1rem] flex-shrink-0 mt-0.5">↻</span>
-        <p className="text-[0.82rem] text-text-secondary leading-[1.75]">
-          Many of these challenges are recurring across most projects in this portfolio. The shared nature of computer vision deployments - multi-country rollouts, evolving product catalogs, and real-world field conditions - means that class imbalance, data quality, and distribution shift are constant engineering concerns rather than isolated incidents.
-        </p>
-      </div>
 
       <div className="flex flex-col gap-10">
         {projects.map((proj, pi) => (
@@ -1369,9 +459,43 @@ export default function ProblemSolving() {
                   </motion.div>
                 ))}
               </div>
+              {proj.askMe && (
+                <div className="px-6 py-3 border-t border-border-primary bg-purple/5 flex gap-3 items-baseline">
+                  <span className="font-mono text-[0.6rem] font-bold tracking-wide text-purple flex-shrink-0">ASK ME ABOUT</span>
+                  <p className="text-[0.82rem] text-text-secondary leading-[1.6]">{proj.askMe}</p>
+                </div>
+              )}
             </div>
           </motion.div>
         ))}
+      </div>
+
+      <div className="mt-10 rounded-2xl border border-border-primary bg-bg-secondary p-6">
+        <h3 className="text-[0.9rem] font-semibold mb-3">Also solved along the way</h3>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
+          {alsoSolved.map((item) => (
+            <li
+              key={item}
+              className="text-[0.82rem] text-text-secondary leading-[1.6] pl-4 relative before:content-['›'] before:absolute before:left-0 before:text-purple"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-purple/25 bg-purple/5 p-6 flex flex-wrap items-center justify-between gap-4">
+        <p className="text-[0.9rem] text-text-primary leading-[1.6]">
+          Want the details behind any of these? I&apos;m happy to walk you through them.
+        </p>
+        <a
+          href={CAL_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="font-mono text-[0.72rem] text-white bg-purple px-4 py-2 rounded-full hover:opacity-85 transition-opacity whitespace-nowrap"
+        >
+          Book a call ↗
+        </a>
       </div>
     </GridWrapper>
   );

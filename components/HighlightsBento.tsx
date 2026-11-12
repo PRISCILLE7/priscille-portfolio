@@ -20,7 +20,7 @@ const nodes = [
   { emoji: "📄", label: "Research",  top: "32%", left: "31%" },
 ];
 
-const CAL_URL = "https://cal.com/priscille-e-ebwala-pejob6";
+export const CAL_URL ="https://cal.com/priscille-e-ebwala-pejob6";
 
 function getTopPosition(index: number) {
   return `${10 + index * 40}px`;
