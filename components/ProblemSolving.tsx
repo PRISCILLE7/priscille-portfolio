@@ -1109,7 +1109,7 @@ const projects: Project[] = [
   {
     projectNum: "Project 8",
     title: "Self-Supervised Fault Diagnosis in Electric Machines (R&D)",
-    context: "LGI2A Laboratory · University of Artois & EDF · France · Paper accepted at IEA/AIE 2026",
+    context: "LGI2A Laboratory · University of Artois & EDF · France · Paper published at IEA/AIE 2026 (Springer)",
     challenges: [
       {
         num: "01",

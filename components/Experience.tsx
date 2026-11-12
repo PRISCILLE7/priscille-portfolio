@@ -7,7 +7,7 @@ const experience = [
     title: "Freelance Data Scientist & ML Engineer",
     company: "FieldPro by Optimetriks",
     location: "Paris, France / Remote",
-    period: "Oct. 2025 - present · 9 months",
+    period: "Oct. 2025 - present · 1 yr 2 mo",
     intro:
       "Development and industrialization of AI solutions for field execution, deployed across multiple countries in Africa and Asia for FMCG clients (Nestlé, Coca-Cola).",
     items: [
