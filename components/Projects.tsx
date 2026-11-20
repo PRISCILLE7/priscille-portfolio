@@ -13,10 +13,10 @@ const CC: Record<string, RGB> = {
   "Production & MLOps":                    ["#061020", "#1D4ED8", "#93C5FD"],
   "Applied AI: Vision, Multimodal & LLMs": ["#100020", "#5B21B6", "#C4B5FD"],
   "Research & Simulation":                 ["#200A00", "#C2410C", "#FDBA74"],
-  "Academic & Personal Projects":          ["#0F0A1E", "#7C3AED", "#DDD6FE"],
+  "Academic Projects":          ["#0F0A1E", "#7C3AED", "#DDD6FE"],
 };
 
-const SECONDARY = "Academic & Personal Projects";
+const SECONDARY = "Academic Projects";
 
 function renderVisual(vid: string, ac: string): React.ReactNode {
   switch (vid) {
@@ -195,65 +195,6 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={200} y={155} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Visual similarity · IFI-VNU / Univ. La Rochelle</text>
         </>
       );
-    case "sift-coil":
-      return (
-        <>
-          <rect x={15} y={18} width={158} height={118} rx={4} fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)" strokeWidth={0.5}/>
-          <rect x={228} y={18} width={158} height={118} rx={4} fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)" strokeWidth={0.5}/>
-          {[[52,50],[82,40],[105,78],[62,92],[122,62],[38,68]].map(([x,y],i) => (
-            <circle key={i} cx={x} cy={y} r={3} fill={ac} opacity={0.8}/>
-          ))}
-          {[[262,52],[295,42],[312,80],[272,93],[334,64],[250,70]].map(([x,y],i) => (
-            <circle key={i} cx={x} cy={y} r={3} fill={ac} opacity={0.8}/>
-          ))}
-          {[[52,50,262,52],[82,40,295,42],[105,78,312,80],[62,92,272,93],[122,62,334,64]].map(([x1,y1,x2,y2],i) => (
-            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={`rgba(196,181,253,${0.2+i*0.04})`} strokeWidth={0.8}/>
-          ))}
-          <rect x={170} y={52} width={62} height={34} rx={6} fill="rgba(255,255,255,0.05)" stroke={ac} strokeWidth={0.5}/>
-          <text x={201} y={67} textAnchor="middle" fontSize={10} fill={ac} fontFamily="monospace" fontWeight="bold">SIFT</text>
-          <text x={201} y={79} textAnchor="middle" fontSize={6} fill="rgba(255,255,255,0.35)" fontFamily="monospace">COIL-100</text>
-        </>
-      );
-    case "cnn-lstm":
-      return (
-        <>
-          <path d="M 10,52 C 30,24 50,82 70,52 S 110,24 130,52 S 170,82 190,52 S 230,24 250,52 S 290,82 310,52 S 350,24 390,52"
-            fill="none" stroke={ac} strokeWidth={1.5} opacity={0.55}/>
-          <text x={20} y={18} fontSize={7} fill="rgba(255,255,255,0.35)" fontFamily="monospace">time series input</text>
-          {[0,1,2].map(i => (
-            <rect key={i} x={28+i*10} y={78} width={28} height={55} rx={2}
-              fill={`rgba(196,181,253,${0.08+i*0.04})`} stroke={ac} strokeWidth={0.5}/>
-          ))}
-          <text x={46} y={142} textAnchor="middle" fontSize={8} fill={ac} fontFamily="monospace">CNN</text>
-          <line x1={102} y1={105} x2={126} y2={105} stroke="rgba(255,255,255,0.4)" strokeWidth={1.5}/>
-          <polygon points="123,101 133,105 123,109" fill="rgba(255,255,255,0.4)"/>
-          <rect x={136} y={84} width={88} height={44} rx={10} fill="rgba(196,181,253,0.08)" stroke={ac} strokeWidth={1}/>
-          <text x={180} y={109} textAnchor="middle" fontSize={10} fill={ac} fontFamily="monospace" fontWeight="bold">LSTM</text>
-          <line x1={228} y1={106} x2={252} y2={106} stroke="rgba(255,255,255,0.4)" strokeWidth={1.5}/>
-          <polygon points="249,102 259,106 249,110" fill="rgba(255,255,255,0.4)"/>
-          <rect x={260} y={90} width={62} height={32} rx={5} fill="rgba(196,181,253,0.12)" stroke={ac} strokeWidth={0.5}/>
-          <text x={291} y={109} textAnchor="middle" fontSize={8} fill="rgba(255,255,255,0.65)" fontFamily="monospace">Output</text>
-          <text x={360} y={142} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">PyTorch</text>
-        </>
-      );
-    case "skinai":
-      return (
-        <>
-          <circle cx={200} cy={76} r={58} fill="rgba(255,255,255,0.03)" stroke="rgba(196,181,253,0.18)" strokeWidth={1}/>
-          <circle cx={200} cy={76} r={48} fill="rgba(196,181,253,0.05)"/>
-          <circle cx={200} cy={76} r={34} fill="rgba(196,181,253,0.08)"/>
-          <circle cx={200} cy={76} r={18} fill="rgba(196,181,253,0.14)"/>
-          <circle cx={200} cy={76} r={7}  fill="rgba(196,181,253,0.28)"/>
-          {[52,62,72,82,92].map((y,i) => (
-            <line key={i} x1={145} y1={y} x2={255} y2={y}
-              stroke={i === 2 ? ac : "rgba(196,181,253,0.2)"} strokeWidth={i === 2 ? 1 : 0.5}/>
-          ))}
-          <line x1={196} y1={32} x2={196} y2={120} stroke={ac} strokeWidth={0.5} opacity={0.3}/>
-          <line x1={155} y1={76} x2={245} y2={76} stroke={ac} strokeWidth={0.5} opacity={0.3}/>
-          <rect x={118} y={146} width={164} height={18} rx={9} fill="rgba(16,185,129,0.25)" stroke="rgba(16,185,129,0.55)" strokeWidth={1}/>
-          <text x={200} y={158} textAnchor="middle" fontSize={8.5} fill="#6EE7B7" fontFamily="monospace" fontWeight="bold">NORMAL · confidence 0.91</text>
-        </>
-      );
     case "text-summarize":
       return (
         <>
@@ -294,29 +235,6 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <rect x={15} y={121} width={16} height={6} rx={1} fill={ac} opacity={0.5}/>
         </>
       );
-    case "bias-reviews":
-      return (
-        <>
-          <text x={20} y={18} fontSize={7} fill="rgba(255,255,255,0.4)" fontFamily="monospace">CRITICS</text>
-          {[0,1,2,3,4].map(i => (
-            <text key={i} x={20+i*22} y={36} fontSize={14} fill={i < 4 ? "#FCD34D" : "rgba(255,255,255,0.15)"}>★</text>
-          ))}
-          <text x={20} y={68} fontSize={7} fill="rgba(255,255,255,0.4)" fontFamily="monospace">AUDIENCE</text>
-          {[0,1,2,3,4].map(i => (
-            <text key={i} x={20+i*22} y={86} fontSize={14} fill={i < 3 ? "#FCD34D" : "rgba(255,255,255,0.15)"}>★</text>
-          ))}
-          <line x1={175} y1={20} x2={175} y2={120} stroke="rgba(255,255,255,0.08)" strokeWidth={0.5}/>
-          <text x={290} y={16} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.35)" fontFamily="monospace">Sentiment dist.</text>
-          {[["Positive", 110, "#6EE7B7"],["Neutral", 72, "rgba(255,255,255,0.35)"],["Negative", 48, "#FCA5A5"]].map(([l,w,c],i) => (
-            <g key={String(l)}>
-              <text x={185} y={34+i*28} fontSize={7} fill="rgba(255,255,255,0.45)" fontFamily="monospace">{l}</text>
-              <rect x={238} y={25+i*28} width={Number(w)} height={12} rx={3} fill={String(c)} opacity={0.55}/>
-            </g>
-          ))}
-          <rect x={90} y={110} width={220} height={18} rx={9} fill="rgba(252,211,77,0.12)" stroke="rgba(252,211,77,0.4)" strokeWidth={1}/>
-          <text x={200} y={122} textAnchor="middle" fontSize={8} fill="#FCD34D" fontFamily="monospace">Systemic bias detected</text>
-        </>
-      );
     case "search-engine":
       return (
         <>
@@ -331,24 +249,6 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
             </g>
           ))}
           <text x={200} y={155} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.22)" fontFamily="monospace">TF-IDF · Vector Space · IFI / Univ. La Rochelle</text>
-        </>
-      );
-    case "word-embed":
-      return (
-        <>
-          <line x1={28} y1={128} x2={380} y2={128} stroke="rgba(255,255,255,0.08)" strokeWidth={0.5}/>
-          <line x1={28} y1={128} x2={28}  y2={12}  stroke="rgba(255,255,255,0.08)" strokeWidth={0.5}/>
-          {([["king",285,30,"#FCD34D"],["queen",235,50,"#FCD34D"],["man",200,82,ac],["woman",155,70,ac],
-             ["france",96,42,"#FCA5A5"],["paris",75,62,"#FCA5A5"],["joyful",330,72,"#86EFAC"],["happy",310,90,"#86EFAC"]] as [string,number,number,string][]).map(([w,x,y,c]) => (
-            <g key={w}>
-              <circle cx={x} cy={y} r={4} fill={c} opacity={0.8}/>
-              <text x={x+7} y={y-3} fontSize={7} fill={c} fontFamily="monospace" opacity={0.8}>{w}</text>
-            </g>
-          ))}
-          <line x1={200} y1={82} x2={285} y2={30} stroke="rgba(255,255,255,0.15)" strokeWidth={0.8} strokeDasharray="3 2"/>
-          <line x1={155} y1={70} x2={235} y2={50} stroke="rgba(255,255,255,0.15)" strokeWidth={0.8} strokeDasharray="3 2"/>
-          <line x1={75}  y1={62} x2={285} y2={30} stroke="rgba(255,255,255,0.1)"  strokeWidth={0.7} strokeDasharray="3 2"/>
-          <text x={200} y={150} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.22)" fontFamily="monospace">Word2Vec · Gensim · semantic vector space</text>
         </>
       );
     case "waste-sim":
@@ -372,90 +272,6 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={125} y={138} textAnchor="middle" fontSize={8} fill={ac} fontFamily="monospace" fontWeight="bold">GAMA · Multi-Agent</text>
           <rect x={215} y={126} width={170} height={18} rx={9} fill="rgba(16,185,129,0.18)" stroke="rgba(16,185,129,0.45)" strokeWidth={0.5}/>
           <text x={300} y={138} textAnchor="middle" fontSize={7.5} fill="#6EE7B7" fontFamily="monospace">AFIA 2025 publication</text>
-        </>
-      );
-    case "pedestrian-sim":
-      return (
-        <>
-          <polygon points="55,92 55,40 112,18 112,70"  fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" strokeWidth={0.5}/>
-          <polygon points="55,92 112,70 168,92 112,114" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.09)" strokeWidth={0.5}/>
-          <polygon points="112,18 168,40 168,92 112,70"  fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"  strokeWidth={0.5}/>
-          <polygon points="185,100 185,48 248,24 248,76"  fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" strokeWidth={0.5}/>
-          <polygon points="185,100 248,76 310,100 248,124" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.09)" strokeWidth={0.5}/>
-          <polygon points="248,24 310,48 310,100 248,76"  fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"  strokeWidth={0.5}/>
-          <polygon points="295,80 295,50 335,34 335,64"  fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" strokeWidth={0.5}/>
-          <polygon points="295,80 335,64 375,80 335,96"  fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.09)" strokeWidth={0.5}/>
-          {[[82,106],[135,114],[168,98],[222,120],[180,110],[258,126],[302,116],[342,108],[360,98]].map(([x,y],i) => (
-            <circle key={i} cx={x} cy={y} r={3.5} fill={ac} opacity={0.65+(i%3)*0.1}/>
-          ))}
-          <path d="M 82,106 Q 108,110 135,114" fill="none" stroke={ac} strokeWidth={0.7} strokeDasharray="3 2" opacity={0.4}/>
-          <path d="M 222,120 Q 240,123 258,126" fill="none" stroke={ac} strokeWidth={0.7} strokeDasharray="3 2" opacity={0.4}/>
-          <text x={200} y={153} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Unity · Blender · C# · behavioral modeling</text>
-        </>
-      );
-    case "bmi-automl":
-      return (
-        <>
-          {([["Underweight",58,"#60A5FA","<18.5"],["Normal",140,"#6EE7B7","18.5-25"],["Overweight",100,"#FCD34D","25-30"],["Obese",72,"#FCA5A5",">30"]] as [string,number,string,string][]).map(([label,width,color,range],i) => (
-            <g key={label}>
-              <text x={100} y={30+i*28} textAnchor="end" fontSize={8} fill="rgba(255,255,255,0.55)" fontFamily="monospace">{label}</text>
-              <rect x={108} y={20+i*28} width={width} height={14} rx={3} fill={color} opacity={0.6}/>
-              <text x={116+width} y={30+i*28} fontSize={7} fill="rgba(255,255,255,0.4)" fontFamily="monospace">{range}</text>
-            </g>
-          ))}
-          <text x={322} y={18} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.35)" fontFamily="monospace">AutoGluon</text>
-          <circle cx={322} cy={76} r={40} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={6}/>
-          <circle cx={322} cy={76} r={40} fill="none" stroke={ac} strokeWidth={6}
-            strokeDasharray={`${0.92*251} 251`} strokeLinecap="round" transform="rotate(-90 322 76)"/>
-          <text x={322} y={73} textAnchor="middle" fontSize={15} fill={ac} fontFamily="monospace" fontWeight="bold">92%</text>
-          <text x={322} y={86} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.35)" fontFamily="monospace">accuracy</text>
-          <text x={200} y={153} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.22)" fontFamily="monospace">TabularPredictor · AutoML model selection</text>
-        </>
-      );
-    case "sleep-pred":
-      return (
-        <>
-          <path d="M 10,52 L 28,52 L 33,26 L 43,78 L 53,26 L 63,78 L 68,52 L 88,52 L 93,36 L 103,68 L 108,52 L 128,52 L 136,18 L 146,82 L 156,18 L 166,82 L 171,52 L 188,52"
-            fill="none" stroke={ac} strokeWidth={1.5} opacity={0.65}/>
-          <text x={98} y={14} textAnchor="middle" fontSize={7} fill={ac} fontFamily="monospace" opacity={0.5}>EEG sleep pattern</text>
-          {([
-            [225,38,"#FCA5A5"],[238,54,"#FCA5A5"],[218,66,"#FCA5A5"],
-            [265,34,"#6EE7B7"],[278,48,"#6EE7B7"],[268,62,"#6EE7B7"],
-            [305,44,"#FCD34D"],[316,60,"#FCD34D"],[298,72,"#FCD34D"],
-            [244,82,"#FCA5A5"],[282,78,"#6EE7B7"],[318,88,"#FCD34D"],
-          ] as [number,number,string][]).map(([x,y,c],i) => (
-            <circle key={i} cx={x} cy={y} r={4} fill={c} opacity={0.7}/>
-          ))}
-          <ellipse cx={225} cy={56} rx={18} ry={24} fill="none" stroke="#FCA5A5" strokeWidth={0.7} strokeDasharray="3 2" opacity={0.45}/>
-          <ellipse cx={270} cy={48} rx={18} ry={22} fill="none" stroke="#6EE7B7" strokeWidth={0.7} strokeDasharray="3 2" opacity={0.45}/>
-          <ellipse cx={308} cy={63} rx={20} ry={24} fill="none" stroke="#FCD34D" strokeWidth={0.7} strokeDasharray="3 2" opacity={0.45}/>
-          <line x1={207} y1={100} x2={340} y2={100} stroke="rgba(255,255,255,0.08)" strokeWidth={0.5}/>
-          {[["None",225,"#FCA5A5"],["Mild",270,"#6EE7B7"],["Severe",310,"#FCD34D"]].map(([l,x,c]) => (
-            <text key={String(l)} x={Number(x)} y={112} textAnchor="middle" fontSize={6} fill={String(c)} fontFamily="monospace">{l}</text>
-          ))}
-          <text x={200} y={153} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.22)" fontFamily="monospace">PCA · MCA · KNN · CART · clustering</text>
-        </>
-      );
-    case "info-spotting":
-      return (
-        <>
-          <rect x={28} y={10} width={200} height={138} rx={4} fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" strokeWidth={0.5}/>
-          {[0,1,2,3,4,5,6,7,8].map(i => (
-            <line key={i} x1={40} y1={22+i*14} x2={208-i%3*8} y2={22+i*14}
-              stroke="rgba(255,255,255,0.18)" strokeWidth={3.5} strokeLinecap="round"/>
-          ))}
-          <rect x={40}  y={18} width={92}  height={10} rx={2} fill="rgba(252,211,77,0.28)"  stroke="#FCD34D" strokeWidth={0.7}/>
-          <rect x={88}  y={46} width={116} height={10} rx={2} fill="rgba(110,231,183,0.28)" stroke="#6EE7B7" strokeWidth={0.7}/>
-          <rect x={40}  y={74} width={72}  height={10} rx={2} fill={`rgba(196,181,253,0.28)`} stroke={ac} strokeWidth={0.7}/>
-          <rect x={40}  y={102} width={128} height={10} rx={2} fill="rgba(252,165,165,0.28)" stroke="#FCA5A5" strokeWidth={0.7}/>
-          <circle cx={310} cy={66} r={42} fill="rgba(255,255,255,0.03)" stroke={ac} strokeWidth={1.5}/>
-          <line x1={340} y1={96} x2={370} y2={128} stroke={ac} strokeWidth={2.5} strokeLinecap="round"/>
-          {[0,1,2].map(i => (
-            <line key={i} x1={278} y1={46+i*14} x2={340} y2={46+i*14}
-              stroke="rgba(255,255,255,0.28)" strokeWidth={3} strokeLinecap="round"/>
-          ))}
-          <rect x={282} y={42} width={52} height={12} rx={2} fill={`rgba(196,181,253,0.35)`} stroke={ac} strokeWidth={0.7}/>
-          <text x={200} y={157} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.22)" fontFamily="monospace">OpenCV · Document AI · video capture</text>
         </>
       );
     default:
@@ -604,7 +420,7 @@ const categories: { label: string; projects: Project[] }[] = [
     ],
   },
   {
-    label: "Academic & Personal Projects",
+    label: "Academic Projects",
     projects: [
       {
         vid: "cbir",
@@ -615,85 +431,12 @@ const categories: { label: string; projects: Project[] }[] = [
         github: "https://github.com/PRISCILLE7/Projet-CBIR",
       },
       {
-        vid: "sift-coil",
-        type: "Computer Vision · SIFT · Recognition",
-        title: "Object recognition with SIFT descriptors - COIL-100",
-        desc: "Object detection and recognition using SIFT descriptors on the COIL-100 dataset, evaluated with confusion matrix and keypoint matching.",
-        tags: ["SIFT", "OpenCV", "Python", "COIL-100"],
-        github: "https://github.com/PRISCILLE7/TP-SIFT-ObjectRecognition",
-      },
-      {
-        vid: "cnn-lstm",
-        type: "Deep Learning · CNN-LSTM · Time Series",
-        title: "CNN & CNN-LSTM Deep Learning project",
-        desc: "Implementation and comparison of CNN and CNN-LSTM models for time series classification and analysis.",
-        tags: ["PyTorch", "CNN", "LSTM"],
-        github: "https://github.com/PRISCILLE7/DeepLearning-CNN-CNNLSTM-Project",
-      },
-      {
-        vid: "skinai",
-        type: "Medical AI · Dermatology",
-        title: "SkinAI - Skin lesion abnormality detection",
-        desc: "Application detecting whether a skin lesion is normal or abnormal from a photo - first-pass AI evaluation (non-medical).",
-        tags: ["Python", "Deep Learning", "Medical AI"],
-        github: "https://github.com/PRISCILLE7/SkinAI_Project",
-      },
-      {
-        vid: "info-spotting",
-        type: "Document AI · Visual spotting",
-        title: "Information spotting in scanned paper documents",
-        desc: "Visual information retrieval system in scanned paper documents from video capture, using visual feature extraction.",
-        tags: ["Python", "OpenCV", "Document AI"],
-        github: "https://github.com/PRISCILLE7/Projet-InformationSpotting",
-      },
-      {
-        vid: "bias-reviews",
-        type: "NLP · Bias detection · Sentiment",
-        title: "Bias detection in film reviews",
-        desc: "Analysis and quantification of potential biases in online film reviews - comparing professional critics vs. general audience, detecting systemic patterns.",
-        tags: ["Python", "NLP", "Sentiment Analysis"],
-        github: "https://github.com/PRISCILLE7/Detection_of_Biases_in_Film_Reviews",
-      },
-      {
         vid: "search-engine",
         type: "NLP · Information Retrieval",
         title: "Custom text search engine (Information Retrieval)",
         desc: "Custom search engine with indexing, vector models and TF-IDF relevance scoring. M2 project IFI / University of La Rochelle.",
         tags: ["Python", "TF-IDF", "IR"],
         github: "https://github.com/PRISCILLE7/Information-Retrieval-Search-Engine",
-      },
-      {
-        vid: "word-embed",
-        type: "NLP · Word Embeddings",
-        title: "Word embedding & sentiment analysis",
-        desc: "Word2Vec with Gensim and NLTK - semantic similarity, analogies and sentence sentiment classification.",
-        tags: ["Gensim", "NLTK", "Word2Vec"],
-        github: "https://github.com/PRISCILLE7/TP-WordEmbedding",
-      },
-      {
-        vid: "pedestrian-sim",
-        img: "/unity.jpg",
-        type: "Simulation · Unity · Blender",
-        title: "Urban pedestrian simulation in a virtual city",
-        desc: "Pedestrian simulation system in a virtual urban environment, built with Unity and Blender. Behavioral modeling in constrained environments.",
-        tags: ["Unity", "Blender", "C#"],
-        github: "https://github.com/PRISCILLE7/unity-urban-pedestrian-simulation",
-      },
-      {
-        vid: "bmi-automl",
-        type: "ML · AutoML · Health",
-        title: "BMI classification with AutoGluon",
-        desc: "Body mass index classification using AutoGluon (AutoML) - automatic model selection and training with TabularPredictor.",
-        tags: ["AutoGluon", "AutoML", "Pandas"],
-        github: "https://github.com/PRISCILLE7/BMI-AutoGluon-Classifier",
-      },
-      {
-        vid: "sleep-pred",
-        type: "ML · PCA · Clustering · Health",
-        title: "Sleep disorder prediction",
-        desc: "Academic project combining PCA, MCA, clustering and supervised models (KNN, CART) for sleep disorder prediction.",
-        tags: ["PCA", "Clustering", "KNN", "CART"],
-        github: "https://github.com/PRISCILLE7/sleep-disorder-prediction",
       },
     ],
   },
