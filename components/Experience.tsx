@@ -4,18 +4,18 @@ import GridWrapper from "./GridWrapper";
 
 const experience = [
   {
-    title: "Freelance Data Scientist & ML Engineer",
+    title: "AI/ML Engineer (Freelance)",
     company: "FieldPro by Optimetriks",
     location: "Paris, France / Remote",
     period: "Oct. 2025 - present · 1 yr 2 mo",
     intro:
-      "Development and industrialization of AI solutions for field execution, deployed across multiple countries in Africa and Asia for FMCG clients (Nestlé, Coca-Cola).",
+      "Development and industrialization of AI solutions for field execution, deployed across multiple countries in Africa and Asia for global FMCG brands.",
     items: [
       "Trained, fine-tuned and deployed YOLO v8/v11 object detection models in production across 9 countries (Vietnam, Senegal, Nigeria, Ivory Coast, Ghana, Burkina Faso, DR Congo, Cameroon, Angola)",
       "Owned the full ML lifecycle end-to-end: data curation (90,000+ images validated), class balancing, training, evaluation, deployment, retraining and monitoring",
       "Traced a production regression on a product family to a packaging and SKU mapping issue rather than the model: detection rates rose from 6% to 76% on the worst variant, with no regression elsewhere",
       "Designed a data-driven oversampling strategy for rare SKU classes in YOLO11: a class with only 80 annotations reached 1.00 recall on validation, without degrading stable classes in production",
-      "Led the core development of a Gemini-based retail price audit pipeline for Nestlé Vietnam, from PoC to production, evaluated on a 1,000-image annotated benchmark and integrated into SQL/ETL and PostgreSQL reporting",
+      "Core developer of a Gemini-based retail price audit pipeline for a major FMCG client in Vietnam, from PoC to production, evaluated on a 1,000-image annotated benchmark and integrated into SQL/ETL and PostgreSQL reporting",
       "Built an end-to-end frost detection PoC with Gemini Vision: designed and compared two multimodal inference architectures on recall, precision, coverage and cost",
       "Built annotation data infrastructure at scale: migrated 40,000+ images and 587,000+ annotations with zero verified data loss, and a cross-project transfer tool that cut processing from dozens of hours to minutes",
       "Monitored production models, investigated incidents on Kubernetes/GKE, and ran offline/online evaluations and A/B experiments to drive continuous improvement",

@@ -89,7 +89,7 @@ export default function Hero() {
           className="text-[0.93rem] text-text-secondary leading-[1.85] max-w-[520px] mb-8"
         >
           I build computer vision and multimodal AI systems that hold up in production: object
-          detection models deployed in 9 countries for Nestlé &amp; Coca-Cola, Gemini-based vision
+          detection models deployed in 9 countries for global FMCG brands, Gemini-based vision
           pipelines, and published research in self-supervised learning.
         </motion.p>
 

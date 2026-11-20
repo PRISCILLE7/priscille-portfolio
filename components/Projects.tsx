@@ -42,7 +42,7 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={270} y={148} fontSize={15}>🇨🇩</text>
           <text x={312} y={148} fontSize={15}>🇨🇲</text>
           <text x={354} y={148} fontSize={15}>🇦🇴</text>
-          <text x={200} y={132} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé · Coca-Cola · 9 countries · 90k+ images</text>
+          <text x={200} y={132} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">FMCG brands · 9 countries · 90k+ images</text>
         </>
       );
     case "price-audit":
@@ -67,7 +67,7 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={247} y={86} fontSize={7} fill="rgba(255,255,255,0.6)" fontFamily="monospace">promo_price: 27200</text>
           <rect x={247} y={96} width={126} height={14} rx={7} fill="rgba(16,185,129,0.25)" stroke="rgba(16,185,129,0.5)" strokeWidth={1}/>
           <text x={310} y={106} textAnchor="middle" fontSize={7} fill="#6EE7B7" fontFamily="monospace">✓ validation rules passed</text>
-          <text x={200} y={148} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">Nestlé Vietnam · shelf images → prices → BI dashboards</text>
+          <text x={200} y={148} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">FMCG retail, Vietnam · shelf images → prices → BI dashboards</text>
         </>
       );
     case "rare-class":
@@ -326,8 +326,8 @@ const categories: { label: string; projects: Project[] }[] = [
         vid: "price-audit",
         type: "Generative AI · Computer Vision · Data",
         badge: "Industry", featured: true,
-        title: "Automated Price Audit - Nestlé Vietnam",
-        desc: "Led the core development, from proof of concept to production, of a Gemini-based pipeline that reads regular and promotional prices from shelf photos and matches each one to the right SKU. Every strategy and prompt change was judged on a 1,000-image annotated benchmark rather than by eye. Validation layers and ETL integration then turned the prototype into data that feeds Nestlé Vietnam's audit dashboards.",
+        title: "Automated Price Audit - FMCG retail, Vietnam",
+        desc: "As core developer, I took a Gemini-based pipeline from proof of concept to production: it reads regular and promotional prices from shelf photos and matches each one to the right SKU. Every strategy and prompt change was judged on a 1,000-image annotated benchmark rather than by eye. Validation layers and ETL integration then turned the prototype into data that feeds the client's retail audit dashboards.",
         tags: ["Python", "Google Gemini API", "Prompt Engineering", "Computer Vision", "SQL / ETL", "PostgreSQL", "Apache Superset"],
       },
       {
@@ -336,7 +336,7 @@ const categories: { label: string; projects: Project[] }[] = [
         type: "Production · MLOps · Computer Vision",
         badge: "Industry", featured: true,
         title: "Multi-country product detection model industrialization",
-        desc: "Training, deploying and maintaining YOLO v8/v11 models for Nestlé & Coca-Cola in 9 countries. When a product family collapsed in production, I traced it to a packaging change rather than the model: detection rates went from 6% to 76% on the worst variant, with no regression elsewhere. Also fixed a bug that passed every test environment but broke the production app.",
+        desc: "Training, deploying and maintaining YOLO v8/v11 models for global FMCG brands in 9 countries. When a product family collapsed in production, I traced it to a packaging change rather than the model: detection rates went from 6% to 76% on the worst variant, with no regression elsewhere. Also fixed a bug that passed every test environment but broke the production app.",
         tags: ["YOLO v8/v11", "GCP", "Docker", "Python", "REST API"],
       },
       {

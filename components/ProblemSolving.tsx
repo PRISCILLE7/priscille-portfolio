@@ -29,7 +29,7 @@ const projects: Project[] = [
   {
     projectNum: "Case 01",
     title: "Keeping product detection reliable in production across 9 countries",
-    context: "FieldPro (Optimetriks) · Nestlé & Coca-Cola · YOLO v8/v11 in production · GCP, REST API, SQL",
+    context: "FieldPro (Optimetriks) · Global FMCG brands · YOLO v8/v11 in production · GCP, REST API, SQL",
     challenges: [
       {
         num: "01",
@@ -227,7 +227,7 @@ const projects: Project[] = [
   },
   {
     projectNum: "Case 04",
-    title: "Automated Price Audit with Generative AI - Nestlé Vietnam",
+    title: "Automated Price Audit with Generative AI - FMCG retail, Vietnam",
     context: "FieldPro (Optimetriks) · Core developer, PoC to production · Google Gemini API, Python, SQL/ETL, PostgreSQL, Apache Superset",
     challenges: [
       {
@@ -275,7 +275,7 @@ const projects: Project[] = [
             label: "RESULT",
             labelColor: "text-green",
             content:
-              "A production-deployed pipeline feeding PostgreSQL and Apache Superset for Nestlé Vietnam's retail audit reporting.",
+              "A production-deployed pipeline feeding PostgreSQL and Apache Superset for the client's retail audit reporting in Vietnam.",
           },
         ],
         tags: ["Data validation", "Batch processing", "ETL", "PostgreSQL", "Production deployment"],
