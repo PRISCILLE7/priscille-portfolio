@@ -95,6 +95,28 @@ function renderVisual(vid: string, ac: string): React.ReactNode {
           <text x={100} y={150} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.25)" fontFamily="monospace">annotations per class</text>
         </>
       );
+    case "fill-rate":
+      return (
+        <>
+          <rect x={20} y={20} width={170} height={110} rx={6} fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.3)" strokeWidth={1}/>
+          <line x1={105} y1={20} x2={105} y2={130} stroke="rgba(255,255,255,0.3)" strokeWidth={1}/>
+          <rect x={26} y={26} width={48} height={40} rx={3} fill={ac} opacity={0.75}/>
+          <rect x={26} y={70} width={70} height={54} rx={3} fill={ac} opacity={0.45}/>
+          <rect x={111} y={26} width={36} height={98} rx={3} fill="rgba(253,186,116,0.55)"/>
+          <rect x={151} y={80} width={33} height={44} rx={3} fill={ac} opacity={0.6}/>
+          <text x={105} y={146} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.35)" fontFamily="monospace">top-down coverage map</text>
+          <line x1={196} y1={75} x2={224} y2={75} stroke={ac} strokeWidth={1.5}/>
+          <polygon points="221,71 229,75 221,79" fill={ac}/>
+          {[["GEMINI", "brand ID", 22], ["SAM 3", "segmentation", 58], ["VGGT", "3D depth", 94]].map(([t, s, y]) => (
+            <g key={t as string}>
+              <rect x={236} y={y as number} width={150} height={30} rx={5} fill="rgba(255,255,255,0.06)" stroke={ac} strokeWidth={1}/>
+              <text x={248} y={(y as number) + 19} fontSize={8} fill={ac} fontFamily="monospace" fontWeight="bold">{t}</text>
+              <text x={376} y={(y as number) + 19} textAnchor="end" fontSize={7} fill="rgba(255,255,255,0.45)" fontFamily="monospace">{s}</text>
+            </g>
+          ))}
+          <text x={311} y={146} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.35)" fontFamily="monospace">fill level · brand coverage</text>
+        </>
+      );
     case "frost-detect":
       return (
         <>
@@ -354,12 +376,20 @@ const categories: { label: string; projects: Project[] }[] = [
     label: "Applied AI: Vision, Multimodal & LLMs",
     projects: [
       {
+        vid: "fill-rate",
+        type: "Multimodal AI · 3D Vision · PoC",
+        badge: "In progress", featured: true,
+        title: "Chest freezer fill-rate estimation from images",
+        desc: "Ongoing PoC for an FMCG client: estimate from field photos and short videos how full a chest freezer is, and how much of its surface the client's products occupy. Pipeline under construction: Gemini Vision for scene analysis and brand identification, SAM 3 for product segmentation, VGGT for multi-view 3D reconstruction, and Open3D to fuse semantics and geometry into a top-down coverage map calibrated with real freezer dimensions.",
+        tags: ["Gemini Vision", "SAM 3", "VGGT", "3D reconstruction", "Open3D", "Python"],
+      },
+      {
         vid: "frost-detect",
-        type: "Multimodal AI · Computer Vision · PoC",
+        type: "Multimodal AI · Computer Vision · R&D",
         badge: "Industry", featured: true,
-        title: "Frost Detection with Multimodal AI",
-        desc: "Can a foundation model spot frost in freezer photos taken by field agents, without training a custom model? Designed and compared two Gemini Vision architectures: a single-call direct detector and a visibility-aware pipeline with a rule-based decision layer. On a 49-image reference set over two independent runs, Direct Detection caught 16/16 frost cases with 98% decision coverage at about $0.004 per image, and was selected as the baseline.",
-        tags: ["Gemini Vision API", "Multimodal AI", "Prompt Engineering", "AI Evaluation", "Python", "JavaScript"],
+        title: "Frost Detection: Gemini Vision and DINOv3 + MIL",
+        desc: "Can AI spot frost in freezer photos taken by field agents? Phase 1: compared two Gemini Vision architectures; the simpler single-call detector caught 16/16 frost cases at about $0.004 per image. Phase 2: trained a DINOv3 + multiple-instance learning (MIL) classifier on field images, evaluated over 10 seeds with a pre-registered protocol (median recall about 97%). A hybrid combining both approaches is in preparation.",
+        tags: ["Gemini Vision API", "DINOv3", "Multiple-Instance Learning", "AI Evaluation", "Python"],
       },
       {
         vid: "license-plate",

@@ -28,6 +28,7 @@ const skillGroups = [
       { name: "Transfer Learning", core: true },
       { name: "Self-Supervised Learning", core: true },
       { name: "Vision foundation models (DINOv3)", core: true },
+      { name: "Multiple-instance learning" },
       { name: "Grad-CAM" },
       { name: "Segmentation" },
       { name: "OCR (Tesseract, EasyOCR)" },

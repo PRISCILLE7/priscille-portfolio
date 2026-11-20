@@ -285,8 +285,8 @@ const projects: Project[] = [
   },
   {
     projectNum: "Case 05",
-    title: "Frost Detection with Multimodal AI (Proof of Concept)",
-    context: "FieldPro (Optimetriks) · End-to-end PoC owner · Gemini Vision API, Python, rule-based decision logic, HTML/JS dashboard",
+    title: "Frost Detection: from a Gemini PoC to DINOv3 + MIL",
+    context: "FieldPro (Optimetriks) · End-to-end owner · Gemini Vision API, DINOv3, multiple-instance learning, Python, rule-based decision logic",
     challenges: [
       {
         num: "01",
@@ -313,8 +313,33 @@ const projects: Project[] = [
         ],
         tags: ["Multimodal AI", "AI system design", "Evaluation", "Trade-off analysis"],
       },
+      {
+        num: "02",
+        title: "Learning frost directly from field images",
+        blocks: [
+          {
+            label: "CHALLENGE",
+            labelColor: "text-red-500",
+            content:
+              "Field photos bring light frost, glass lids and white walls that look like frost, and labels exist only for the whole image, not for the frosted regions.",
+          },
+          {
+            label: "MY CALL",
+            labelColor: "text-purple",
+            content:
+              "Use DINOv3 features with multiple-instance learning, so the model learns from image-level labels and shows which regions drive its decision. I pre-registered the protocol and success criteria before each run, and evaluated over 10 seeds rather than one lucky split.",
+          },
+          {
+            label: "RESULT",
+            labelColor: "text-green",
+            content:
+              "Median recall of about 97% on field images. Reviewing the persistent false alerts showed that most were light frost missed during annotation, which improved the dataset itself. A hybrid with Gemini is in preparation, pending new field data.",
+          },
+        ],
+        tags: ["DINOv3", "Multiple-instance learning", "Pre-registered evaluation", "Data quality"],
+      },
     ],
-    askMe: "why the more sophisticated architecture lost, and what I would test next.",
+    askMe: "why the simpler Gemini architecture won, and why I pre-register my experiments.",
   },
   {
     projectNum: "Case 06",
