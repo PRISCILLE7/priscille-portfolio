@@ -396,7 +396,7 @@ const categories: { label: string; projects: Project[] }[] = [
         img: "/plaque_imatriculation.jpg",
         type: "Computer Vision · OCR · Deployment",
         title: "Automatic Congolese license plate recognition",
-        desc: "Two-stage pipeline built for traffic and security checks in Kinshasa, where vehicle checks are still largely manual: a custom-trained YOLOv8 model detects license plates, then EasyOCR reads the characters on each cropped plate. Results can be exported to CSV, and the full system runs in an interactive Streamlit web app.",
+        desc: "Master project developed with the support of the Ministry of Infrastructure and Public Works (DR Congo). A two-stage pipeline for traffic and security checks in Kinshasa, where vehicle checks are still largely manual: a custom-trained YOLOv8 model detects license plates, then EasyOCR reads the characters on each cropped plate. Results can be exported to CSV, and the full system runs in an interactive Streamlit web app.",
         tags: ["YOLOv8", "EasyOCR", "OpenCV", "Streamlit", "Python"],
         github: "https://github.com/PRISCILLE7/YOLO-License-Recognition",
       },
