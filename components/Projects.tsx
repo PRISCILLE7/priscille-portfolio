@@ -396,8 +396,8 @@ const categories: { label: string; projects: Project[] }[] = [
         img: "/plaque_imatriculation.jpg",
         type: "Computer Vision · OCR · Deployment",
         title: "Automatic Congolese license plate recognition",
-        desc: "Automatic detection and recognition using YOLOv8 + EasyOCR + Scikit-learn, deployed as an interactive Streamlit app.",
-        tags: ["YOLOv8", "EasyOCR", "OpenCV", "Streamlit"],
+        desc: "Two-stage pipeline built for traffic and security checks in Kinshasa, where vehicle checks are still largely manual: a custom-trained YOLOv8 model detects license plates, then EasyOCR reads the characters on each cropped plate. Results can be exported to CSV, and the full system runs in an interactive Streamlit web app.",
+        tags: ["YOLOv8", "EasyOCR", "OpenCV", "Streamlit", "Python"],
         github: "https://github.com/PRISCILLE7/YOLO-License-Recognition",
       },
       {
@@ -452,6 +452,14 @@ const categories: { label: string; projects: Project[] }[] = [
   {
     label: "Academic Projects",
     projects: [
+      {
+        vid: "info-spotting",
+        type: "Document AI · Visual retrieval · Video",
+        title: "Information spotting in scanned paper documents",
+        desc: "Identifies which paper document is being filmed, frame by frame, from a video capture. SIFT descriptors are indexed with locality-sensitive hashing (LSH) for fast search, and each frame votes for its best-matching document. M2 project, University of La Rochelle / IFI-VNU.",
+        tags: ["Python", "OpenCV", "SIFT", "LSH (Annoy)", "Document AI"],
+        github: "https://github.com/PRISCILLE7/Projet-InformationSpotting",
+      },
       {
         vid: "cbir",
         type: "Computer Vision · CBIR · Multimedia",
