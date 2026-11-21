@@ -50,6 +50,21 @@ const experience = [
     lastItemBold: true,
   },
   {
+    title: "Software Developer",
+    company: "Ministry of Infrastructure and Public Works · New Administrative Building",
+    location: "Kinshasa, DR Congo",
+    period: "Dec. 2022 - Jan. 2024 · 1 yr 2 mo",
+    intro:
+      "Permanent position in the ministry's administrative building. Granted official study leave (2024 - 2025) to pursue my Master's, with my position kept.",
+    items: [
+      "Automated repetitive administrative tasks with Python scripts, macros and automatically generated reports",
+      "Digitized and organized documents and archives to make them easier to search and retrieve",
+      "Worked on the building's access control and video surveillance systems",
+      "Identified the need for automated vehicle access control, which became my Master's license plate recognition project (YOLOv8 + OCR), developed with the Ministry's support",
+    ],
+    tags: ["Python", "Automation", "Document digitization", "Access control / CCTV"],
+  },
+  {
     title: "Teaching & Research Assistant",
     company: "University of Kinshasa (UNIKIN)",
     location: "DR Congo",
@@ -60,20 +75,6 @@ const experience = [
       "Contributed to exam preparation, grading and evaluation",
     ],
     tags: [],
-  },
-  {
-    title: "IT Engineer & Marketing Assistant",
-    company: "Intervision RDC",
-    location: "Kinshasa, DR Congo",
-    period: "Dec. 2022 - Nov. 2023 · 1 yr",
-    intro:
-      "Two successive roles within the same company, covering IT infrastructure and client operations.",
-    items: [
-      "IT Engineer (Jul - Nov 2023): installed and configured CCTV video surveillance and access control systems, gaining hands-on experience of how camera placement, viewing angles and lighting affect image quality in the field",
-      "Set up network equipment and infrastructure for camera systems, and handled technical troubleshooting on site",
-      "Marketing & Customer Support Assistant (Dec 2022 - Aug 2023): maintained and improved product and customer databases; collected and structured customer feedback to improve service quality",
-    ],
-    tags: ["CCTV / video systems", "Networking", "Troubleshooting", "Database Management"],
   },
 ];
 
