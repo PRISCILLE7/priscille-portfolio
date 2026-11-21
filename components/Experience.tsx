@@ -69,11 +69,11 @@ const experience = [
     intro:
       "Two successive roles within the same company, covering IT infrastructure and client operations.",
     items: [
-      "Marketing & Customer Assistant (Dec 2022 - Aug 2023): designed marketing materials (catalogs, product sheets, pricing guides, advertising brochures); managed client interactions via phone, email and chat",
-      "Maintained and improved product databases and customer files; collected and synthesized customer feedback",
-      "IT Engineer (Jul - Nov 2023): installed and optimized CCTV video surveillance systems at access points; configured and assembled network hardware and routers",
+      "IT Engineer (Jul - Nov 2023): installed and configured CCTV video surveillance and access control systems, gaining hands-on experience of how camera placement, viewing angles and lighting affect image quality in the field",
+      "Set up network equipment and infrastructure for camera systems, and handled technical troubleshooting on site",
+      "Marketing & Customer Support Assistant (Dec 2022 - Aug 2023): maintained and improved product and customer databases; collected and structured customer feedback to improve service quality",
     ],
-    tags: ["Networking", "CCTV Systems", "Client Relations", "Database Management"],
+    tags: ["CCTV / video systems", "Networking", "Troubleshooting", "Database Management"],
   },
 ];
 
