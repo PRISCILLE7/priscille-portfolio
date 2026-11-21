@@ -77,16 +77,14 @@ const experience = [
     tags: [],
   },
   {
-    title: "IT Engineer & Marketing Assistant (Part-time)",
+    title: "IT Engineer & Marketing Assistant",
     company: "Intervision RDC",
     location: "Kinshasa, DR Congo",
-    period: "Dec. 2022 - Nov. 2023 · 1 yr",
-    intro:
-      "Part-time assignments alongside my main developer role at the Ministry.",
+    period: "Mar. 2021 - Nov. 2021 · 9 months",
     items: [
-      "IT Engineer (Jul - Nov 2023): installed and configured CCTV video surveillance and access control systems, gaining hands-on experience of how camera placement, viewing angles and lighting affect image quality in the field",
+      "Installed and configured CCTV video surveillance and access control systems, gaining hands-on experience of how camera placement, viewing angles and lighting affect image quality in the field",
       "Set up network equipment and infrastructure for camera systems, and handled technical troubleshooting on site",
-      "Marketing & Customer Support Assistant (Dec 2022 - Aug 2023): maintained and improved product and customer databases; collected and structured customer feedback to improve service quality",
+      "Marketing & customer support: maintained and improved product and customer databases; collected and structured customer feedback to improve service quality",
     ],
     tags: ["CCTV / video systems", "Networking", "Troubleshooting", "Database Management"],
   },
