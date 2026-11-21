@@ -77,7 +77,7 @@ const experience = [
     tags: [],
   },
   {
-    title: "IT Engineer & Marketing Assistant",
+    title: "IT Engineer & Marketing Assistant (Part-time)",
     company: "Intervision RDC",
     location: "Kinshasa, DR Congo",
     period: "Mar. 2021 - Nov. 2021 · 9 months",
